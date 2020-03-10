@@ -190,13 +190,17 @@
     <Compile Include="Migrations\202003102139268_init.Designer.cs">
       <DependentUpon>202003102139268_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003102257223_tabelas1.cs" />
+    <Compile Include="Migrations\202003102257223_tabelas1.Designer.cs">
+      <DependentUpon>202003102257223_tabelas1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Coordenada.cs" />
-    <Compile Include="Models\Imagem.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PontoInteresse.cs" />
+    <Compile Include="Models\Users\AccountViewModels.cs" />
+    <Compile Include="Models\Database\Coordenada.cs" />
+    <Compile Include="Models\Database\Imagem.cs" />
+    <Compile Include="Models\Users\IdentityModels.cs" />
+    <Compile Include="Models\Users\ManageViewModels.cs" />
+    <Compile Include="Models\Database\PontoInteresse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -276,6 +280,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003102139268_init.resx">
       <DependentUpon>202003102139268_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003102257223_tabelas1.resx">
+      <DependentUpon>202003102257223_tabelas1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
