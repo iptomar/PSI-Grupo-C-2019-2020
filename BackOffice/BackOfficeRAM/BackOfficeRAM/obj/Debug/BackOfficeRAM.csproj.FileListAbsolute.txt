@@ -114,3 +114,4 @@ C:\Users\gdtf\OneDrive\Documentos\GitHub\PSI-Grupo-C-2019-2020\BackOffice\BackOf
 C:\Users\gdtf\OneDrive\Documentos\GitHub\PSI-Grupo-C-2019-2020\BackOffice\BackOfficeRAM\BackOfficeRAM\obj\Debug\BackOfficeRAM.Migrations.init.resources
 C:\Users\gdtf\OneDrive\Documentos\GitHub\PSI-Grupo-C-2019-2020\BackOffice\BackOfficeRAM\BackOfficeRAM\obj\Debug\BackOfficeRAM.csproj.GenerateResource.cache
 C:\Users\gdtf\OneDrive\Documentos\GitHub\PSI-Grupo-C-2019-2020\BackOffice\BackOfficeRAM\BackOfficeRAM\obj\Debug\BackOfficeRAM.Migrations.tabelas1.resources
+C:\Users\gdtf\OneDrive\Documentos\GitHub\PSI-Grupo-C-2019-2020\BackOffice\BackOfficeRAM\BackOfficeRAM\obj\Debug\BackOfficeRAM.Migrations.removeatr.resources
