@@ -46,7 +46,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Descricao,MyProperty")] PontoInteresse pontoInteresse)
+        public ActionResult Create([Bind(Include = "Id,Nome,Descricao")] PontoInteresse pontoInteresse)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,MyProperty")] PontoInteresse pontoInteresse)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao")] PontoInteresse pontoInteresse)
         {
             if (ModelState.IsValid)
             {
