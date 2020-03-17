@@ -20,6 +20,8 @@ namespace BackOfficeRAM.Controllers
             return View(db.PontosInteresse.ToList());
         }
 
+
+
         // GET: PontoInteresses/Details/5
         public ActionResult Details(int? id)
         {
