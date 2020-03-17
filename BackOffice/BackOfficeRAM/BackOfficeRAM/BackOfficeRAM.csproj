@@ -182,6 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PontoInteressesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,12 +197,12 @@
       <DependentUpon>202003102257223_tabelas1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Users\AccountViewModels.cs" />
-    <Compile Include="Models\Database\Coordenada.cs" />
-    <Compile Include="Models\Database\Imagem.cs" />
-    <Compile Include="Models\Users\IdentityModels.cs" />
-    <Compile Include="Models\Users\ManageViewModels.cs" />
-    <Compile Include="Models\Database\PontoInteresse.cs" />
+    <Compile Include="Migrations\Models\Users\AccountViewModels.cs" />
+    <Compile Include="Migrations\Models\Database\Coordenada.cs" />
+    <Compile Include="Migrations\Models\Database\Imagem.cs" />
+    <Compile Include="Migrations\Models\Users\IdentityModels.cs" />
+    <Compile Include="Migrations\Models\Users\ManageViewModels.cs" />
+    <Compile Include="Migrations\Models\Database\PontoInteresse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -266,6 +267,11 @@
     <Content Include="Views\PontoInteresses\Details.cshtml" />
     <Content Include="Views\PontoInteresses\Edit.cshtml" />
     <Content Include="Views\PontoInteresses\Index.cshtml" />
+    <Content Include="Views\Imagems\Create.cshtml" />
+    <Content Include="Views\Imagems\Delete.cshtml" />
+    <Content Include="Views\Imagems\Details.cshtml" />
+    <Content Include="Views\Imagems\Edit.cshtml" />
+    <Content Include="Views\Imagems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
