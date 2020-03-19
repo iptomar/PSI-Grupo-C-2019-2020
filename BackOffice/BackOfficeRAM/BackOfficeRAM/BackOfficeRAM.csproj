@@ -266,16 +266,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\PontoInteresses\Create.cshtml" />
-    <Content Include="Views\PontoInteresses\Delete.cshtml" />
-    <Content Include="Views\PontoInteresses\Details.cshtml" />
-    <Content Include="Views\PontoInteresses\Edit.cshtml" />
-    <Content Include="Views\PontoInteresses\Index.cshtml" />
-    <Content Include="Views\Imagems\Create.cshtml" />
-    <Content Include="Views\Imagems\Delete.cshtml" />
-    <Content Include="Views\Imagems\Details.cshtml" />
-    <Content Include="Views\Imagems\Edit.cshtml" />
-    <Content Include="Views\Imagems\Index.cshtml" />
+    <Content Include="Views\Imagens\Create.cshtml" />
+    <Content Include="Views\Imagens\Delete.cshtml" />
+    <Content Include="Views\Imagens\Details.cshtml" />
+    <Content Include="Views\Imagens\Edit.cshtml" />
+    <Content Include="Views\Imagens\Index.cshtml" />
+    <Content Include="Views\PontosInteresse\Create.cshtml" />
+    <Content Include="Views\PontosInteresse\Delete.cshtml" />
+    <Content Include="Views\PontosInteresse\Details.cshtml" />
+    <Content Include="Views\PontosInteresse\Edit.cshtml" />
+    <Content Include="Views\PontosInteresse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
