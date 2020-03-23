@@ -50,7 +50,6 @@ namespace BackOfficeRAM.Models
     {
         [Required]
         [Display(Name = "Nome de utilizador")]
-        [EmailAddress]
         public string Username { get; set; }
 
         [Required]
