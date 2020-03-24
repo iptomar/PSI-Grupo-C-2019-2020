@@ -11,5 +11,7 @@ namespace BackOfficeRAM.Models
         [Key]
         public int Id { get; set; }
         public String ConteudoImagem { get; set; }
+        public String Nome { get; set; }
+        public String Autor { get; set; }
     }
 }

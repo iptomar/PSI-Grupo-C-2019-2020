@@ -183,7 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImagemsController.cs" />
+    <Compile Include="Controllers\ImagensController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PontosInteresseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202003172124169_remove-atr.Designer.cs">
       <DependentUpon>202003172124169_remove-atr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003242203537_atrib-imagens.cs" />
+    <Compile Include="Migrations\202003242203537_atrib-imagens.Designer.cs">
+      <DependentUpon>202003242203537_atrib-imagens.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
@@ -216,12 +220,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\maps\.DS_Store" />
+    <Content Include="Content\maps\horizontal-layout-light\style.css.map" />
+    <Content Include="Content\maps\style.css.map" />
+    <Content Include="Content\.DS_Store" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -232,6 +241,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\chart.js" />
+    <Content Include="Scripts\js\dashboard.js" />
+    <Content Include="Scripts\js\file-upload.js" />
+    <Content Include="Scripts\js\select2.js" />
+    <Content Include="Scripts\js\template.js" />
+    <Content Include="Scripts\js\typeahead.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -277,6 +292,7 @@
     <Content Include="Views\PontosInteresse\Details.cshtml" />
     <Content Include="Views\PontosInteresse\Edit.cshtml" />
     <Content Include="Views\PontosInteresse\Index.cshtml" />
+    <Content Include="Scripts\js\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003172124169_remove-atr.resx">
       <DependentUpon>202003172124169_remove-atr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003242203537_atrib-imagens.resx">
+      <DependentUpon>202003242203537_atrib-imagens.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

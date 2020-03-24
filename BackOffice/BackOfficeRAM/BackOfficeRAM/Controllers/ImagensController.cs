@@ -10,7 +10,7 @@ using BackOfficeRAM.Models;
 
 namespace BackOfficeRAM.Controllers
 {
-    public class ImagemsController : Controller
+    public class ImagensController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -46,7 +46,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ConteudoImagem")] Imagem imagem)
+        public ActionResult Create([Bind(Include = "Id,ConteudoImagem,Autor,Nome")] Imagem imagem)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ConteudoImagem")] Imagem imagem)
+        public ActionResult Edit([Bind(Include = "Id,ConteudoImagem,Autor,Nome")] Imagem imagem)
         {
             if (ModelState.IsValid)
             {
