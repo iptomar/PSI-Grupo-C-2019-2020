@@ -456,8 +456,14 @@ var app = {
         }
 
         var onError = function (error) {
-            alert('code: ' + error.code + '\n' +
-                'message: ' + error.message + '\n');
+            str = 'code: ' + error.code + '\n' +
+            'message: ' + error.message + '\n';
+            if (error.code == 3) { // no gps
+                str = "Sem sinal de GPS.";
+                onSuccess();
+            }
+            alert(str);
+           
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 10000, enableHighAccuracy: true });
