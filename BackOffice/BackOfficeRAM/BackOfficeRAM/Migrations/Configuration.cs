@@ -33,16 +33,16 @@ namespace BackOfficeRAM.Migrations
             //    }
             //}
 
-            if (!context.Users.Any(u => u.UserName == "admin"))
-            {
-                var store = new UserStore<ApplicationUser>(context);
-                //var manager = new UserManager<ApplicationUser>(store);
-                var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var user = new ApplicationUser { UserName = "admin" };
+            //if (!context.Users.Any(u => u.UserName == "admin"))
+            //{
+            //    var store = new UserStore<ApplicationUser>(context);
+            //    //var manager = new UserManager<ApplicationUser>(store);
+            //    var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //    var user = new ApplicationUser { UserName = "admin" };
 
-                manager.Create(user, "123_Asd");
-                //manager.AddToRole(user.Id, "AppAdmin");
-            }
+            //    manager.Create(user, "123_Asd");
+            //    //manager.AddToRole(user.Id, "AppAdmin");
+            //}
 
 
 
