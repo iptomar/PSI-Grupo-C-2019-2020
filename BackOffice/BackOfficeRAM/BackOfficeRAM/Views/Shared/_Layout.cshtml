@@ -3,31 +3,161 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>RAM Tomar</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/base/vendor.bundle.base.css">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    @*<link rel="shortcut icon" href="images/favicon.png" />*@
 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Novo Utilizador", "Register", "Account")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+        @*<div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Novo Utilizador", "Register", "Account")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>*@
+
+
+
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                        <ul class="navbar-nav navbar-nav-left">
+
+                            @* esquerda do titulo *@
+
+                        </ul>
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="@Url.Action("Index", "Home")">
+                                @*<img src="http://portal2.ipt.pt/img/logo.png" alt="logo" />*@
+                                <h2>RAM Tomar</h2>
+                            </a>
+                            <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index", "Home")">
+                                <img src="http://portal2.ipt.pt/img/logo.png" alt="logo" />
+                            </a>
+                        </div>
+                        <ul class="navbar-nav navbar-nav-right">
+
+                            @* direita do titulo *@
+
+
+                            @if (@Request.IsAuthenticated)
+                            {
+                                <li class="nav-item nav-profile dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                                        <span class="nav-profile-name">@HttpContext.Current.User.Identity.Name</span>
+                                        <span class="online-status"></span>
+                                        @*<img src="images/faces/face28.png" alt="profile" />*@
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                        <a class="dropdown-item">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                            Settings
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <i class="mdi mdi-logout text-primary"></i>
+                                            Logout
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="bottom-navbar">
+                <div class="container">
+                    <ul class="nav page-navigation">
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                                <span class="menu-title">Pontos de Interesse</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="submenu">
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-file-image menu-icon"></i>
+                                <span class="menu-title">Imagens</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="submenu">
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Imagens")">Adicionar nova imagem</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-account-multiple menu-icon"></i>
+                                <span class="menu-title">Utilizadores</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="submenu">
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="">Ver lista de utilizadores</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Register", "Account")">Adicionar novo utilizador</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="container body-content">
         @RenderBody()
