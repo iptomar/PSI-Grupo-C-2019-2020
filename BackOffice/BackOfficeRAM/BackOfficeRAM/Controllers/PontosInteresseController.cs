@@ -10,7 +10,7 @@ using BackOfficeRAM.Models;
 
 namespace BackOfficeRAM.Controllers
 {
-    public class PontoInteressesController : Controller
+    public class PontosInteresseController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -75,7 +75,7 @@ namespace BackOfficeRAM.Controllers
             return View(pontoInteresse);
         }
 
-        // POST: PontoInteresses/Edit/5
+        // POST: PontosInteresse/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,7 +91,7 @@ namespace BackOfficeRAM.Controllers
             return View(pontoInteresse);
         }
 
-        // GET: PontoInteresses/Delete/5
+        // GET: PontosInteresse/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,7 +106,7 @@ namespace BackOfficeRAM.Controllers
             return View(pontoInteresse);
         }
 
-        // POST: PontoInteresses/Delete/5
+        // POST: PontosInteresse/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
