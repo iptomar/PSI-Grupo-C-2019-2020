@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BackOfficeRAM.Models;
+using BackOfficeRAM.Models.Database;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -151,7 +152,7 @@ namespace BackOfficeRAM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email};
+                var user = new Utilizador { UserName = model.Username, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

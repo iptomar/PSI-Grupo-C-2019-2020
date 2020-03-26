@@ -1,0 +1,23 @@
+﻿body, html {
+    background-color: aliceblue;
+}
+
+
+
+.navbar {
+    display: unset;
+}
+
+
+
+.form-control, .typeahead, .tt-query, .tt-hint {
+    border: 1px solid #02b1f7;
+    font-weight: 400;
+    font-size: 0.875rem;
+    height: auto;
+}
+
+
+.horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right {
+    padding-right: 50px;
+}
