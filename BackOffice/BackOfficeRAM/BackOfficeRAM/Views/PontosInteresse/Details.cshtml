@@ -4,20 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-
-<h2>Details</h2>
+<br />
+<h2>@Html.DisplayFor(model => model.Nome)</h2>
 
 <div>
-    <h4>PontoInteresse</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.Descricao)
@@ -26,6 +21,14 @@
         <dd>
             @Html.DisplayFor(model => model.Descricao)
         </dd>
+
+        @foreach (var item in Model.Imagens)
+        {
+            <dd>
+                <img src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Alternate Text" style="height:400px" />
+            </dd>
+            <br />
+        }
 
     </dl>
 </div>

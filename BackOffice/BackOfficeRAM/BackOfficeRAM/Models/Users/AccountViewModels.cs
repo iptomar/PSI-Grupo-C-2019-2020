@@ -67,6 +67,8 @@ namespace BackOfficeRAM.Models
         [Display(Name = "Nome de utilizador")]
         public string Username { get; set; }
 
+        public string SelectedRole { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]

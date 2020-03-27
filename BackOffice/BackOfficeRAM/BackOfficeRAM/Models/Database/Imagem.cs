@@ -13,5 +13,6 @@ namespace BackOfficeRAM.Models
         public String ConteudoImagem { get; set; }
         public String Nome { get; set; }
         public String Autor { get; set; }
+        public virtual PontoInteresse PontoInteresse { get; set; }
     }
 }

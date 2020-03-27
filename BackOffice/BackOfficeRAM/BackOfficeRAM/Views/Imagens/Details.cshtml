@@ -21,10 +21,13 @@
         <dd>
             <b>Autor: </b> @Model.Autor
         </dd>
+        <dd>
+            <b>Ponto de Interesse: </b> @Model.PontoInteresse.Nome
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id, @class="btn btn-warning" }) |
+    @Html.ActionLink("Regressar à lista", "Index")
 </p>

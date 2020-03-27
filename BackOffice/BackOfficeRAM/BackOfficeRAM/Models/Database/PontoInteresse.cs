@@ -13,6 +13,6 @@ namespace BackOfficeRAM.Models
         public String Nome { get; set; }
         public String Descricao { get; set; }
         public List<Coordenada> Coordenadas { get; set; }
-        public List<Imagem> Imagens { get; set; }
+        public virtual List<Imagem> Imagens { get; set; }
     }
 }

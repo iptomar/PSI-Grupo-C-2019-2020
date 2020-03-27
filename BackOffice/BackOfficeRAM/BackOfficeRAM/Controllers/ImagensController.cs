@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BackOfficeRAM.Models;
+using BackOfficeRAM.ViewModels;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -32,13 +33,18 @@ namespace BackOfficeRAM.Controllers
             {
                 return HttpNotFound();
             }
+            ImageDetailsViewModel model = new ImageDetailsViewModel();
+            model.Imagem = imagem;
+            model.Ponto = imagem.PontoInteresse;
             return View(imagem);
         }
 
         // GET: Imagems/Create
         public ActionResult Create()
         {
-            return View();
+            CreateEditImagemViewModel model = new CreateEditImagemViewModel();
+            LoadPontos(ref model);
+            return View(model);
         }
 
         // POST: Imagems/Create
@@ -46,16 +52,29 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ConteudoImagem,Autor,Nome")] Imagem imagem)
+        public ActionResult Create(CreateEditImagemViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                db.Imagens.Add(imagem);
+                var pontodb = db.PontosInteresse.Find(model.PontoEscolhido);
+
+                pontodb.Imagens = pontodb.Imagens ?? new List<Imagem>();
+
+                var imagem = new Imagem
+                {
+                    Autor = model.Autor,
+                    ConteudoImagem = model.Conteudo,
+                    Nome = model.Nome
+                };
+
+                pontodb.Imagens.Add(imagem);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(imagem);
+            LoadPontos(ref model);
+            return View(model);
         }
 
         // GET: Imagems/Edit/5
@@ -70,7 +89,14 @@ namespace BackOfficeRAM.Controllers
             {
                 return HttpNotFound();
             }
-            return View(imagem);
+            CreateEditImagemViewModel model = new CreateEditImagemViewModel();
+            LoadPontos(ref model);
+            model.IdImagem = imagem.Id;
+            model.Nome = imagem.Nome;
+            model.Autor = imagem.Autor;
+            model.Conteudo = imagem.ConteudoImagem;
+            model.PontoEscolhido = imagem.PontoInteresse.Id;
+            return View(model);
         }
 
         // POST: Imagems/Edit/5
@@ -78,15 +104,24 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ConteudoImagem,Autor,Nome")] Imagem imagem)
+        public ActionResult Edit(CreateEditImagemViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(imagem).State = EntityState.Modified;
+                var imagem = db.Imagens.Find(model.IdImagem);
+
+                imagem.Autor = model.Autor;
+                imagem.ConteudoImagem = model.Conteudo;
+                imagem.Nome = model.Nome;
+                imagem.PontoInteresse = db.PontosInteresse.Find(model.PontoEscolhido);
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            return View(imagem);
+
+            LoadPontos(ref model);
+            return View(model);
         }
 
         // GET: Imagems/Delete/5
@@ -122,6 +157,13 @@ namespace BackOfficeRAM.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [NonAction]
+        public void LoadPontos(ref CreateEditImagemViewModel model)
+        {
+            var pontos = db.PontosInteresse.ToList();
+            model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
         }
     }
 }
