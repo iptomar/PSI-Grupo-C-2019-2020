@@ -6,8 +6,8 @@
 
 .navbar {
     display: unset;
+    padding: 0; 
 }
-
 
 
 .form-control, .typeahead, .tt-query, .tt-hint {
@@ -20,4 +20,39 @@
 
 .horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right {
     padding-right: 50px;
+}
+
+.auth .login-half-bg {
+    background: url("../fotos/convento.jpg");
+    background-size: cover;
+}
+
+.input-group {
+    display: unset;
+}
+
+.form-control-lg {
+    border-radius: 0;
+}
+
+select.form-control, select.typeahead, select.tt-query, select.tt-hint {
+    color: #222;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f0f3f6;
+}
+
+.jumbotron {
+    display: flex;
+    flex-direction: row;
+    background: url(../fotos/camara.jpg);
+    background-position: center;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-fluid {
+    padding-right: 15px;
 }

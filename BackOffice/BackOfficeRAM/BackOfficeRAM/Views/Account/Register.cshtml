@@ -11,6 +11,28 @@
     @Html.AntiForgeryToken()
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @{
+                List<SelectListItem> listaRoles = new List<SelectListItem>();
+                listaRoles.Add(new SelectListItem
+                {
+                    Text = "Administrador",
+                    Value = "administrador"
+                });
+                listaRoles.Add(new SelectListItem
+                {
+                    Text = "Utilizador",
+                    Value = "utilizador",
+                });
+
+            }
+            @Html.LabelFor(m => m.SelectedRole, "Função")
+            @Html.DropDownListFor(m => m.SelectedRole, listaRoles, new { @class = "form-control form-control-lg" })
+        </div>
+    </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
