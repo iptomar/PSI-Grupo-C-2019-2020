@@ -213,6 +213,18 @@
     <Compile Include="Migrations\202003252329560_atrib-email-rem.Designer.cs">
       <DependentUpon>202003252329560_atrib-email-rem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003271547498_ad-atribs-ponto.cs" />
+    <Compile Include="Migrations\202003271547498_ad-atribs-ponto.Designer.cs">
+      <DependentUpon>202003271547498_ad-atribs-ponto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003271643492_mud-nome-atr-pt.cs" />
+    <Compile Include="Migrations\202003271643492_mud-nome-atr-pt.Designer.cs">
+      <DependentUpon>202003271643492_mud-nome-atr-pt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003271645449_tipo-ano.cs" />
+    <Compile Include="Migrations\202003271645449_tipo-ano.Designer.cs">
+      <DependentUpon>202003271645449_tipo-ano.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
@@ -379,6 +391,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003252329560_atrib-email-rem.resx">
       <DependentUpon>202003252329560_atrib-email-rem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003271547498_ad-atribs-ponto.resx">
+      <DependentUpon>202003271547498_ad-atribs-ponto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003271643492_mud-nome-atr-pt.resx">
+      <DependentUpon>202003271643492_mud-nome-atr-pt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003271645449_tipo-ano.resx">
+      <DependentUpon>202003271645449_tipo-ano.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

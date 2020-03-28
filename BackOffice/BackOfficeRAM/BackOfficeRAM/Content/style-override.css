@@ -9,6 +9,9 @@
     padding: 0; 
 }
 
+.container {
+    max-width: 1300px;
+}
 
 .form-control, .typeahead, .tt-query, .tt-hint {
     border: 1px solid #02b1f7;
@@ -48,7 +51,7 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
     flex-direction: row;
     background: url(../fotos/camara.jpg);
     background-position: center;
-    height: 250px;
+    height: 500px;
     align-items: center;
     justify-content: center;
 }
@@ -56,3 +59,4 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
 .container-fluid {
     padding-right: 15px;
 }
+

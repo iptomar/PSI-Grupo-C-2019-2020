@@ -10,6 +10,7 @@ namespace BackOfficeRAM.Models
     {
         [Key]
         public int Id { get; set; }
-        public String ValorCoordenada { get; set; }
+        public String Latitude { get; set; }
+        public String Longitude { get; set; }
     }
 }
