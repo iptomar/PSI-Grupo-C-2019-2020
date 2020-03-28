@@ -10,28 +10,69 @@
 <div>
     <h4></h4>
     <hr />
-    <dl class="dl-horizontal">
+    <div class="container">
 
+        <br />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="h3 col-sm">
+                    Autor:
+                </div>
+                <div class="col-sm">
+                    @Html.DisplayFor(model => model.Autor)
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="h3 col-sm">
+                    Localização:
+                </div>
+                <div class="col-sm">
+                    @Html.DisplayFor(model => model.Localizacao)
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="h3 col-sm">
+                    Tipo de Edifício:
+                </div>
+                <div class="col-sm">
+                    @Html.DisplayFor(model => model.TipoEdificio)
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="h3 col-sm">
+                    Ano de construção:
+                </div>
+                <div class="col-sm">
+                    @Html.DisplayFor(model => model.Ano)
+                </div>
+            </div>
 
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-
-        <dd>
+        <br />
+        <br />
+        <div class="col-sm" style="text-align: justify;">
             @Html.DisplayFor(model => model.Descricao)
-        </dd>
+        </div>
 
-        @foreach (var item in Model.Imagens)
-        {
-            <dd>
-                <img src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Alternate Text" style="height:400px" />
-            </dd>
-            <br />
-        }
 
-    </dl>
+        <div class="row">
+            @foreach (var item in Model.Imagens)
+            {
+                <div class="col-sm" style="text-align: center;">
+                    <div>
+                        <img src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style="height:350px; margin:10px;margin-left:0px" />
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
+<br />
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

@@ -52,7 +52,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateEditImagemViewModel model)
+        public ActionResult Create(CreateEditImagemViewModel model, HttpPostedFileBase foto)
         {
 
             if (ModelState.IsValid)
@@ -64,11 +64,29 @@ namespace BackOfficeRAM.Controllers
                 var imagem = new Imagem
                 {
                     Autor = model.Autor,
-                    ConteudoImagem = model.Conteudo,
                     Nome = model.Nome
                 };
 
                 pontodb.Imagens.Add(imagem);
+
+
+                if (foto != null)
+                {
+                    System.IO.Stream fs = foto.InputStream;
+                    System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
+                    Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    imagem.ConteudoImagem = "data:image/png;base64," + base64String;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro no carregamento da foto");
+                    LoadPontos(ref model);
+                    return View(model);
+                }
+
+
+
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,7 +112,7 @@ namespace BackOfficeRAM.Controllers
             model.IdImagem = imagem.Id;
             model.Nome = imagem.Nome;
             model.Autor = imagem.Autor;
-            model.Conteudo = imagem.ConteudoImagem;
+            //model.Conteudo = imagem.ConteudoImagem;
             model.PontoEscolhido = imagem.PontoInteresse.Id;
             return View(model);
         }
@@ -111,7 +129,7 @@ namespace BackOfficeRAM.Controllers
                 var imagem = db.Imagens.Find(model.IdImagem);
 
                 imagem.Autor = model.Autor;
-                imagem.ConteudoImagem = model.Conteudo;
+                //imagem.ConteudoImagem = model.Conteudo;
                 imagem.Nome = model.Nome;
                 imagem.PontoInteresse = db.PontosInteresse.Find(model.PontoEscolhido);
 
