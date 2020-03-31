@@ -9,9 +9,10 @@ namespace BackOfficeRAM.ViewModels
 {
     public class CreateEditImagemViewModel
     {
-        public IEnumerable<SelectListItem> PontosInteresse { get; set; }
+        public IEnumerable<SelectListItem> PontosInteresse  { get; set; }
         public int PontoEscolhido { get; set; }
         public int IdImagem { get; set; }
+        public String Conteudo { get; set; }
         public String Nome { get; set; }
         public String Autor { get; set; }
     }

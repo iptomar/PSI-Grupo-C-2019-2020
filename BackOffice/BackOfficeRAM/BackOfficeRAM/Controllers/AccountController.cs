@@ -95,13 +95,13 @@ namespace BackOfficeRAM.Controllers
             }
         }
 
-       
 
-        
+
+
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "administrador")]
         public ActionResult Register()
         {
             return View();
@@ -110,7 +110,7 @@ namespace BackOfficeRAM.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "administrador")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

@@ -112,7 +112,7 @@ namespace BackOfficeRAM.Controllers
             model.IdImagem = imagem.Id;
             model.Nome = imagem.Nome;
             model.Autor = imagem.Autor;
-            //model.Conteudo = imagem.ConteudoImagem;
+            model.Conteudo = imagem.ConteudoImagem;
             model.PontoEscolhido = imagem.PontoInteresse.Id;
             return View(model);
         }
@@ -129,7 +129,6 @@ namespace BackOfficeRAM.Controllers
                 var imagem = db.Imagens.Find(model.IdImagem);
 
                 imagem.Autor = model.Autor;
-                //imagem.ConteudoImagem = model.Conteudo;
                 imagem.Nome = model.Nome;
                 imagem.PontoInteresse = db.PontosInteresse.Find(model.PontoEscolhido);
 
