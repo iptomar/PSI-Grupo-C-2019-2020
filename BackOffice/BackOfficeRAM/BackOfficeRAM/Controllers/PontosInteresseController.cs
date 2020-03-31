@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BackOfficeRAM.Models;
+using BackOfficeRAM.ViewModels;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -40,7 +41,9 @@ namespace BackOfficeRAM.Controllers
         // GET: PontoInteresses/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new CreateEditPontoInteresseViewModel();
+
+            return View(model);
         }
 
         // POST: PontoInteresses/Create
@@ -48,16 +51,16 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Descricao,Autor,Localizacao,Ano,TipoEdificio")] PontoInteresse pontoInteresse)
+        public ActionResult Create(CreateEditPontoInteresseViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.PontosInteresse.Add(pontoInteresse);
+                db.PontosInteresse.Add(model.PontoInteresse);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pontoInteresse);
+            return View(model);
         }
 
         // GET: PontoInteresses/Edit/5
