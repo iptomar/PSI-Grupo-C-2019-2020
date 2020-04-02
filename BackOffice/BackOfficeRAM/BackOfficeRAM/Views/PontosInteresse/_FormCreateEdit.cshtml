@@ -1,0 +1,206 @@
+﻿@using System.Web.Script.Serialization
+
+@model BackOfficeRAM.ViewModels.CreateEditPontoInteresseViewModel
+
+<div class="form-horizontal">
+    <h4></h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.PontoInteresse.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PontoInteresse.Nome, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.PontoInteresse.Nome, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.PontoInteresse.Descricao, 5, 1, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.Descricao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row" style="margin-left:0; margin-right:0">
+
+        <div class="col-md-6">
+            @Html.Label("Localização", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
+            @Html.EditorFor(model => model.PontoInteresse.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.Localizacao, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.PontoInteresse.Autor, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0;" })
+            @Html.EditorFor(model => model.PontoInteresse.Autor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.Autor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row" style="margin-left:0; margin-right:0">
+
+
+        <div class="col-md-6">
+            @Html.Label("Ano de Construção", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
+            @Html.EditorFor(model => model.PontoInteresse.Ano, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.Ano, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-md-6">
+            @Html.Label("Tipo de Edifício", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
+            @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control text-box single-line" })
+            @Html.ValidationMessageFor(model => model.PontoInteresse.TipoEdificio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group row" style="margin-left:0; margin-right:0">
+        <div class="col-md-6">
+            @Html.Label("Coordenadas do Ícone", htmlAttributes: new { @class = "control-label", @style = "padding-left:0;" })
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Latitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude" } })
+                    @Html.ValidationMessageFor(model => model.PontoInteresse.CoordenadaIcon.Latitude, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude" } })
+                    @Html.ValidationMessageFor(model => model.PontoInteresse.CoordenadaIcon.Longitude, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+        </div>
+
+
+    </div>
+
+
+    <div class="form-group row" style="margin-left:0; margin-right:0">
+        <div class="col-md-6">
+            @Html.Label("Coordenadas do Polígono", htmlAttributes: new { @class = "control-label", @style = "padding-left:0;" })
+            <div class="row">
+                <div class="col">
+                    <input type="text" placeholder="Latitude" data-bind="value: Latitude" class="form-control col-md" />
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="Longitude" data-bind="value: Longitude" class="form-control col-md" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-success" data-bind="click: adicionarCoordenada">
+                        <i class="fa fa-plus"></i> Adicionar
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            @*<input type="text" data-bind="value: Latitude" class="form-control" />
+                <input type="text" data-bind="value: Longitude" class="form-control" />
+                <button class="btn btn-success" data-bind="click: adicionarCoordenada">
+                    <i class="fa fa-plus"></i> Adicionar
+                </button>*@
+        </div>
+
+
+    </div>
+
+    <div class="form-group row" style="margin-left:0; margin-right:0; " data-bind="foreach: Coordenadas">
+        <input type="hidden" data-bind="value: Id, attr:{name:'PontoInteresse.CoordenadasPoligono['+$index()+'].Id'}" />
+        <input type="hidden" data-bind="value: Latitude, attr:{name:'PontoInteresse.CoordenadasPoligono['+$index()+'].Latitude'}" />
+        <input type="hidden" data-bind="value: Longitude, attr:{name:'PontoInteresse.CoordenadasPoligono['+$index()+'].Longitude'}" />
+
+        <div class="col-md-6" style=" background-color:cadetblue;color:white;padding:10px;">
+            <div class="row">
+                <div class="col">
+                    <b>Latitude: </b> <span data-bind="text: Latitude"></span>
+                </div>
+                <div class="col">
+                    <b>Longitude: </b> <span data-bind="text: Longitude"></span>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" data-bind="click: $root.removerCoordenada">
+                        <i class="fa fa-minus"></i> Remover
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        var Coordenada = function (id, latitude, longitude) {
+            var self = this;
+
+            self.Id = ko.observable();
+            self.Latitude = ko.observable(latitude);
+            self.Longitude = ko.observable(longitude);
+        }
+
+        var Model = function () {
+            var self = this;
+
+            self.Latitude = ko.observable();
+            self.Longitude = ko.observable();
+
+            self.Coordenadas = ko.observableArray([]);
+
+            self.adicionarCoordenada = function () {
+                if (self.Latitude() === undefined || self.Longitude() === undefined || self.Latitude() === '' || self.Longitude() === '')
+                    alert("Preencha as coordenadas")
+
+                self.Coordenadas.push(new Coordenada(0, self.Latitude(), self.Longitude()));
+
+                self.Latitude('');
+                self.Longitude('');
+            };
+
+            self.removerCoordenada = function (coordenada) {
+                self.Coordenadas.remove(coordenada);
+            };
+
+            self.loadCoordenadas = function () {
+                var json = @Html.Raw(new JavaScriptSerializer().Serialize(Model.PontoInteresse.CoordenadasPoligono));
+
+                if (json.length === 0)
+                    return;
+
+                var arr = [];
+                $.each(json, function (index, coordenada) {
+                    arr.push(new Coordenada(coordenada.Id, coordenada.Latitude, coordenada.Longitude));
+                });
+
+                self.Coordenadas(arr);
+            };
+
+            self.loadCoordenadas();
+        };
+
+        $(function () {
+            var model = new Model();
+            ko.applyBindings(model);
+        })
+</script>

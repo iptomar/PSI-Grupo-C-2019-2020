@@ -1,6 +1,7 @@
 ﻿using BackOfficeRAM.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,5 +23,6 @@ namespace BackOfficeRAM.ViewModels
         public PontoInteresse PontoInteresse { get; set; }
 
         public List<SelectListItem> TiposEdificios { get; set; }
+
     }
 }

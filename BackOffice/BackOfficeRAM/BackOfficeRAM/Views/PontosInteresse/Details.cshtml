@@ -48,6 +48,33 @@
             </div>
 
         </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <div class="h3 col-sm">
+                    Coordenadas do Ícone:
+                </div>
+                <div class="col-sm" style="font-style:italic">
+                    @Html.DisplayFor(model => model.CoordenadaIcon.Latitude)
+                    ,
+                    @Html.DisplayFor(model => model.CoordenadaIcon.Longitude)
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="h3 col-sm">
+                    Coordenadas do Polígono:
+                </div>
+
+                @foreach (var item in Model.CoordenadasPoligono)
+                {<div class="col-sm" style="font-style:italic">
+                        @item.Latitude
+                        @String.Format(" , ")
+                        @item.Latitude
+                    </div>
+                }
+
+            </div>
+        </div>
 
         <br />
         <br />

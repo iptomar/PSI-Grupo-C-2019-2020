@@ -18,9 +18,7 @@ namespace BackOfficeRAM.ViewModels.API
             Autor = ponto.Autor;
             Ano = ponto.Ano;
             Descricao = ponto.Descricao;
-            //Ingredientes = produto.Ingredientes.Select(i => new IngredienteModel(i));
-            Imagens = ponto.Imagens.Select(i=>new ImagensApiModel(i));
-
+            Imagens = ponto.Imagens.Select(i => new ImagensApiModel(i));
         }
 
         public String Localizacao { get; set; }
@@ -43,9 +41,7 @@ namespace BackOfficeRAM.ViewModels.API
             public String Conteudo { get; set; }
         }
 
-
-
-
+       
 
     }
 }
