@@ -11,71 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4></h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PontoInteresse.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PontoInteresse.Nome, htmlAttributes: new { @class = "control-label col-md-5" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.PontoInteresse.Nome, new { htmlAttributes = new { @class = "form-control " } })
-                @Html.ValidationMessageFor(model => model.PontoInteresse.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-5" })
-            <div class="col-md-12">
-                @Html.TextAreaFor(model => model.PontoInteresse.Descricao, 5, 1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PontoInteresse.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row" style="margin-left:0; margin-right:0">
-
-            <div class="col-md-6">
-                @Html.Label("Localização", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-                @Html.EditorFor(model => model.PontoInteresse.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PontoInteresse.Localizacao, "", new { @class = "text-danger" })
-            </div>
-
-
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.PontoInteresse.Autor, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0;" })
-                @Html.EditorFor(model => model.PontoInteresse.Autor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PontoInteresse.Autor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row" style="margin-left:0; margin-right:0">
-
-
-            <div class="col-md-6">
-                @Html.Label("Ano de Construção", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-                @Html.EditorFor(model => model.PontoInteresse.Ano, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PontoInteresse.Ano, "", new { @class = "text-danger" })
-            </div>
-
-
-            <div class="col-md-6">
-                @Html.Label("Tipo de Edifício", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-                @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control" })
-                @*@Html.EditorFor(model => model.PontoInteresse.TipoEdificio, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.PontoInteresse.TipoEdificio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_FormCreateEdit")
 }
 
 <div>

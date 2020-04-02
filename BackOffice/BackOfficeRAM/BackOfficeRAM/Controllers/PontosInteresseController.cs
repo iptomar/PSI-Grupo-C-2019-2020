@@ -70,12 +70,16 @@ namespace BackOfficeRAM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             PontoInteresse pontoInteresse = db.PontosInteresse.Find(id);
             if (pontoInteresse == null)
             {
                 return HttpNotFound();
             }
-            return View(pontoInteresse);
+            var model = new CreateEditPontoInteresseViewModel();
+            model.PontoInteresse = pontoInteresse;
+
+            return View(model);
         }
 
         // POST: PontosInteresse/Edit/5
@@ -83,15 +87,42 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,Autor,Localizacao,Ano,TipoEdificio")] PontoInteresse pontoInteresse)
+        public ActionResult Edit(CreateEditPontoInteresseViewModel model)
         {
+            foreach (var item in model.PontoInteresse.CoordenadasPoligono)
+                ModelState.Remove("PontoInteresse.CoordenadasPoligono["+ model.PontoInteresse.CoordenadasPoligono .IndexOf(item)+ "].Id");
+
             if (ModelState.IsValid)
             {
-                db.Entry(pontoInteresse).State = EntityState.Modified;
+                var oldPontoInteresse = db.PontosInteresse.Find(model.PontoInteresse.Id);
+
+                foreach (var coordenada in oldPontoInteresse.CoordenadasPoligono.ToList())
+                {
+                    if (model.PontoInteresse.CoordenadasPoligono == null || !model.PontoInteresse.CoordenadasPoligono.Any(c => c.Id == coordenada.Id))
+                        oldPontoInteresse.CoordenadasPoligono.Remove(coordenada);
+                }
+
+                if (model.PontoInteresse.CoordenadasPoligono != null)
+                {
+                    foreach (var novaCoordenada in model.PontoInteresse.CoordenadasPoligono.Where(x => x.Id == 0).ToList())
+                    {
+                        oldPontoInteresse.CoordenadasPoligono.Add(novaCoordenada);
+                    }
+                }
+
+                oldPontoInteresse.Ano = model.PontoInteresse.Ano;
+                oldPontoInteresse.Autor = model.PontoInteresse.Autor;
+                oldPontoInteresse.Descricao = model.PontoInteresse.Descricao;
+                oldPontoInteresse.Localizacao = model.PontoInteresse.Localizacao;
+                oldPontoInteresse.TipoEdificio = model.PontoInteresse.TipoEdificio;
+                oldPontoInteresse.CoordenadaIcon = model.PontoInteresse.CoordenadaIcon;
+                oldPontoInteresse.Nome = model.PontoInteresse.Nome;
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            return View(pontoInteresse);
+            return View(model);
         }
 
         // GET: PontosInteresse/Delete/5

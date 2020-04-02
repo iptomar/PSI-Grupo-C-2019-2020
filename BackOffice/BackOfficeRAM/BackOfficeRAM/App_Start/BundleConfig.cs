@@ -22,6 +22,9 @@ namespace BackOfficeRAM
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ko").Include(
+                      "~/Scripts/knockout-3.5.1.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/fa").Include(
                       "~/Scripts/fontawesome/all.js"));
 

@@ -16,8 +16,8 @@ namespace BackOfficeRAM.Models
         public String Ano { get; set; }
         public String TipoEdificio { get; set; }
         public String Descricao { get; set; }
-        public Coordenada CoordenadaIcon { get; set; }
-        public List<Coordenada> CoordenadasPoligono { get; set; }
+        public virtual Coordenada CoordenadaIcon { get; set; }
+        public virtual List<Coordenada> CoordenadasPoligono { get; set; }
         public virtual List<Imagem> Imagens { get; set; }
     }
 }
