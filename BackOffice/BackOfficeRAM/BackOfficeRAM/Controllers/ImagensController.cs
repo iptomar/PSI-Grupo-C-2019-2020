@@ -11,6 +11,7 @@ using BackOfficeRAM.ViewModels;
 
 namespace BackOfficeRAM.Controllers
 {
+    [Authorize]
     public class ImagensController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

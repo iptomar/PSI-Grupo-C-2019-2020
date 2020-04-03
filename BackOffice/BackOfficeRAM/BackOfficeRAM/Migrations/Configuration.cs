@@ -20,7 +20,7 @@ namespace BackOfficeRAM.Migrations
 
         protected override void Seed(BackOfficeRAM.Models.ApplicationDbContext context)
         {
-
+            System.Diagnostics.Debugger.Launch();
 
             var _userManager = new UserManager<Utilizador>(new UserStore<Utilizador>(context));
             var _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));

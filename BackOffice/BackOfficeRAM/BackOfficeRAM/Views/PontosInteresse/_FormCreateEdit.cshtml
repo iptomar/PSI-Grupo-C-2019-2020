@@ -95,7 +95,7 @@
                     <input type="text" placeholder="Longitude" data-bind="value: Longitude" class="form-control col-md" />
                 </div>
                 <div class="col">
-                    <button class="btn btn-success" data-bind="click: adicionarCoordenada">
+                    <button class="btn btn-success" data-bind="click: adicionarCoordenada" type="button">
                         <i class="fa fa-plus"></i> Adicionar
                     </button>
                 </div>
@@ -129,7 +129,7 @@
                     <b>Longitude: </b> <span data-bind="text: Longitude"></span>
                 </div>
                 <div class="col">
-                    <button class="btn btn-danger" data-bind="click: $root.removerCoordenada">
+                    <button class="btn btn-danger" data-bind="click: $root.removerCoordenada" type="button">
                         <i class="fa fa-minus"></i> Remover
                     </button>
                 </div>
@@ -185,7 +185,7 @@
             self.loadCoordenadas = function () {
                 var json = @Html.Raw(new JavaScriptSerializer().Serialize(Model.PontoInteresse.CoordenadasPoligono));
 
-                if (json.length === 0)
+                if (json == null || json.length === 0)
                     return;
 
                 var arr = [];

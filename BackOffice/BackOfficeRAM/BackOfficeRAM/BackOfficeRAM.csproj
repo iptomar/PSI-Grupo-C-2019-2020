@@ -17,7 +17,7 @@
     <AssemblyName>BackOfficeRAM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44307</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -257,6 +257,7 @@
     <Content Include="fonts\fontawesome\fa-solid-900.svg" />
     <Content Include="fotos\camara.jpg" />
     <Content Include="fotos\convento.jpg" />
+    <Content Include="fotos\templar.jpg" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Content\style-override.css" />
     <Content Include="Content\style.css" />
@@ -445,7 +446,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>6316</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44307/</IISUrl>
+          <IISUrl>http://localhost/BackOfficeRAM</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
