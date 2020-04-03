@@ -11,6 +11,7 @@ using BackOfficeRAM.ViewModels;
 
 namespace BackOfficeRAM.Controllers
 {
+    [Authorize]
     public class PontosInteresseController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -53,6 +54,11 @@ namespace BackOfficeRAM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateEditPontoInteresseViewModel model)
         {
+            if (model.PontoInteresse.CoordenadasPoligono != null)
+            {
+                foreach (var item in model.PontoInteresse.CoordenadasPoligono)
+                    ModelState.Remove("PontoInteresse.CoordenadasPoligono[" + model.PontoInteresse.CoordenadasPoligono.IndexOf(item) + "].Id");
+            }
             if (ModelState.IsValid)
             {
                 db.PontosInteresse.Add(model.PontoInteresse);
@@ -89,9 +95,11 @@ namespace BackOfficeRAM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CreateEditPontoInteresseViewModel model)
         {
-            foreach (var item in model.PontoInteresse.CoordenadasPoligono)
-                ModelState.Remove("PontoInteresse.CoordenadasPoligono["+ model.PontoInteresse.CoordenadasPoligono .IndexOf(item)+ "].Id");
-
+            if (model.PontoInteresse.CoordenadasPoligono != null)
+            {
+                foreach (var item in model.PontoInteresse.CoordenadasPoligono)
+                    ModelState.Remove("PontoInteresse.CoordenadasPoligono[" + model.PontoInteresse.CoordenadasPoligono.IndexOf(item) + "].Id");
+            }
             if (ModelState.IsValid)
             {
                 var oldPontoInteresse = db.PontosInteresse.Find(model.PontoInteresse.Id);
@@ -146,6 +154,13 @@ namespace BackOfficeRAM.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             PontoInteresse pontoInteresse = db.PontosInteresse.Find(id);
+            if (pontoInteresse.CoordenadasPoligono != null)
+            {
+                foreach (var item in pontoInteresse.CoordenadasPoligono.ToList())
+                {
+                    db.Coordenadas.Remove(item);
+                }
+            }
             db.PontosInteresse.Remove(pontoInteresse);
             db.SaveChanges();
             return RedirectToAction("Index");

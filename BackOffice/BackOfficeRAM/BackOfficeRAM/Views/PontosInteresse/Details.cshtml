@@ -99,7 +99,7 @@
                 {
                     <div class="col-sm" style="text-align: center;">
                         <div>
-                            <img src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style="height:350px; margin:10px;margin-left:0px" />
+                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style=" margin:10px;margin-left:0px" />
                         </div>
                         <div>
                             @Html.DisplayFor(modelItem => item.Nome)
@@ -128,7 +128,18 @@
 
         function initMap() {
             var myCenter = new google.maps.LatLng(parseFloat("@Model.CoordenadaIcon.Latitude"), parseFloat("@Model.CoordenadaIcon.Longitude"));
-            var mapProp = { center: myCenter, zoom: 17, scrollwheel: false, draggable: false, mapTypeId: google.maps.MapTypeId.SATELLITE };
+            var mapProp = {
+                center: myCenter,
+                zoom: 17,
+                scrollwheel: false,
+                draggable: true,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false };
             map = new google.maps.Map(document.getElementById('map'),
                 mapProp
             );
