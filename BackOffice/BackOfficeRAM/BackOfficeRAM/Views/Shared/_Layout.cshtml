@@ -98,13 +98,13 @@
 
 
 
+                            <li class="nav-item nav-profile dropdown">
 
-
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                @if (Request.IsAuthenticated)
                                 {
-                                    @Html.AntiForgeryToken()
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
 
                                     <li class="nav navbar-nav navbar-right">
                                         <i class="fas fa-user-tie"></i>
@@ -140,101 +140,101 @@
                                 </li>
                             }
 
+                            
 
+                            </ul>
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                                <span class="mdi mdi-menu"></span>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
+                                    <i class="fas fa-map-marker-alt menu-icon"></i>
+                                    <span class="menu-title">Pontos de Interesse</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Imagens")" class="nav-link">
+                                    <i class="far fa-images menu-icon"></i>
+                                    <span class="menu-title">Imagens</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Imagens")">Adicionar nova imagem</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    @*<i class="mdi mdi-account-multiple menu-icon"></i>*@
+                                    <i class="fas fa-users menu-icon"></i>
+                                    <span class="menu-title">Utilizadores</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        @if (User.IsInRole("administrador"))
+                                        {
+                                            <li class="nav-item"><a class="nav-link" href="">Ver lista de utilizadores</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Register", "Account")">Adicionar novo utilizador</a></li>
+                                        }
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Manage")">Gerir a minha conta</a></li>
+                                    </ul>
+                                </div>
+                            </li>
 
                         </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
-                            <span class="mdi mdi-menu"></span>
-                        </button>
                     </div>
-                </div>
-            </nav>
-            <nav class="bottom-navbar">
-                <div class="container">
-                    <ul class="nav page-navigation">
-
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
-                                <i class="fas fa-map-marker-alt menu-icon"></i>
-                                <span class="menu-title">Pontos de Interesse</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul>
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
-                                </ul>
-                            </div>
-                        </li>
+                </nav>
+            </div>
 
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Imagens")" class="nav-link">
-                                <i class="far fa-images menu-icon"></i>
-                                <span class="menu-title">Imagens</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul>
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Imagens")">Adicionar nova imagem</a></li>
-                                </ul>
-                            </div>
-                        </li>
 
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                @*<i class="mdi mdi-account-multiple menu-icon"></i>*@
-                                <i class="fas fa-users menu-icon"></i>
-                                <span class="menu-title">Utilizadores</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul>
-                                    @if (User.IsInRole("administrador"))
-                                    {
-                                        <li class="nav-item"><a class="nav-link" href="">Ver lista de utilizadores</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Register", "Account")">Adicionar novo utilizador</a></li>
-                                    }
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Manage")">Gerir a minha conta</a></li>
-                                </ul>
-                            </div>
-                        </li>
 
-                    </ul>
-                </div>
-            </nav>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Projeto de Sistemas de Informação</p>
+            </footer>
         </div>
 
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/fa")
+        @Scripts.Render("~/bundles/ko")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Projeto de Sistemas de Informação</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/fa")
-    @Scripts.Render("~/bundles/ko")
-
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
