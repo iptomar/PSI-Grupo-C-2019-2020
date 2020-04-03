@@ -14,12 +14,12 @@
         <th>Nome</th>
         <th>Autor</th>
         <th></th>
-        
+
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","Imagens", new{id = item.Id})'">
             <td>
                 <img src="@item.ConteudoImagem" alt="@item.Nome" />
             </td>

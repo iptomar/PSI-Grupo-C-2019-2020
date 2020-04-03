@@ -2,18 +2,20 @@
     ViewBag.Title = "Home Page";
 }
 
+
+
 <div class="jumbotron">
-    <p><a class="btn btn-primary btn-lg" style="margin:20px;"href="@Url.Action("Create","PontosInteresse")">Criar novo Ponto de Interesse</a></p>
+    <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","PontosInteresse")">Criar novo Ponto de Interesse</a></p>
     <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","Imagens")">Adicionar nova imagem</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Gestão de utilizadores</h2>
+        <h2>Pontos de interesse</h2>
         <p>
-            Função de administrador
+            Ver a lista de pontos de interesse
         </p>
-        <p><a class="btn btn-default" href="@Url.Action("Register","Account")">Criar novo utilizador &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","PontosInteresse")">Ver &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>RAM Tomar(1930-65) (Early Access)</h2>
