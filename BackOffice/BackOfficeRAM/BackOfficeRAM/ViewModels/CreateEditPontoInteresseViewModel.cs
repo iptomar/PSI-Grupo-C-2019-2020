@@ -15,8 +15,8 @@ namespace BackOfficeRAM.ViewModels
             PontoInteresse = new PontoInteresse();
             TiposEdificios = new List<SelectListItem>
             {
-                new SelectListItem{Value="Monumento", Text="Monumento"},
-                new SelectListItem{Value="XPTO", Text="XPTO"},
+                new SelectListItem{Value="Edifício Publico", Text="Edifício Público"},
+                new SelectListItem{Value="Edifício de Arquitectura Doméstica", Text="Edifício de Arquitectura Doméstica"}
             };
         }
 

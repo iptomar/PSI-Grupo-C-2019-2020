@@ -169,9 +169,10 @@
             self.Coordenadas = ko.observableArray([]);
 
             self.adicionarCoordenada = function () {
-                if (self.Latitude() === undefined || self.Longitude() === undefined || self.Latitude() === '' || self.Longitude() === '')
-                    alert("Preencha as coordenadas")
-
+                if (self.Latitude() === undefined || self.Longitude() === undefined || self.Latitude() === '' || self.Longitude() === '') {
+                    alert("Preencha as coordenadas");
+                    return;
+                 }
                 self.Coordenadas.push(new Coordenada(0, self.Latitude(), self.Longitude()));
 
                 self.Latitude('');

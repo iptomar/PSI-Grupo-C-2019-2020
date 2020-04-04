@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
 
-            <div id="map" class="col-md-3" style="height:300px;width:100%"></div>
+            <div id="map" class="col-md-3 img-thumbnail" style="height:300px;width:100%"></div>
 
             <br />
             <div class="col-md">
@@ -76,7 +76,7 @@
                         {<div class="col-sm" style="font-style:italic">
                                 @item.Latitude
                                 @String.Format(" , ")
-                                @item.Latitude
+                                @item.Longitude
                             </div>
                         }
 
@@ -99,7 +99,7 @@
                 {
                     <div class="col-sm" style="text-align: center;">
                         <div>
-                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style=" margin:10px;margin-left:0px" />
+                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style=" margin:10px;margin-left:0px;cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","Imagens", new{id = item.Id})'" />
                         </div>
                         <div>
                             @Html.DisplayFor(modelItem => item.Nome)

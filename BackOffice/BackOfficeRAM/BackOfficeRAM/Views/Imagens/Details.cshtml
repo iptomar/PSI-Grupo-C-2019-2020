@@ -3,31 +3,54 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<br />
 <h2>Detalhes da imagem</h2>
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <div class="row">
+
+        <div class="col-md-7">
+            <div>
+                <img class="img-thumbnail" src="@Model.ConteudoImagem" alt="Alternate Text" style="width:100%;" />
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div>
+                <b>Nome: </b> @Model.Nome
+                <br />
+            </div>
+            <div>
+                <b>Autor: </b> @Model.Autor
+                <br />
+            </div>
+            <div>
+                <b>Ponto de Interesse: </b> @Model.PontoInteresse.Nome
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="row">
+                    <p>
+                        <div class="col">
+                            <a class="btn btn-warning" href="@Url.Action("Edit", new { id = Model.Id})">Editar</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.Id})">Eliminar</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary" href="@Url.Action("Index")">Voltar</a>
+                        </div>
 
 
-        <dd>
-            <img src="@Model.ConteudoImagem" alt="Alternate Text" style="height:400px" />
-        </dd>
-        <br />
-        <dd>
-            <b>Nome: </b> @Model.Nome
-        </dd>
-        <dd>
-            <b>Autor: </b> @Model.Autor
-        </dd>
-        <dd>
-            <b>Ponto de Interesse: </b> @Model.PontoInteresse.Nome
-        </dd>
+                        @*@Html.ActionLink("Editar", "Edit", new { id = Model.Id, @class = "btn btn-warning" }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id, @class = "btn btn-danger" }) |
+                            @Html.ActionLink("Regressar à lista", "Index")*@
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id, @class="btn btn-warning" }) |
-    @Html.ActionLink("Regressar à lista", "Index")
-</p>
+<br />
