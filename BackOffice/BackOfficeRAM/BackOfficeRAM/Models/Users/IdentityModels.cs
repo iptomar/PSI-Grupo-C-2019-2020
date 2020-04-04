@@ -31,5 +31,6 @@ namespace BackOfficeRAM.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }
