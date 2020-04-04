@@ -100,6 +100,7 @@ namespace BackOfficeRAM.Controllers
                 foreach (var item in model.PontoInteresse.CoordenadasPoligono)
                     ModelState.Remove("PontoInteresse.CoordenadasPoligono[" + model.PontoInteresse.CoordenadasPoligono.IndexOf(item) + "].Id");
             }
+
             if (ModelState.IsValid)
             {
                 var oldPontoInteresse = db.PontosInteresse.Find(model.PontoInteresse.Id);
@@ -160,6 +161,10 @@ namespace BackOfficeRAM.Controllers
                 {
                     db.Coordenadas.Remove(item);
                 }
+            }
+            if (pontoInteresse.CoordenadaIcon != null)
+            {
+                db.Coordenadas.Remove(pontoInteresse.CoordenadaIcon);
             }
             db.PontosInteresse.Remove(pontoInteresse);
             db.SaveChanges();

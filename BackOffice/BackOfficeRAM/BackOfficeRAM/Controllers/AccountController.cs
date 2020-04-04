@@ -141,7 +141,6 @@ namespace BackOfficeRAM.Controllers
                         return View(model);
                     }
 
-                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
