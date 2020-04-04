@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using BackOfficeRAM.Models;
 using BackOfficeRAM.Models.Database;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -20,11 +21,15 @@ namespace BackOfficeRAM.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +41,9 @@ namespace BackOfficeRAM.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -54,7 +59,11 @@ namespace BackOfficeRAM.Controllers
             }
         }
 
-       
+        [Authorize(Roles = "administrador")]
+        public ActionResult Index()
+        {
+            return View(db.Users.ToList());
+        }
 
         //
         // GET: /Account/Login
@@ -116,7 +125,7 @@ namespace BackOfficeRAM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Utilizador { UserName = model.Username, Email = model.Email};
+                var user = new Utilizador { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -132,7 +141,7 @@ namespace BackOfficeRAM.Controllers
 
                     if (resultadoAddRole.Succeeded)
                     {
-                        return RedirectToAction("Index","Home");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -149,7 +158,7 @@ namespace BackOfficeRAM.Controllers
             return View(model);
         }
 
-       
+
 
         //
         // GET: /Account/ForgotPassword
@@ -195,53 +204,32 @@ namespace BackOfficeRAM.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        // GET: Imagems/Delete/5
+        public ActionResult Delete(string id)
         {
-            return code == null ? View("Error") : View();
-        }
-
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return View(model);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            ApplicationUser user = db.Users.Find(id);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return HttpNotFound();
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
-            return View();
+            return View(user);
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
+        // POST: Imagems/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
         {
-            return View();
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-       
-
-       
-
-        
 
         //
         // POST: /Account/LogOff

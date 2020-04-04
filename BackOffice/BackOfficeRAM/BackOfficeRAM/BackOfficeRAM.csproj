@@ -373,6 +373,9 @@
     <Content Include="vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Views\Account\Login - Copy.cshtml" />
     <Content Include="Views\PontosInteresse\_FormCreateEdit.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAM Tomar</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link rel="stylesheet" href="@Url.Content("~/vendors/base/vendor.bundle.base.css")">
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/style-override.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/fontawesome/all.css")" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    @*<link rel="shortcut icon" href="images/favicon.png" />*@
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Novo Utilizador", "Register", "Account")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>*@
+
+
+
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                        <ul class="navbar-nav navbar-nav-left">
+
+                            @* esquerda do titulo *@
+
+                        </ul>
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="@Url.Action("Index", "Home")">
+                                @*<img src="http://portal2.ipt.pt/img/logo.png" alt="logo" />*@
+                                <h2>RAM Tomar</h2>
+                            </a>
+                            <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index", "Home")">
+                                @*<img src="http://portal2.ipt.pt/img/logo.png" alt="logo" />*@
+                            </a>
+                        </div>
+                        <ul class="navbar-nav navbar-nav-right">
+
+                            @* direita do titulo *@
+
+                            @*
+                                @{
+                                    if (Request.IsAuthenticated)
+                                    {
+                                        <li class="nav-item nav-profile dropdown">
+                                            <a class="nav-link" href="" data-toggle="dropdown">
+                                                <span class="nav-profile-name">@HttpContext.Current.User.Identity.Name</span>
+                                                <span class="online-status"></span>
+                                            </a>
+                                            <a href="@Url.Action("LogOff", "Account")" class="nav-link">
+                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    <span class="menu-title">Logout</span>
+                                                </a>
+
+
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Login", "Account")" class="nav-link">
+                                                <i class="fas fa-sign-in-alt"></i>
+                                                <span class="menu-title">Login</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            *@
+
+
+
+
+
+                            <li class="nav-item nav-profile dropdown">
+
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                    <li class="nav navbar-nav navbar-right">
+                                        <i class="fas fa-user-tie"></i>
+                                        @Html.ActionLink(HttpContext.Current.User.Identity.Name + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+
+
+                                    </li>
+                                    <li>
+                                        <a class="menu-title" href="javascript:document.getElementById('logoutForm').submit()">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            <span class="menu-title">Logout</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item nav-profile dropdown">
+
+                                        <a href="@Url.Action("LogOff", "Account")" class="nav-link">
+                                        </a>
+
+
+                                    </li>
+
+                                }
+                            }
+                            else
+                            {
+                                <li class="nav navbar-nav navbar-right">
+                                    <a href="@Url.Action("Login", "Account")" class="nav-link">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        <span class="menu-title">Login</span>
+                                    </a>
+                                </li>
+                            }
+
+
+
+                            </ul>
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                                <span class="mdi mdi-menu"></span>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
+                                    <i class="fas fa-map-marker-alt menu-icon"></i>
+                                    <span class="menu-title">Pontos de Interesse</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Imagens")" class="nav-link">
+                                    <i class="far fa-images menu-icon"></i>
+                                    <span class="menu-title">Imagens</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Imagens")">Adicionar nova imagem</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    @*<i class="mdi mdi-account-multiple menu-icon"></i>*@
+                                    <i class="fas fa-users menu-icon"></i>
+                                    <span class="menu-title">Utilizadores</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul>
+                                        @if (User.IsInRole("administrador"))
+                                        {
+                                            <li class="nav-item"><a class="nav-link" href="">Ver lista de utilizadores</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Register", "Account")">Adicionar novo utilizador</a></li>
+                                        }
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Manage")">Gerir a minha conta</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Projeto de Sistemas de Informação</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/fa")
+        @Scripts.Render("~/bundles/ko")
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
