@@ -19,7 +19,7 @@
 
 
         <img src="@Model.Conteudo" alt="@Model.Nome" style="height:350px" />
-
+        <br />
         <div class="form-group">
             @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -37,9 +37,9 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Associar imagem ao seguinte ponto de interesse")
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.PontoEscolhido, Model.PontosInteresse, new { @class = "form-control" })
+                @Html.Label("Associar imagem ao seguinte ponto de interesse")
+                @Html.DropDownListFor(m => m.PontoEscolhido, Model.PontosInteresse, new { @class = "form-control", style = "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
             </div>
         </div>
         <div class="form-group">

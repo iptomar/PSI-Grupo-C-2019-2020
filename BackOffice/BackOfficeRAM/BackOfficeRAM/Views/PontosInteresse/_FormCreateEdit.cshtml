@@ -52,7 +52,7 @@
 
         <div class="col-md-6">
             @Html.Label("Tipo de Edifício", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-            @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control text-box single-line" })
+            @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control text-box single-line", style= "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
             @Html.ValidationMessageFor(model => model.PontoInteresse.TipoEdificio, "", new { @class = "text-danger" })
         </div>
     </div>
