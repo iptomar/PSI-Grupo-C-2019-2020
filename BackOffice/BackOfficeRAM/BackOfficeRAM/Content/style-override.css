@@ -4,9 +4,10 @@
 
 
 
+
 .navbar {
     display: unset;
-    padding: 0; 
+    padding: 0;
 }
 
 .container {
@@ -48,7 +49,7 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
 
 .jumbotron {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background: url(../fotos/templar.jpg);
     background-position: center;
     height: 500px;
@@ -60,3 +61,36 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
     padding-right: 15px;
 }
 
+
+.card-border-azul:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #0ddbb9;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.card-border-azul:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #0ad7f7;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.card-border-laranja:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #ee5b5b;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}

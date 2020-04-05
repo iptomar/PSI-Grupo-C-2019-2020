@@ -7,52 +7,57 @@
 
 
 <div class="jumbotron">
-    <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","PontosInteresse")">Criar novo Ponto de Interesse</a></p>
-    <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","Imagens")">Adicionar nova imagem</a></p>
-</div>
+    @*<p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","PontosInteresse")">Criar novo Ponto de Interesse</a></p>
+        <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","Imagens")">Adicionar nova imagem</a></p>*@
 
-<div class="row" style="height:175px">
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card">
-            <a href="@Url.Action("Index","PontosInteresse")">
-                <div class="card-body pb-0">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h2 class="text-danger font-weight-bold">@Model.NumPontos</h2>
-                        <i class="fas fa-map-marker-alt text-dark"></i>
+
+    <div class="row" style="height:175px;width:100%;justify-content: center;">
+
+        <div class="col-lg-3 grid-margin stretch-card">
+            <div class="card sale-diffrence-border">
+                <a href="https://play.google.com/store/apps/details?id=ipt.RAMTomar&hl=en_US">
+                    <div class="card-body pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2 class="text-primary font-weight-bold">RAM Tomar</h2>
+                            <i class="fab fa-android text-dark"></i>
+                        </div>
+                        <div class="line-chart-row-title">Download APP</div>
                     </div>
-                    <div class="line-chart-row-title">Pontos de interesse registados</div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
+
+        <div class="col-lg-3 grid-margin stretch-card">
+            <div class="card  card-border-laranja">
+                <a href="@Url.Action("Index","PontosInteresse")">
+                    <div class="card-body pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2 class="text-danger font-weight-bold">@Model.NumPontos</h2>
+                            <i class="fas fa-map-marker-alt text-dark"></i>
+                        </div>
+                        <div class="line-chart-row-title">Pontos de interesse registados</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 grid-margin stretch-card">
+            <div class="card card-border-azul">
+                <a href="@Url.Action("Index","Imagens")">
+                    <div class="card-body pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2 class="text-info font-weight-bold">@Model.NumImagens</h2>
+                            <i class="far fa-images text-dark"></i>
+                        </div>
+                        <div class="line-chart-row-title">Imagens guardadas</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+
     </div>
 
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card">
-            <a href="@Url.Action("Index","Imagens")">
-                <div class="card-body pb-0">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h2 class="text-info font-weight-bold">@Model.NumImagens</h2>
-                        <i class="far fa-images text-dark"></i>
-                    </div>
-                    <div class="line-chart-row-title">Imagens guardadas</div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card">
-            <a href="https://play.google.com/store/apps/details?id=ipt.RAMTomar&hl=en_US">
-                <div class="card-body pb-0">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h2 class="text-info font-weight-bold">App RAM Tomar</h2>
-                        <i class="fab fa-android text-dark"></i>
-                    </div>
-                    <div class="line-chart-row-title">Download</div>
-                </div>
-            </a>
-        </div>
-    </div>
 
 </div>
