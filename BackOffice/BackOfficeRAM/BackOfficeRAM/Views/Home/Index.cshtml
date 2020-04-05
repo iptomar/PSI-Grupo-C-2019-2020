@@ -1,4 +1,6 @@
-﻿@{
+﻿@model BackOfficeRAM.ViewModels.HomeIndexViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -9,22 +11,48 @@
     <p><a class="btn btn-primary btn-lg" style="margin:20px;" href="@Url.Action("Create","Imagens")">Adicionar nova imagem</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Pontos de interesse</h2>
-        <p>
-            Ver a lista de pontos de interesse
-        </p>
-        <p><a class="btn btn-default" href="@Url.Action("Index","PontosInteresse")">Ver &raquo;</a></p>
+<div class="row" style="height:175px">
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <a href="@Url.Action("Index","PontosInteresse")">
+                <div class="card-body pb-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="text-danger font-weight-bold">@Model.NumPontos</h2>
+                        <i class="fas fa-map-marker-alt text-dark"></i>
+                    </div>
+                    <div class="line-chart-row-title">Pontos de interesse registados</div>
+                </div>
+            </a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>RAM Tomar(1930-65) (Early Access)</h2>
-        <p>O guia virtual do Roteiro de Arquitectura Moderna da cidade de Tomar integra um conjunto selecionado de edificios públicos e residenciais que foram projectados entre 1930 e 1965.</p>
-        <p><a class="btn btn-default" href="https://play.google.com/store/apps/details?id=ipt.RAMTomar&hl=en_US">Download da aplicação &raquo;</a></p>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <a href="@Url.Action("Index","Imagens")">
+                <div class="card-body pb-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="text-info font-weight-bold">@Model.NumImagens</h2>
+                        <i class="far fa-images text-dark"></i>
+                    </div>
+                    <div class="line-chart-row-title">Imagens guardadas</div>
+                </div>
+            </a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>aaa</h2>
-        <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <a href="https://play.google.com/store/apps/details?id=ipt.RAMTomar&hl=en_US">
+                <div class="card-body pb-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="text-info font-weight-bold">App RAM Tomar</h2>
+                        <i class="fab fa-android text-dark"></i>
+                    </div>
+                    <div class="line-chart-row-title">Download</div>
+                </div>
+            </a>
+        </div>
     </div>
+
 </div>
