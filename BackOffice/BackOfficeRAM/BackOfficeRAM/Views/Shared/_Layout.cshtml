@@ -61,9 +61,8 @@
                 <ul class="nav page-navigation">
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
-                            <i class="fas fa-map-marker-alt menu-icon"></i>
+                            <i class="fas fa-map-marker-alt" style="margin-bottom:10px"></i>
                             <span class="menu-title">Pontos de Interesse</span>
-                            <i class="menu-arrow"></i>
                         </a>
                         <div class="submenu">
                             <ul>
@@ -75,9 +74,8 @@
 
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Imagens")" class="nav-link">
-                            <i class="far fa-images menu-icon"></i>
+                            <i class="far fa-images" style="margin-bottom:10px"></i>
                             <span class="menu-title">Imagens</span>
-                            <i class="menu-arrow"></i>
                         </a>
                         <div class="submenu">
                             <ul>
@@ -90,9 +88,8 @@
 
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Account")" class="nav-link">
-                            <i class="fas fa-users menu-icon"></i>
+                            <i class="fas fa-users" style="margin-bottom:10px"></i>
                             <span class="menu-title">Utilizadores</span>
-                            <i class="menu-arrow"></i>
                         </a>
                         <div class="submenu">
                             <ul>
@@ -115,10 +112,14 @@
     </div>
 
     <div class="container body-content">
+
+
         @RenderBody()
+
+
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Projeto de Sistemas de Informação</p>
+            <p>&copy; @DateTime.Now.Year - Projeto de Sistemas de Informação - Grupo C</p>
         </footer>
     </div>
 
