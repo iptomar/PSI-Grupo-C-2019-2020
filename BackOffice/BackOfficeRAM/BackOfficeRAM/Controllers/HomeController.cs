@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BackOfficeRAM.Models;
+using BackOfficeRAM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +11,16 @@ namespace BackOfficeRAM.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+
         public ActionResult Index()
         {
-            return View();
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            model.NumPontos = db.PontosInteresse.Count();
+            model.NumImagens = db.Imagens.Count();
+            return View(model);
         }
 
         public ActionResult About()

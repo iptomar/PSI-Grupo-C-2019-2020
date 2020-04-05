@@ -243,6 +243,7 @@
     <Compile Include="ViewModels\API\PontoApiModel.cs" />
     <Compile Include="ViewModels\CreateEditImagemViewModel.cs" />
     <Compile Include="ViewModels\CreateEditPontoInteresseViewModel.cs" />
+    <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ImageDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
