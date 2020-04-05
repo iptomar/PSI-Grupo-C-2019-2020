@@ -25,7 +25,10 @@
                 <br />
             </div>
             <div>
-                <b>Ponto de Interesse: </b> @Model.PontoInteresse.Nome
+
+                <b>Ponto de Interesse: </b> <a href="@Url.Action("Details","PontosInteresse", new { id = Model.PontoInteresse.Id})">
+                    @Model.PontoInteresse.Nome
+                </a>
                 <br />
             </div>
             <div>
