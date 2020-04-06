@@ -8,6 +8,7 @@
     <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/style-override.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/fontawesome/all.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/selectize.css")" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/jquery")
 
@@ -30,7 +31,7 @@
                     </div>
                     <ul class="navbar-nav navbar-nav-right">
 
-                        <li class="nav-item nav-profile" style="margin-left:10px">
+                        <li class="nav-item nav-profile d-lg-flex d-none" style="margin-left:10px">
                             <a class="nav-link" href="@Url.Action("Index", "Manage")">
                                 <span class="nav-profile-name">@HttpContext.Current.User.Identity.Name</span>
                                 @*<span class="online-status"></span>
@@ -59,7 +60,8 @@
         <nav class="bottom-navbar">
             <div class="container">
                 <ul class="nav page-navigation">
-                    <li class="nav-item">
+
+                    <li class="nav-item" id="botaoPontos">
                         <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
                             <i class="fas fa-map-marker-alt" style="margin-bottom:10px"></i>
                             <span class="menu-title">Pontos de Interesse</span>
@@ -72,7 +74,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="botaoImagens">
                         <a href="@Url.Action("Index", "Imagens")" class="nav-link">
                             <i class="far fa-images" style="margin-bottom:10px"></i>
                             <span class="menu-title">Imagens</span>
@@ -86,8 +88,8 @@
                     </li>
 
 
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index", "Account")" class="nav-link">
+                    <li class="nav-item" id="botaoUsers">
+                        <a href="@Url.Action("Index", "Account")" class="nav-link" style="padding:17px 32px 17px 32px">
                             <i class="fas fa-users" style="margin-bottom:10px"></i>
                             <span class="menu-title">Utilizadores</span>
                         </a>
@@ -126,6 +128,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/fa")
     @Scripts.Render("~/bundles/ko")
+    @Scripts.Render("~/bundles/selectize")
 
     @RenderSection("scripts", required: false)
 </body>

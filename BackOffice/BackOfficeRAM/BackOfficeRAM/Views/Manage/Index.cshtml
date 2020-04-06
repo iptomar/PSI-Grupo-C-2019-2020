@@ -1,29 +1,17 @@
 ﻿@model BackOfficeRAM.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Gerir Conta";
 }
 <br />
-<h2>Perfil</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
     <br />
-    <h4>@HttpContext.Current.User.Identity.Name</h4>
+    <h2>@HttpContext.Current.User.Identity.Name</h2>
     <hr />
     <dl class="dl-horizontal">
-        @*<dt>Password:</dt>*@
-        <br />
         <dd>
-
-            @if (Model.HasPassword)
-            {
-                <p><a class="btn btn-warning" href="@Url.Action("ChangePassword")">Alterar Password</a></p>
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-
+            <p><a class="btn btn-warning" href="@Url.Action("ChangePassword")">Alterar Password</a></p>
         </dd>
     </dl>
 </div>

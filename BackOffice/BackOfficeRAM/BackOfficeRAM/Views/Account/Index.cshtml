@@ -1,4 +1,11 @@
 ﻿@model IEnumerable<BackOfficeRAM.Models.ApplicationUser>
+
+<script>
+    $(document).ready(function () {
+        $('#botaoUsers').addClass('active');
+    });
+</script>
+
 <br />
 <p>
     @Html.ActionLink("Criar novo", "Register")

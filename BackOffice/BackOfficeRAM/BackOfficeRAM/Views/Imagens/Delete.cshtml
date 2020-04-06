@@ -4,20 +4,26 @@
     ViewBag.Title = "Delete";
 }
 
+<script>
+    $(document).ready(function () {
+        $('#botaoImagens').addClass('active');
+    });
+</script>
 
 <h2>Deseja eliminar esta imagem?</h2>
 <div>
     <h4>@Model.Nome</h4>
     <hr />
     <dl class="dl-horizontal">
-        
+
         <dd>
             <img src="@Model.ConteudoImagem" alt="Alternate Text" style="height:400px" />
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

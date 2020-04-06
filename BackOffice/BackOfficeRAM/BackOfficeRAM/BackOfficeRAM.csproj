@@ -252,6 +252,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fontawesome\all.css" />
+    <Content Include="Content\selectize.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\fontawesome\fa-brands-400.svg" />
     <Content Include="fonts\fontawesome\fa-regular-400.svg" />
@@ -259,6 +260,7 @@
     <Content Include="fotos\camara.jpg" />
     <Content Include="fotos\convento.jpg" />
     <Content Include="fotos\templar.jpg" />
+    <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Content\style-override.css" />
     <Content Include="Content\style.css" />
@@ -343,18 +345,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Imagens\Create.cshtml" />
@@ -372,7 +366,6 @@
     <Content Include="vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
     <Content Include="vendors\mdi\fonts\materialdesignicons-webfont.woff" />
     <Content Include="vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
-    <Content Include="Views\Account\Login - Copy.cshtml" />
     <Content Include="Views\PontosInteresse\_FormCreateEdit.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
@@ -381,7 +374,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\PontoAPIViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
