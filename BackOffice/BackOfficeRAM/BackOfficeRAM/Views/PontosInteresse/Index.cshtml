@@ -1,32 +1,35 @@
 ﻿@model IEnumerable<BackOfficeRAM.Models.PontoInteresse>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <script>
     $(document).ready(function () {
         $('#botaoPontos').addClass('active');
     });
 </script>
-
-<h2></h2>
 <br />
-<p>
-    @Html.ActionLink("Adicionar novo ponto", "Create")
-</p>
-
+<div class="row">
+    <div class="col">
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create","PontosInteresse")">Criar novo Ponto de Interesse</a>
+        </p>
+    </div>
+    <div class="col" style="display:flex;flex-direction:row-reverse;">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col">
+                    @Html.TextBox("SearchString", "", new { @class = "form-control", style = "padding:9px", placeholder = "Pesquisar..." })
+                </div>
+                <div>
+                    <input type="submit" value="🔍" class="btn btn-primary" />
+                    <a class="btn btn-primary" href="@Url.Action("Index")">Limpar</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 <br />
-
-@using (Html.BeginForm())
-{
-<p>
-    Filtrar por: @Html.TextBox("SearchString")
-    <input type="submit" value="Pesquisar" />
-    @Html.ActionLink("❌", "Index")
-</p>
-}
-
 <table class="table table-hover" style="background-color:#fff">
     <tr>
         <th style="width:25%">
@@ -37,7 +40,6 @@
         </th>
         <th style="width:25%"></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","PontosInteresse", new{id = item.Id})'">
@@ -54,5 +56,4 @@
             </td>
         </tr>
     }
-
 </table>

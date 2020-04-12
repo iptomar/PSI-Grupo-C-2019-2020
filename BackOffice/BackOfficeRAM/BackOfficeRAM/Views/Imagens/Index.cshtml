@@ -1,52 +1,42 @@
 ﻿@model IEnumerable<BackOfficeRAM.Models.Imagem>
-
 @{
     ViewBag.Title = "Index";
 }
-
-
-
 <script>
     $(document).ready(function () {
         $('#botaoImagens').addClass('active');
     });
 </script>
-
-
 <br />
-
-@*<div class="row">
-    <div class="col">*@
-<p>
-    @Html.ActionLink("Adicionar imagem", "Create")
-</p>
-@*</div>
-        <div class="col">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar..">
-        </div>
-    </div>*@
-
+<div class="row">
+    <div class="col">
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create","Imagens")">Adicionar nova imagem</a>
+        </p>
+    </div>
+    <div class="col" style="display:flex;flex-direction:row-reverse;">
+        @using (Html.BeginForm())
+        {
+            <div class=" row">
+                <div class="col">
+                    @Html.TextBox("SearchStringImg", "", new { @class = "form-control", style = "padding:9px", placeholder = "Pesquisar..." })
+                </div>
+                <div>
+                    <input type="submit" value="🔍" class="btn btn-primary" />
+                    <a class="btn btn-primary" href="@Url.Action("Index")">Limpar</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 <br />
-
-@using (Html.BeginForm())
-{
-    <p>
-        Ponto de Interesse: @Html.TextBox("SearchStringImg")
-        <input type="submit" value="Pesquisar" />
-        @Html.ActionLink("❌", "Index")
-    </p>
-}
-
-
 <table class="table table-hover" style="background-color:#fff">
     <tr>
         <th style="width:5%">Imagens</th>
         <th style="width:40%">Nome</th>
-        <th style="width:30%">Autor</th>
+        <th style="width: 30%">Ponto de interesse</th>
         <th style="width:25%"></th>
-
     </tr>
-
     @foreach (var item in Model)
     {
         <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","Imagens", new{id = item.Id})'">
@@ -57,7 +47,7 @@
                 @item.Nome
             </td>
             <td>
-                @item.Autor
+                @item.PontoInteresse.Nome
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
@@ -66,5 +56,4 @@
             </td>
         </tr>
     }
-
 </table>
