@@ -17,9 +17,17 @@ namespace BackOfficeRAM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Imagems
-        public ActionResult Index()
+        public ActionResult Index(string searchStringImg)
         {
-            return View(db.Imagens.ToList());
+            var img = from s in db.Imagens
+                        select s;
+
+            if (!String.IsNullOrEmpty(searchStringImg))
+            {
+                img = img.Where(s => s.PontoInteresse.Nome.Contains(searchStringImg));
+            }
+
+            return View(img.ToList());
         }
 
         // GET: Imagems/Details/5

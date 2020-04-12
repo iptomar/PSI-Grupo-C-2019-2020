@@ -17,12 +17,19 @@ namespace BackOfficeRAM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PontoInteresses
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.PontosInteresse.ToList());
+
+            var ponto = from s in db.PontosInteresse
+                        select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ponto = ponto.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString));
+            }
+
+            return View(ponto.ToList());
         }
-
-
 
         // GET: PontoInteresses/Details/5
         public ActionResult Details(int? id)
