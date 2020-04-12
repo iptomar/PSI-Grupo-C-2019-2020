@@ -91,7 +91,14 @@
                     <li class="nav-item" id="botaoUsers">
                         <a href="@Url.Action("Index", "Account")" class="nav-link" style="padding:17px 32px 17px 32px">
                             <i class="fas fa-users" style="margin-bottom:10px"></i>
-                            <span class="menu-title">Utilizadores</span>
+                            @if (User.IsInRole("administrador"))
+                            {
+                                <span class="menu-title">Utilizadores</span>
+                            }
+                            else
+                            {
+                                <span class="menu-title">Conta</span>
+                            }
                         </a>
                         <div class="submenu">
                             <ul>
