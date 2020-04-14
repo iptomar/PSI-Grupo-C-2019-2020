@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th style="width:50%">
-            @Html.DisplayNameFor(model => model.Descricao)
+            Localização
         </th>
         <th style="width:25%"></th>
     </tr>
@@ -50,7 +50,7 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                @Html.DisplayFor(modelItem => item.Descricao)
+                @Html.DisplayFor(modelItem => item.Localizacao)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
@@ -80,7 +80,7 @@
                 zoomControl: false,
                 mapTypeControl: false,
                 scaleControl: false,
-                streetViewControl: false,
+                streetViewControl: true,
                 rotateControl: false,
                 fullscreenControl: true
             };

@@ -255,9 +255,27 @@
     <Content Include="Content\fontawesome\all.css" />
     <Content Include="Content\selectize.css" />
     <Content Include="css\style.css" />
+    <Content Include="fonts\fontawesome\fa-brands-400.eot" />
     <Content Include="fonts\fontawesome\fa-brands-400.svg" />
+    <Content Include="fonts\fontawesome\fa-brands-400.ttf" />
+    <Content Include="fonts\fontawesome\fa-brands-400.woff" />
+    <Content Include="fonts\fontawesome\fa-brands-400.woff2" />
+    <Content Include="fonts\fontawesome\fa-regular-400.eot" />
     <Content Include="fonts\fontawesome\fa-regular-400.svg" />
+    <Content Include="fonts\fontawesome\fa-regular-400.ttf" />
+    <Content Include="fonts\fontawesome\fa-regular-400.woff" />
+    <Content Include="fonts\fontawesome\fa-regular-400.woff2" />
+    <Content Include="fonts\fontawesome\fa-solid-900.eot" />
     <Content Include="fonts\fontawesome\fa-solid-900.svg" />
+    <Content Include="fonts\fontawesome\fa-solid-900.ttf" />
+    <Content Include="fonts\fontawesome\fa-solid-900.woff" />
+    <Content Include="fonts\fontawesome\fa-solid-900.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.svg" />
     <Content Include="fotos\camara.jpg" />
     <Content Include="fotos\convento.jpg" />
     <Content Include="fotos\templar.jpg" />
@@ -266,7 +284,6 @@
     <Content Include="Content\style-override.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="js\chart.js" />
@@ -279,22 +296,40 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\maps\horizontal-layout-light\style.css.map" />
     <Content Include="Content\maps\style.css.map" />
-    <Content Include="fonts\fontawesome\fa-brands-400.eot" />
-    <Content Include="fonts\fontawesome\fa-brands-400.ttf" />
-    <Content Include="fonts\fontawesome\fa-brands-400.woff" />
-    <Content Include="fonts\fontawesome\fa-brands-400.woff2" />
-    <Content Include="fonts\fontawesome\fa-regular-400.eot" />
-    <Content Include="fonts\fontawesome\fa-regular-400.ttf" />
-    <Content Include="fonts\fontawesome\fa-regular-400.woff" />
-    <Content Include="fonts\fontawesome\fa-regular-400.woff2" />
-    <Content Include="fonts\fontawesome\fa-solid-900.eot" />
-    <Content Include="fonts\fontawesome\fa-solid-900.ttf" />
-    <Content Include="fonts\fontawesome\fa-solid-900.woff" />
-    <Content Include="fonts\fontawesome\fa-solid-900.woff2" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <Content Include="fonts\sourcesanspro\.DS_Store" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Black.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Black.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Black.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Black.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Bold.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Bold.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Bold.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Bold.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-ExtraLight.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-ExtraLight.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-ExtraLight.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Light.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Light.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Light.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Light.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Regular.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Regular.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Regular.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-Regular.woff2" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.eot" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.ttf" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff" />
+    <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff2" />
+    <None Include="Properties\PublishProfiles\BackOfficeRAM - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -374,13 +409,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
