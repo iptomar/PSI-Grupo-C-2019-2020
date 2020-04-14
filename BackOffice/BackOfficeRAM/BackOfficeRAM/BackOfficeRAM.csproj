@@ -245,6 +245,7 @@
     <Compile Include="ViewModels\CreateEditPontoInteresseViewModel.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ImageDetailsViewModel.cs" />
+    <Compile Include="ViewModels\IndexAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

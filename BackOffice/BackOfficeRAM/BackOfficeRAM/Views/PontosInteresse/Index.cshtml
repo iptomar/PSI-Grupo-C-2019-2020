@@ -8,6 +8,9 @@
     });
 </script>
 <br />
+
+<div id="map" class="img-thumbnail" style="height:300px;width:100%"></div>
+<br />
 <div class="row">
     <div class="col">
         <p>
@@ -57,3 +60,53 @@
         </tr>
     }
 </table>
+
+
+@section scripts
+    {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaNOF8NDOvIgeHEO5Glt6yz9AellnNS2E&callback=initMap" async defer></script>
+
+    <script>
+        var map;
+
+        function initMap() {
+            var myCenter = new google.maps.LatLng(parseFloat("39.603803"), parseFloat("-8.406601"));
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                scrollwheel: true,
+                draggable: true,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false
+            };
+            map = new google.maps.Map(document.getElementById('map'),
+                mapProp
+            );
+
+             @foreach (var item in Model)
+             {
+                 <text>
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(parseFloat("@item.CoordenadaIcon.Latitude"), parseFloat("@item.CoordenadaIcon.Longitude")),
+                        title: "@Html.Raw(item.Nome)"
+                    });
+
+                    marker.addListener('click', function () {
+                        window.location.href = "PontosInteresse/Details/@item.Id"
+                    });
+
+                    marker.setMap(map);
+                </text>
+             }
+
+
+
+
+        }
+    </script>
+}

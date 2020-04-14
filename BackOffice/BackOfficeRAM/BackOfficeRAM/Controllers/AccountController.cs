@@ -12,6 +12,7 @@ using BackOfficeRAM.Models;
 using BackOfficeRAM.Models.Database;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
+using BackOfficeRAM.ViewModels;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -62,7 +63,10 @@ namespace BackOfficeRAM.Controllers
         [Authorize(Roles = "administrador")]
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            IndexAccountViewModel model = new IndexAccountViewModel();
+            model.Utilizadores = db.Users.ToList();
+            model.Funcoes = db.Roles.ToList();
+            return View(model);
         }
 
         //

@@ -10,12 +10,12 @@
     });
 </script>
 
-<h2>@ViewBag.Title.</h2>
+
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <hr />
+    <br />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-group">

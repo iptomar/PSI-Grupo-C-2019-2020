@@ -20,15 +20,15 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Index(string searchString)
         {
 
-            var ponto = from s in db.PontosInteresse
+            var pontos = from s in db.PontosInteresse
                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                ponto = ponto.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString));
+                pontos = pontos.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString));
             }
 
-            return View(ponto.ToList());
+            return View(pontos.ToList());
         }
 
         // GET: PontoInteresses/Details/5
