@@ -20,17 +20,12 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Index(string searchStringImg)
         {
 
-            List<Imagem> lista = new List<Imagem>();
+            var lista = from s in db.Imagens
+                        select s;
 
             if (!String.IsNullOrEmpty(searchStringImg))
             {
-                lista.AddRange(db.Imagens.Where(s => s.PontoInteresse.Nome.Contains(searchStringImg)).ToList());
-                lista.AddRange(db.Imagens.Where(s => s.Autor.Contains(searchStringImg)).ToList());
-                lista.AddRange(db.Imagens.Where(s => s.Nome.Contains(searchStringImg)).ToList());
-            }
-            else
-            {
-                lista = db.Imagens.ToList();
+                lista = lista.Where(s => s.Nome.Contains(searchStringImg) || s.Autor.Contains(searchStringImg) || s.PontoInteresse.Nome.Contains(searchStringImg));
             }
 
             return View(lista.ToList());

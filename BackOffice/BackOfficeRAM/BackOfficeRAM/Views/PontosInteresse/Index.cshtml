@@ -82,7 +82,7 @@
                 scaleControl: false,
                 streetViewControl: false,
                 rotateControl: false,
-                fullscreenControl: false
+                fullscreenControl: true
             };
             map = new google.maps.Map(document.getElementById('map'),
                 mapProp
@@ -100,6 +100,26 @@
                         window.location.href = "PontosInteresse/Details/@item.Id"
                     });
 
+                     var coords = [];
+                    @foreach (var coordenada in item.CoordenadasPoligono)
+                    {
+                        @:coords.push({ lat: parseFloat("@coordenada.Latitude.Replace(",",".")"), lng: parseFloat("@coordenada.Longitude.Replace(",",".")") });
+                    }
+
+                    var poligono = new google.maps.Polygon({
+                        paths: coords,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.35
+                    });
+
+                    poligono.addListener('click', function () {
+                        window.location.href = "PontosInteresse/Details/@item.Id"
+                    });
+
+                    poligono.setMap(map);
                     marker.setMap(map);
                 </text>
              }

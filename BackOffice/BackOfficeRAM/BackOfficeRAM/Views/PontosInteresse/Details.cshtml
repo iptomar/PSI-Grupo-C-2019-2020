@@ -22,11 +22,11 @@
             <div id="map" class="col-md-3 img-thumbnail" style="height:300px;width:100%"></div>
 
             <br />
-            <div class="col-md">
+            <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm">
                         <div class="h3 col-sm">
-                            Autor:
+                            Autor(es):
                         </div>
                         <div class="col-sm">
                             @Html.DisplayFor(model => model.Autor)
@@ -40,6 +40,10 @@
                             @Html.DisplayFor(model => model.Localizacao)
                         </div>
                     </div>
+
+                </div>
+                <br />
+                <div class="row">
                     <div class="col-sm">
                         <div class="h3 col-sm">
                             Tipo de Edifício:
@@ -48,9 +52,10 @@
                             @Html.DisplayFor(model => model.TipoEdificio)
                         </div>
                     </div>
+
                     <div class="col-sm">
                         <div class="h3 col-sm">
-                            Ano de construção:
+                            Ano(s) de construção:
                         </div>
                         <div class="col-sm">
                             @Html.DisplayFor(model => model.Ano)
@@ -60,8 +65,7 @@
                 </div>
                 <br />
                 <div class="row">
-
-                    <div class="col-md-3">
+                    <div class="col-md">
                         <div class="h3 col-sm">
                             Coordenadas do Ícone:
                         </div>
@@ -71,26 +75,28 @@
                             @Html.DisplayFor(model => model.CoordenadaIcon.Longitude)
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="h3 col-sm">
-                            Coordenadas do Polígono:
-                        </div>
-
-                        @foreach (var item in Model.CoordenadasPoligono)
-                        {<div class="col-sm" style="font-style:italic">
-                                @item.Latitude
-                                @String.Format(" , ")
-                                @item.Longitude
-                            </div>
-                        }
-
-                    </div>
-
                 </div>
+
+
                 <br /><br />
-                <div class="col-sm" style="text-align: justify;">
-                    @Html.DisplayFor(model => model.Descricao)
+
+            </div>
+            <div class="col-sm-3" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
+                <div class="h3 col-sm">
+                    Coordenadas do Polígono:
                 </div>
+
+                @foreach (var item in Model.CoordenadasPoligono)
+                {<div class="col-sm" style="font-style:italic">
+                        @item.Latitude
+                        @String.Format(" , ")
+                        @item.Longitude
+                    </div>
+                }
+
+            </div>
+            <div class="row" style="text-align: justify;background-color:#fff; padding:20px;margin:0">
+                @Html.DisplayFor(model => model.Descricao)
             </div>
             <br />
             <br />
@@ -147,8 +153,26 @@
             map = new google.maps.Map(document.getElementById('map'),
                 mapProp
             );
+
             var marker = new google.maps.Marker({ position: myCenter });
             marker.setMap(map);
+
+            var coords = [];
+            @foreach (var coordenada in Model.CoordenadasPoligono)
+            {
+                @:coords.push({ lat: parseFloat("@coordenada.Latitude.Replace(",",".")"), lng: parseFloat("@coordenada.Longitude.Replace(",",".")") });
+            }
+
+            var poligono = new google.maps.Polygon({
+                paths: coords,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35
+            });
+            poligono.setMap(map);
+
         }
     </script>
 }
