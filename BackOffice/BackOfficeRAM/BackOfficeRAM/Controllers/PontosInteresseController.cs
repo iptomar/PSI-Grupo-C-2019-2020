@@ -25,7 +25,7 @@ namespace BackOfficeRAM.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                pontos = pontos.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString));
+                pontos = pontos.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString) || s.Localizacao.Contains(searchString));
             }
 
             return View(pontos.ToList());

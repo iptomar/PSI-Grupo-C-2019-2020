@@ -275,33 +275,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.svg" />
-    <Content Include="fotos\camara.jpg" />
-    <Content Include="fotos\convento.jpg" />
-    <Content Include="fotos\templar.jpg" />
-    <Content Include="Scripts\selectize.js" />
-    <Content Include="Scripts\fontawesome\all.js" />
-    <Content Include="Content\style-override.css" />
-    <Content Include="Content\style.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="js\chart.js" />
-    <Content Include="js\dashboard.js" />
-    <Content Include="js\file-upload.js" />
-    <Content Include="js\select2.js" />
-    <Content Include="js\template.js" />
-    <Content Include="js\typeahead.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\maps\horizontal-layout-light\style.css.map" />
-    <Content Include="Content\maps\style.css.map" />
-    <None Include="Dockerfile" />
-    <None Include=".dockerignore">
-      <DependentUpon>Dockerfile</DependentUpon>
-    </None>
     <Content Include="fonts\sourcesanspro\.DS_Store" />
     <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\sourcesanspro\glyphicons-halflings-regular.woff2" />
@@ -329,6 +305,30 @@
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.ttf" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff2" />
+    <Content Include="fotos\camara.jpg" />
+    <Content Include="fotos\convento.jpg" />
+    <Content Include="fotos\templar.jpg" />
+    <Content Include="Scripts\selectize.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Content\style-override.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="js\chart.js" />
+    <Content Include="js\dashboard.js" />
+    <Content Include="js\file-upload.js" />
+    <Content Include="js\select2.js" />
+    <Content Include="js\template.js" />
+    <Content Include="js\typeahead.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\maps\horizontal-layout-light\style.css.map" />
+    <Content Include="Content\maps\style.css.map" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\BackOfficeRAM - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
