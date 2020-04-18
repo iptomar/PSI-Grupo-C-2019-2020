@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BackOfficeRAM.Models.Roteiro>
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    $(document).ready(function () {
+        $('#botaoRoteiros').addClass('active');
+    });
+</script>
+<br />
+<div class="row">
+    <div class="col">
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create","Roteiros")">Adicionar novo Roteiro</a>
+        </p>
+    </div>
+    <div class="col" style="display:flex;flex-direction:row-reverse;">
+        @using (Html.BeginForm())
+        {
+            <div class=" row">
+                <div class="col">
+                    @Html.TextBox("SearchString", "", new { @class = "form-control", style = "padding:9px", placeholder = "Pesquisar..." })
+                </div>
+                <div>
+                    <input type="submit" value="🔍" class="btn btn-primary" />
+                    <a class="btn btn-primary" href="@Url.Action("Index")">Limpar</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<table class="table table-hover" style="background-color:#fff">
+    <tr>
+        <!--<th style="width:5%">Posicao</th>-->
+        <th style="width:30%">Nome</th>
+        <th style="width:45%">Descrição</th>
+        <th style="width:25%"></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","Roteiros", new{id = item.Id})'">
+            <td>
+                @item.Nome
+            </td>
+            <td>
+                @item.Descricao
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

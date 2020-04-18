@@ -75,6 +75,19 @@
                         </div>
                     </li>
 
+                    <li class="nav-item" id="botaoRoteiros">
+                        <a href="@Url.Action("Index", "Roteiros")" class="nav-link">
+                            <i class="fas fa-map-marked-alt" style="margin-bottom:10px"></i>
+                            <span class="menu-title">Roteiros</span>
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Roteiros")">Ver lista de roteiros</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Roteiros")">Adicionar novo roteiro</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="nav-item" id="botaoImagens">
                         <a href="@Url.Action("Index", "Imagens")" class="nav-link">
                             <i class="far fa-images" style="margin-bottom:10px"></i>
