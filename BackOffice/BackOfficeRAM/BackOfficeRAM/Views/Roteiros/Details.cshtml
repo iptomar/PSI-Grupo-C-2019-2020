@@ -1,0 +1,63 @@
+﻿@model BackOfficeRAM.Models.Roteiro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#botaoRoteiros').addClass('active');
+    });
+</script>
+
+<br />
+<h2>@Html.DisplayFor(model => model.Nome)</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="h3 col-sm">
+                            Roteiro:
+                        </div>
+                        <div class="col-sm">
+                            @Html.DisplayFor(model => model.Nome)
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="h3 col-sm">
+                            Descrição:
+                        </div>
+                        <div class="col-sm">
+                            @Html.DisplayFor(model => model.Descricao)
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="h3 col-sm">
+                            Pontos de Interesse:
+                        </div>
+                        <div class="col-sm">
+                            @Html.DisplayFor(model => model.PontoInteresse)
+                        </div>
+                    </div>
+                </div>
+                <br />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>
+
+

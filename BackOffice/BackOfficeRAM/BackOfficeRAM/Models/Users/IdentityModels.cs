@@ -32,5 +32,6 @@ namespace BackOfficeRAM.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<BackOfficeRAM.Models.Roteiro> Roteiroes { get; set; }
     }
 }
