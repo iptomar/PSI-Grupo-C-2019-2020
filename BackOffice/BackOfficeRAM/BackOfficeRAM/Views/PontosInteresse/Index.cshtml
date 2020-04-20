@@ -2,11 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-<script>
-    $(document).ready(function () {
-        $('#botaoPontos').addClass('active');
-    });
-</script>
 <br />
 <div style="background-color:#fff;padding:10px;border-radius:5px;border:1px solid #ddd">
     <div id="map" class="" style="height:300px;width:100%"></div>
@@ -73,7 +68,6 @@
 
     <script>
         var map;
-
         function initMap() {
             var myCenter = new google.maps.LatLng(parseFloat("39.603803"), parseFloat("-8.406601"));
             var mapProp = {
@@ -92,7 +86,6 @@
             map = new google.maps.Map(document.getElementById('map'),
                 mapProp
             );
-
              @foreach (var item in Model)
              {
                  if (item.TipoEdificio== "Edifício Publico")
@@ -103,10 +96,10 @@
                     </text>
                  }
                  else{
-                 <text>
-                    var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-                    var cor = "#0000FF";
-                 </text>
+                     <text>
+                        var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                        var cor = "#0000FF";
+                     </text>
                      }
 
                  <text>
@@ -118,17 +111,14 @@
                             url: icone
                         }
                     });
-
                     marker.addListener('click', function () {
                         window.location.href = "PontosInteresse/Details/@item.Id"
                     });
-
                      var coords = [];
                     @foreach (var coordenada in item.CoordenadasPoligono)
                     {
                         @:coords.push({ lat: parseFloat("@coordenada.Latitude.Replace(",",".")"), lng: parseFloat("@coordenada.Longitude.Replace(",",".")") });
                     }
-
                     var poligono = new google.maps.Polygon({
                         paths: coords,
                         strokeColor: cor,
@@ -137,19 +127,13 @@
                         fillColor: cor,
                         fillOpacity: 0.35
                     });
-
                     poligono.addListener('click', function () {
                         window.location.href = "PontosInteresse/Details/@item.Id"
                     });
-
                     poligono.setMap(map);
                     marker.setMap(map);
                 </text>
              }
-
-
-
-
         }
     </script>
 }

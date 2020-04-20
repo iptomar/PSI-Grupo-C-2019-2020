@@ -4,13 +4,6 @@
     ViewBag.Title = "Registar utilizador";
 }
 
-<script>
-    $(document).ready(function () {
-        $('#botaoUsers').addClass('active');
-    });
-</script>
-
-
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
