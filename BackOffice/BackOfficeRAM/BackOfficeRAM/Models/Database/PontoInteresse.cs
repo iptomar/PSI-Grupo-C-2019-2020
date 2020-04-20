@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BackOfficeRAM.Models.Database;
+using BackOfficeRAM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,5 +21,8 @@ namespace BackOfficeRAM.Models
         public virtual Coordenada CoordenadaIcon { get; set; }
         public virtual List<Coordenada> CoordenadasPoligono { get; set; }
         public virtual List<Imagem> Imagens { get; set; }
+
+        //presente em vários roteiros
+        public virtual ICollection<PontoRoteiro> EntradasEmRoteiro { get; set; }
     }
 }

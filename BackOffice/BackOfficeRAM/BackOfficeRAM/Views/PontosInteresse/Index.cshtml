@@ -2,14 +2,15 @@
 @{
     ViewBag.Title = "Index";
 }
-<script>
-    $(document).ready(function () {
-        $('#botaoPontos').addClass('active');
-    });
-</script>
-<br />
 
-<div id="map" class="img-thumbnail" style="height:300px;width:100%"></div>
+<br />
+<div style="background-color:#fff;padding:10px;border-radius:5px;border:1px solid #ddd">
+    <div id="map" class="" style="height:300px;width:100%"></div>
+    <div class="row" style="margin-top:5px;">
+        <p class="col-sm-3" style="color:#00F">Edifício de Arquitectura Doméstica</p>
+        <p class="col-sm-2" style="color:#F00">Edifícios Públicos</p>
+    </div>
+</div>
 <br />
 <div class="row">
     <div class="col">
@@ -68,7 +69,6 @@
 
     <script>
         var map;
-
         function initMap() {
             var myCenter = new google.maps.LatLng(parseFloat("39.603803"), parseFloat("-8.406601"));
             var mapProp = {
@@ -87,46 +87,52 @@
             map = new google.maps.Map(document.getElementById('map'),
                 mapProp
             );
-
              @foreach (var item in Model)
              {
+                 if (item.TipoEdificio== "Edifício Publico")
+                 {
+                    <text>
+                    var icone = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+                    var cor ="#FF0000";
+                    </text>
+                 }
+                 else{
+                 <text>
+                    var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                    var cor = "#0000FF";
+                 </text>
+                     }
                  <text>
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(parseFloat("@item.CoordenadaIcon.Latitude"), parseFloat("@item.CoordenadaIcon.Longitude")),
-                        title: "@Html.Raw(item.Nome)"
+                        title: "@Html.Raw(item.TipoEdificio) - @Html.Raw(item.Nome)",
+                        icon: {
+                            url: icone
+                        }
                     });
-
                     marker.addListener('click', function () {
                         window.location.href = "PontosInteresse/Details/@item.Id"
                     });
-
                      var coords = [];
                     @foreach (var coordenada in item.CoordenadasPoligono)
                     {
                         @:coords.push({ lat: parseFloat("@coordenada.Latitude.Replace(",",".")"), lng: parseFloat("@coordenada.Longitude.Replace(",",".")") });
                     }
-
                     var poligono = new google.maps.Polygon({
                         paths: coords,
-                        strokeColor: '#FF0000',
+                        strokeColor: cor,
                         strokeOpacity: 0.8,
                         strokeWeight: 2,
-                        fillColor: '#FF0000',
+                        fillColor: cor,
                         fillOpacity: 0.35
                     });
-
                     poligono.addListener('click', function () {
                         window.location.href = "PontosInteresse/Details/@item.Id"
                     });
-
                     poligono.setMap(map);
                     marker.setMap(map);
                 </text>
              }
-
-
-
-
         }
     </script>
 }

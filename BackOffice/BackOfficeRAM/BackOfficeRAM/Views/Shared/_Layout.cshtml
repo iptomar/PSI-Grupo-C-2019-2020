@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,8 +24,7 @@
         <nav class="navbar top-navbar col-lg-12 col-12 p-0">
             <div class="container-fluid">
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
-                    <ul class="navbar-nav navbar-nav-left">
-                        <div style="width:275px"></div>
+                    <ul class="navbar-nav navbar-nav-left" style="width:275px">
                     </ul>
                     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                         <a class="navbar-brand brand-logo" href="@Url.Action("Index", "Home")">
@@ -53,8 +58,8 @@
 
                     </ul>
                     @*<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
-                        <span class="fa fa-bars"></span>
-                    </button>*@
+                            <span class="fa fa-bars"></span>
+                        </button>*@
                 </div>
             </div>
         </nav>
@@ -62,7 +67,7 @@
             <div class="container">
                 <ul class="nav page-navigation">
 
-                    <li class="nav-item" id="botaoPontos">
+                    <li class="nav-item @(controller == "pontosinteresse" ? "active" : "")" id="botaoPontos">
                         <a href="@Url.Action("Index", "PontosInteresse")" class="nav-link">
                             <i class="fas fa-map-marker-alt" style="margin-bottom:10px"></i>
                             <span class="menu-title">Pontos de Interesse</span>
@@ -75,7 +80,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item" id="botaoRoteiros">
+                    <li class="nav-item @(controller == "roteiros" ? "active" : "")" id="botaoRoteiros">
                         <a href="@Url.Action("Index", "Roteiros")" class="nav-link">
                             <i class="fas fa-map-marked-alt" style="margin-bottom:10px"></i>
                             <span class="menu-title">Roteiros</span>
@@ -88,7 +93,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item" id="botaoImagens">
+                    <li class="nav-item @(controller == "imagens" ? "active" : "")" id="botaoImagens">
                         <a href="@Url.Action("Index", "Imagens")" class="nav-link">
                             <i class="far fa-images" style="margin-bottom:10px"></i>
                             <span class="menu-title">Imagens</span>
@@ -102,7 +107,7 @@
                     </li>
 
 
-                    <li class="nav-item" id="botaoUsers">
+                    <li class="nav-item @(controller == "account" ? "active" : "")" id="botaoUsers">
                         @if (User.IsInRole("administrador"))
                         {
                             <a href="@Url.Action("Index", "Account")" class="nav-link" style="padding:17px 32px 17px 32px">

@@ -17,7 +17,7 @@
     <AssemblyName>BackOfficeRAM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44307</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ImagensController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PontosInteresseController.cs" />
+    <Compile Include="Controllers\RoteirosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,10 +230,32 @@
     <Compile Include="Migrations\202003271645449_tipo-ano.Designer.cs">
       <DependentUpon>202003271645449_tipo-ano.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004181714418_add-roteiros.cs" />
+    <Compile Include="Migrations\202004181714418_add-roteiros.Designer.cs">
+      <DependentUpon>202004181714418_add-roteiros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004181751025_act-roteiros.cs" />
+    <Compile Include="Migrations\202004181751025_act-roteiros.Designer.cs">
+      <DependentUpon>202004181751025_act-roteiros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004181841176_act_atr_roteiros.cs" />
+    <Compile Include="Migrations\202004181841176_act_atr_roteiros.Designer.cs">
+      <DependentUpon>202004181841176_act_atr_roteiros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004191716024_criacao-tbl-relacao-pt-rot.cs" />
+    <Compile Include="Migrations\202004191716024_criacao-tbl-relacao-pt-rot.Designer.cs">
+      <DependentUpon>202004191716024_criacao-tbl-relacao-pt-rot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004202059379_fix-relacao-roteiro-ponto.cs" />
+    <Compile Include="Migrations\202004202059379_fix-relacao-roteiro-ponto.Designer.cs">
+      <DependentUpon>202004202059379_fix-relacao-roteiro-ponto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
     <Compile Include="Models\Database\PontoInteresse.cs" />
+    <Compile Include="Models\Database\PontoRoteiro.cs" />
+    <Compile Include="Models\Database\Roteiro.cs" />
     <Compile Include="Models\Database\Utilizador.cs" />
     <Compile Include="Models\Users\AccountViewModels.cs" />
     <Compile Include="Models\Users\IdentityModels.cs" />
@@ -243,6 +266,7 @@
     <Compile Include="ViewModels\API\PontoApiModel.cs" />
     <Compile Include="ViewModels\CreateEditImagemViewModel.cs" />
     <Compile Include="ViewModels\CreateEditPontoInteresseViewModel.cs" />
+    <Compile Include="ViewModels\CreateEditRoteiroViewModel.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ImageDetailsViewModel.cs" />
     <Compile Include="ViewModels\IndexAccountViewModel.cs" />
@@ -308,6 +332,7 @@
     <Content Include="fotos\camara.jpg" />
     <Content Include="fotos\convento.jpg" />
     <Content Include="fotos\templar.jpg" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Content\style-override.css" />
@@ -406,6 +431,12 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Roteiros\Create.cshtml" />
+    <Content Include="Views\Roteiros\Delete.cshtml" />
+    <Content Include="Views\Roteiros\Details.cshtml" />
+    <Content Include="Views\Roteiros\Edit.cshtml" />
+    <Content Include="Views\Roteiros\Index.cshtml" />
+    <Content Include="Views\Roteiros\_FormCreateEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -447,6 +478,21 @@
     <EmbeddedResource Include="Migrations\202003271645449_tipo-ano.resx">
       <DependentUpon>202003271645449_tipo-ano.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004181714418_add-roteiros.resx">
+      <DependentUpon>202004181714418_add-roteiros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004181751025_act-roteiros.resx">
+      <DependentUpon>202004181751025_act-roteiros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004181841176_act_atr_roteiros.resx">
+      <DependentUpon>202004181841176_act_atr_roteiros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004191716024_criacao-tbl-relacao-pt-rot.resx">
+      <DependentUpon>202004191716024_criacao-tbl-relacao-pt-rot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004202059379_fix-relacao-roteiro-ponto.resx">
+      <DependentUpon>202004202059379_fix-relacao-roteiro-ponto.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -473,7 +519,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>6316</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/BackOfficeRAM</IISUrl>
+          <IISUrl>http://localhost:6316/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
