@@ -46,17 +46,17 @@
             </div>
 
 
-            <div style="vertical-align:top">
+            <div style="vertical-align:top;background-color:cadetblue;color:white !important;width:51%">
                 <!-- mostra a tabela se tiver pelo menos um ponto ja adicionado -->
                 <table class="table" data-bind="visible: ListaPontos().length > 0">
-                    <thead>
+                    <thead style="color:white;">
                         <tr style="border-top: 0">
-                            <th>Ponto</th>
-                            <th></th>
+                            <th><b>Ponto</b></th>
+                            <th style="width:100px"></th>
                         </tr>
                     </thead>
                     <!-- percorre a lista de pontos. desenha um TR por cara ponto -->
-                    <tbody data-bind="foreach: ListaPontos">
+                    <tbody data-bind="foreach: ListaPontos" style="color:white">
                         <tr>
                             <td data-bind="text: NomePonto"></td>
                             <td>
@@ -109,7 +109,6 @@
         self.adicionarPonto = function () {
 
             var nomePonto = $("#listaPontos").find('option:selected').text();
-            console.log(nomePonto);
             var verifExiste = self.getPontoByName(nomePonto);
 
             if (verifExiste !== undefined) {
@@ -123,7 +122,7 @@
 
         //remove um Ponto do roteiro
         self.removerPonto = function (roteiroPonto) {
-            self.ListaPonto.remove(roteiroPonto);
+            self.ListaPontos.remove(roteiroPonto);
         };
     }
 
