@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <br />
 <div style="background-color:#fff;padding:10px;border-radius:5px;border:1px solid #ddd">
     <div id="map" class="" style="height:300px;width:100%"></div>
@@ -97,12 +96,14 @@
                     </text>
                  }
                  else{
-                 <text>
-                    var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-                    var cor = "#0000FF";
-                 </text>
+                     <text>
+                        var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                        var cor = "#0000FF";
+                     </text>
                      }
+
                  <text>
+
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(parseFloat("@item.CoordenadaIcon.Latitude"), parseFloat("@item.CoordenadaIcon.Longitude")),
                         title: "@Html.Raw(item.TipoEdificio) - @Html.Raw(item.Nome)",
