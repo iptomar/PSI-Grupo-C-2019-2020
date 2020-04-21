@@ -20,6 +20,7 @@ namespace BackOfficeRAM.Controllers
             HomeIndexViewModel model = new HomeIndexViewModel();
             model.NumPontos = db.PontosInteresse.Count();
             model.NumImagens = db.Imagens.Count();
+            model.NumRoteiros = db.Roteiroes.Count();
             return View(model);
         }
 

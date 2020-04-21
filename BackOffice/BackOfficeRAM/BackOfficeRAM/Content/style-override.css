@@ -63,16 +63,6 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
 }
 
 
-.card-border-azul:after {
-    content: '';
-    height: 5px;
-    width: 100%;
-    border-radius: 0 0 6px 6px;
-    background-color: #0ddbb9;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-}
 
 .card-border-azul:after {
     content: '';
@@ -91,6 +81,17 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
     width: 100%;
     border-radius: 0 0 6px 6px;
     background-color: #ee5b5b;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.card-border-merda:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #ffd800;
     position: absolute;
     left: 0;
     bottom: 0;
