@@ -1,6 +1,13 @@
 ﻿@model BackOfficeRAM.ViewModels.CreateEditRoteiroViewModel
 
-
+<script>
+    $(document).ready(function () {
+        $('#listaPontos').selectize({
+            create: false,
+            sortField: 'text'
+        });
+    });
+</script>
 
 <div class="form-horizontal">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -114,6 +121,9 @@
 
             if (verifExiste !== undefined) {
                 alert("O ponto de interesse com o nome '" + nomePonto + "' ja foi adicionado a este roteiro");
+            }
+            else if (nomePonto == "") {
+                alert("Não foi selecionado um ponto de interesse.");
             }
             else {
                 self.ListaPontos.push(new RoteiroPonto(self.IdPonto(), nomePonto));
