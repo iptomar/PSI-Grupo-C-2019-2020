@@ -26,9 +26,18 @@
                             </tr>
                             @foreach (var item in Model.PontosInteresse)
                             {
-                                <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","PontosInteresse", new{id = item.Ponto.Id})'">
+                                <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details", "PontosInteresse", new { id = item.Ponto.Id })'">
                                     <td>@item.Posicao</td>
-                                    <td style="width:50px"><img src="@item.Ponto.Imagens.First().ConteudoImagem" alt="Alternate Text" /></td>
+
+                                    <td style="width:50px">
+                                        @{
+                                            if (@item.Ponto.Imagens.Count() > 0)
+                                            {
+                                                <img src="@item.Ponto.Imagens.First().ConteudoImagem" alt="Alternate Text" />
+
+                                            }
+                                        }
+                                    </td>
                                     <td>@item.Ponto.Nome</td>
                                 </tr>
                             }
@@ -54,5 +63,8 @@
         @Html.ActionLink("Voltar", "Index")
     </p>
 
-</div>
 
+
+
+
+</div>
