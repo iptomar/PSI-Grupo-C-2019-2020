@@ -16,18 +16,33 @@
         <div class="row">
             <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="h3 col-sm">
-                            Nome:
-                        </div>
-                        <div class="col-sm">
-                            @Html.DisplayFor(model => model.Nome)
-                        </div>
+                    <div class="col">
+                        <h3>Pontos de Interesse:</h3>
+                        <table class="table table-hover">
+                            <tr style="background-color:#efefef">
+                                <td style="width:100px;">Posição</td>
+                                <td></td>
+                                <td class="table-condensed">Ponto de interesse</td>
+                            </tr>
+                            @foreach (var item in Model.PontosInteresse)
+                            {
+                                <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details", "PontosInteresse", new { id = item.Ponto.Id })'">
+                                    <td>@item.Posicao</td>
+                                    <td style="width:50px">
+                                        @{
+                                            if (@item.Ponto.Imagens.Count() > 0)
+                                            {
+                                                <img src="@item.Ponto.Imagens.First().ConteudoImagem" alt="Alternate Text" />
+
+                                            }
+                                        }
+                                    </td>
+                                    <td>@item.Ponto.Nome</td>
+                                </tr>
+                            }
+                        </table>
                     </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-sm">
+                    <div class="col">
                         <div class="h3 col-sm">
                             Descrição:
                         </div>
@@ -35,39 +50,16 @@
                             @Html.DisplayFor(model => model.Descricao)
                         </div>
                     </div>
-
                 </div>
-                <br />
-                <div class="row">
-
-                    <div class="col">
-                        <h3>Pontos de Interesse:</h3>
-                        @*@Html.DisplayFor(model => model.PontoInteresse)*@
-                        <table class="table table-hover">
-                            <tr style="background-color:#efefef">
-                                <td style="width:100px;">Posição</td>
-                                <td class="table-condensed">Ponto de interesse</td>
-                            </tr>
-                            @foreach (var item in Model.PontosInteresse)
-                            {
-                                <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","PontosInteresse", new{id = item.Ponto.Id})'">
-                                    <td>@item.Posicao</td>
-                                    <td>@item.Ponto.Nome</td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </div>
-                <br />
             </div>
+            <br />
         </div>
     </div>
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Voltar", "Index")
+    </p>
+
 </div>
-<br />
-<br />
-<p>
-    @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Voltar", "Index")
-</p>
-
-

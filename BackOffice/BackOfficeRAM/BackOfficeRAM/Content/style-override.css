@@ -86,7 +86,7 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
     bottom: 0;
 }
 
-.card-border-merda:after {
+.card-border-amarelo:after {
     content: '';
     height: 5px;
     width: 100%;
