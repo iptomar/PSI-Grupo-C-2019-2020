@@ -9,7 +9,7 @@ namespace BackOfficeRAM.ViewModels
     {
         public int NumPontos { get; set; }
         public int NumImagens { get; set; }
-
+        public int NumRoteiros { get; set; }
         public HomeIndexViewModel()
         {
             
