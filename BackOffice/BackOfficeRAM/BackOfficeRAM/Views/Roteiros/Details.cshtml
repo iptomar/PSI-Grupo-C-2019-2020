@@ -28,6 +28,7 @@
                             {
                                 <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details", "PontosInteresse", new { id = item.Ponto.Id })'">
                                     <td>@item.Posicao</td>
+
                                     <td style="width:50px">
                                         @{
                                             if (@item.Ponto.Imagens.Count() > 0)
@@ -61,5 +62,9 @@
         @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }) |
         @Html.ActionLink("Voltar", "Index")
     </p>
+
+
+
+
 
 </div>
