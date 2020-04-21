@@ -13,6 +13,7 @@ using BackOfficeRAM.Models.Database;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
 using BackOfficeRAM.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace BackOfficeRAM.Controllers
 {
@@ -123,7 +124,6 @@ namespace BackOfficeRAM.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [Authorize(Roles = "administrador")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -140,9 +140,18 @@ namespace BackOfficeRAM.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var resultadoAddRole = null;
 
-                    var resultadoAddRole = UserManager.AddToRole(user.Id, model.SelectedRole);
+                    if (User.IsInRole("administrador"))
+                    {
+                        resultadoAddRole = UserManager.AddToRole(user.Id, model.SelectedRole);
+                    }
+                    else
+                    {
+                        resultadoAddRole = UserManager.AddToRole(user.Id, "registado");
+                    }
 
+                    
                     if (resultadoAddRole.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
