@@ -53,17 +53,17 @@
             </div>
 
 
-            <div style="vertical-align:top">
+            <div style="vertical-align:top;background-color:cadetblue;color:white !important;width:51%">
                 <!-- mostra a tabela se tiver pelo menos um ponto ja adicionado -->
                 <table class="table" data-bind="visible: ListaPontos().length > 0">
-                    <thead>
+                    <thead style="color:white;">
                         <tr style="border-top: 0">
-                            <th>Ponto</th>
-                            <th></th>
+                            <th><b>Ponto</b></th>
+                            <th style="width:100px"></th>
                         </tr>
                     </thead>
                     <!-- percorre a lista de pontos. desenha um TR por cara ponto -->
-                    <tbody data-bind="foreach: ListaPontos">
+                    <tbody data-bind="foreach: ListaPontos" style="color:white">
                         <tr>
                             <td data-bind="text: NomePonto"></td>
                             <td>
@@ -97,28 +97,21 @@
         self.IdPonto = ko.observable(id);
         self.NomePonto = ko.observable(nome);
     };
-
     var Model = function () {
         var self = this;
-
-
         self.ListaPontos = ko.observableArray([]);
         self.IdPonto = ko.observable(); //ponto escolhido pelo user
-
         //retorna um Ponto por nome
         self.getPontoByName = function (nomePonto) {
             return ko.utils.arrayFirst(self.ListaPontos(), function (item) {
                 return item.NomePonto() === nomePonto;
             });
         };
-
         //adiciona um Ponto ao roteiro
         self.adicionarPonto = function () {
-
             var nomePonto = $("#listaPontos").find('option:selected').text();
             console.log(nomePonto);
             var verifExiste = self.getPontoByName(nomePonto);
-
             if (verifExiste !== undefined) {
                 alert("O ponto de interesse com o nome '" + nomePonto + "' ja foi adicionado a este roteiro");
             }
@@ -130,13 +123,11 @@
                 self.IdPonto(undefined);
             }
         };
-
         //remove um Ponto do roteiro
         self.removerPonto = function (roteiroPonto) {
             self.ListaPonto.remove(roteiroPonto);
         };
     }
-
     $(function () { //document.ready
         //Aplica o modelo KO à pagina
         ko.applyBindings(new Model());
