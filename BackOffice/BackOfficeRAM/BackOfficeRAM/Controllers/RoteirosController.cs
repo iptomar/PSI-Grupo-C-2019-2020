@@ -170,7 +170,6 @@ namespace BackOfficeRAM.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Roteiro roteiro = db.Roteiroes.Find(id);
-
             foreach (var linha in db.PontoRoteiro)
             {
                 if (linha.Roteiro.Id == id)
