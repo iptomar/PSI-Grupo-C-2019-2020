@@ -110,7 +110,6 @@
         //adiciona um Ponto ao roteiro
         self.adicionarPonto = function () {
             var nomePonto = $("#listaPontos").find('option:selected').text();
-            console.log(nomePonto);
             var verifExiste = self.getPontoByName(nomePonto);
             if (verifExiste !== undefined) {
                 alert("O ponto de interesse com o nome '" + nomePonto + "' ja foi adicionado a este roteiro");
@@ -125,7 +124,7 @@
         };
         //remove um Ponto do roteiro
         self.removerPonto = function (roteiroPonto) {
-            self.ListaPonto.remove(roteiroPonto);
+            self.ListaPontos.remove(roteiroPonto);
         };
     }
     $(function () { //document.ready
