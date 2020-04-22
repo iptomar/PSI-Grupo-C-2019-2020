@@ -118,7 +118,11 @@ namespace BackOfficeRAM.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            if (User.IsInRole("administrador"))
+            {
+                return View();
+            }
+            return View("ExternalRegister");
         }
 
         //

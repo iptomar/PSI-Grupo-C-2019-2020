@@ -444,6 +444,7 @@
     <Content Include="Views\Roteiros\Edit.cshtml" />
     <Content Include="Views\Roteiros\_FormCreateEdit.cshtml" />
     <Content Include="Views\PontosInteresse\ErroKey.cshtml" />
+    <Content Include="Views\Account\ExternalRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
