@@ -115,7 +115,7 @@ namespace BackOfficeRAM.Controllers
 
         //
         // GET: /Account/Register
-        [Authorize(Roles = "administrador")]
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -124,6 +124,7 @@ namespace BackOfficeRAM.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -151,7 +152,7 @@ namespace BackOfficeRAM.Controllers
                         resultadoAddRole = UserManager.AddToRole(user.Id, "registado");
                     }
 
-                    
+
                     if (resultadoAddRole.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");

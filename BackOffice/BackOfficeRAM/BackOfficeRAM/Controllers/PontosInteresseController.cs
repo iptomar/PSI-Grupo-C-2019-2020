@@ -21,7 +21,7 @@ namespace BackOfficeRAM.Controllers
         {
 
             var pontos = from s in db.PontosInteresse
-                        select s;
+                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -174,7 +174,15 @@ namespace BackOfficeRAM.Controllers
                 db.Coordenadas.Remove(pontoInteresse.CoordenadaIcon);
             }
             db.PontosInteresse.Remove(pontoInteresse);
-            db.SaveChanges();
+            try
+            {
+
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("ErroKey");
+            }
             return RedirectToAction("Index");
         }
 
@@ -187,4 +195,6 @@ namespace BackOfficeRAM.Controllers
             base.Dispose(disposing);
         }
     }
+
+
 }
