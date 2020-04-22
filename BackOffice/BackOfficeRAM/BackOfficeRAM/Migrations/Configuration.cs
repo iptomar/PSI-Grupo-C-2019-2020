@@ -40,9 +40,9 @@ namespace BackOfficeRAM.Migrations
                 _roleManager.Create(new IdentityRole("utilizador"));
             }
 
-            if (!_roleManager.RoleExists("registado"))
+            if (!_roleManager.RoleExists("registado externo"))
             {
-                _roleManager.Create(new IdentityRole("registado"));
+                _roleManager.Create(new IdentityRole("registado externo"));
             }
 
 

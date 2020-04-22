@@ -153,7 +153,7 @@ namespace BackOfficeRAM.Controllers
 
                     else
                     {
-                        resultadoAddRole = UserManager.AddToRole(user.Id, "registado");
+                        resultadoAddRole = UserManager.AddToRole(user.Id, "registado externo");
                     }
 
 

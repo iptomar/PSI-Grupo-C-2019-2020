@@ -14,9 +14,9 @@
             Email
         </th>
 
-        @*<th>
-                Função
-            </th>*@
+        <th>
+            Função
+        </th>
 
 
         <th></th>
@@ -33,20 +33,20 @@
                 @Html.DisplayFor(modelItem => user.Email)
             </td>
 
-            @*<td>
-                    @{
-                        var nomeRole = string.Empty;
+            <td>
+                @{
+                    var nomeRole = string.Empty;
 
-                        foreach (var role in Model.Funcoes)
+                    foreach (var role in Model.Funcoes)
+                    {
+                        if (role.Id == user.Roles.FirstOrDefault().RoleId)
                         {
-                            if (role.Id == user.Roles.FirstOrDefault().RoleId)
-                            {
-                                nomeRole = role.Name;
-                            }
+                            nomeRole = role.Name;
                         }
                     }
-                    @nomeRole
-                </td>*@
+                }
+                @nomeRole
+            </td>
 
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
