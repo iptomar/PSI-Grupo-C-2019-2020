@@ -93,7 +93,15 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="col-lg-6 login-half-bg d-flex flex-row">
+
+                            @{
+                                var random = new Random();
+                                var lista = new List<string> { "back-foto-1", "back-foto-2", "back-foto-3", "back-foto-4", "back-foto-5", "back-foto-6" };
+                                int index = random.Next(lista.Count);
+                                var classe = lista[index];
+                            }
+
+                            <div class="col-lg-6 @classe d-flex flex-row">
                             </div>
                         </div>
                     </div>

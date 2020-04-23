@@ -91,18 +91,18 @@
                  if (item.TipoEdificio== "Edifício Publico")
                  {
                     <text>
-                    var icone = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-                    var cor ="#FF0000";
+                      var icone = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+                      var cor ="#FF0000";
                     </text>
                  }
                  else{
-                     <text>
+                    <text>
                         var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
                         var cor = "#0000FF";
-                     </text>
-                     }
+                    </text>
+                    }
 
-                 <text>
+                    <text>
 
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(parseFloat("@item.CoordenadaIcon.Latitude"), parseFloat("@item.CoordenadaIcon.Longitude")),

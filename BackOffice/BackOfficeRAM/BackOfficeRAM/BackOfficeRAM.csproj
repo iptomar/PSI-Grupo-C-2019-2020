@@ -335,9 +335,12 @@
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.ttf" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff2" />
-    <Content Include="fotos\camara.jpg" />
-    <Content Include="fotos\convento.jpg" />
-    <Content Include="fotos\praca.jpg" />
+    <Content Include="fotos\1.jpg" />
+    <Content Include="fotos\2.jpg" />
+    <Content Include="fotos\3.jpg" />
+    <Content Include="fotos\4.jpg" />
+    <Content Include="fotos\5.jpg" />
+    <Content Include="fotos\6.jpg" />
     <Content Include="fotos\templar.jpg" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\selectize.js" />

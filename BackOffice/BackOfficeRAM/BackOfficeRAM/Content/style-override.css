@@ -26,15 +26,36 @@
     padding-right: 50px;
 }
 
-.auth .login-half-bg {
-    background: url("../fotos/convento.jpg");
+.auth .back-foto-1 {
+    background: url("../fotos/1.jpg");
     background-size: cover;
 }
 
-.auth .register-half-bg {
-    background: url("../fotos/praca.jpg");
+.auth .back-foto-2 {
+    background: url("../fotos/2.jpg");
     background-size: cover;
 }
+
+.auth .back-foto-3 {
+    background: url("../fotos/3.jpg");
+    background-size: cover;
+}
+
+.auth .back-foto-4 {
+    background: url("../fotos/4.jpg");
+    background-size: cover;
+}
+
+.auth .back-foto-5 {
+    background: url("../fotos/5.jpg");
+    background-size: cover;
+}
+
+.auth .back-foto-6 {
+    background: url("../fotos/6.jpg");
+    background-size: cover;
+}
+
 
 .input-group {
     display: unset;
