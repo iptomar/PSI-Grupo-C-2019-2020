@@ -189,8 +189,39 @@ namespace BackOfficeRAM.Controllers
         [NonAction]
         public void LoadPontos(ref CreateEditImagemViewModel model)
         {
-            var pontos = db.PontosInteresse.ToList();
-            model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
+            IEnumerable<PontoInteresse> pontos;
+            if (User.IsInRole("registado externo"))
+            {
+
+                //pontos = db.PontosInteresse.ToList().Where(p => p.CriadorPonto.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name))));
+                //model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
+
+                pontos = from s in db.PontosInteresse
+                         select s;
+
+                //remover o que tem criador a null
+                pontos = pontos.Where(s => s.CriadorPonto != null);
+                pontos = pontos.Where(s => s.CriadorPonto.UserName.Equals(User.Identity.Name));
+
+                if (pontos.Count() == 0)
+                {
+                    //apresentar erro
+                }
+
+                model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
+
+            }
+            else
+            {
+                pontos = db.PontosInteresse.ToList().Where(p => p.Visivel.Equals(true));
+
+                model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
+            }
+        }
+
+        public ActionResult SemPontos()
+        {
+            return View("ErroPonto");
         }
     }
 }

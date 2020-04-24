@@ -16,6 +16,32 @@ namespace BackOfficeRAM.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "administrador,utilizador")]
+        public ActionResult IndexAprovacao()
+        {
+            //retorna para a view os pontos que estão ocultos (pendentes de aprovação)
+            return View(db.PontosInteresse.Where(p => p.Visivel.Equals(false)));
+        }
+
+        [Authorize(Roles = "administrador,utilizador")]
+        public ActionResult Aprovar(int id)
+        {
+            var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            ponto.Visivel = true;
+            ponto.AprovadoPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            db.SaveChanges();
+            return RedirectToAction("IndexAprovacao");
+        }
+
+        [Authorize(Roles = "administrador,utilizador")]
+        public ActionResult Rejeitar(int id)
+        {
+            var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            db.PontosInteresse.Remove(ponto);
+            db.SaveChanges();
+            return RedirectToAction("IndexAprovacao");
+        }
+
         // GET: PontoInteresses
         public ActionResult Index(string searchString)
         {
@@ -27,6 +53,10 @@ namespace BackOfficeRAM.Controllers
             {
                 pontos = pontos.Where(s => s.Nome.Contains(searchString) || s.Descricao.Contains(searchString) || s.Localizacao.Contains(searchString));
             }
+
+
+            pontos = pontos.Where(p => p.Visivel.Equals(true));
+
 
             return View(pontos.ToList());
         }
@@ -68,8 +98,21 @@ namespace BackOfficeRAM.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                {
+                    model.PontoInteresse.Visivel = true;
+                }
+                else
+                {
+                    model.PontoInteresse.Visivel = false;
+                }
+                model.PontoInteresse.CriadorPonto = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
                 db.PontosInteresse.Add(model.PontoInteresse);
                 db.SaveChanges();
+                if (User.IsInRole("registado externo"))
+                {
+                    return View("InfoAprovacao");
+                }
                 return RedirectToAction("Index");
             }
 
@@ -77,6 +120,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: PontoInteresses/Edit/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +144,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(CreateEditPontoInteresseViewModel model)
         {
             if (model.PontoInteresse.CoordenadasPoligono != null)
@@ -142,6 +187,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: PontosInteresse/Delete/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -159,6 +205,7 @@ namespace BackOfficeRAM.Controllers
         // POST: PontosInteresse/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             PontoInteresse pontoInteresse = db.PontosInteresse.Find(id);

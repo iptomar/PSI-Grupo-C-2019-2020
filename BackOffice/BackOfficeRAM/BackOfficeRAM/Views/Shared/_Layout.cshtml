@@ -79,6 +79,12 @@
                             <ul>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
+                                @{
+                                    if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                                    {
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("IndexAprovacao", "PontosInteresse")">Pontos pendentes de aprovação</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </li>

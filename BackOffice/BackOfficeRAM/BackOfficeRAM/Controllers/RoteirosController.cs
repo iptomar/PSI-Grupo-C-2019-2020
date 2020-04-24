@@ -49,7 +49,7 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Create()
         {
             CreateEditRoteiroViewModel model = new CreateEditRoteiroViewModel();
-            model.Pontos = db.PontosInteresse.ToList();
+            model.Pontos = db.PontosInteresse.ToList().Where(p => p.Visivel.Equals(true));
             return View(model);
         }
 
