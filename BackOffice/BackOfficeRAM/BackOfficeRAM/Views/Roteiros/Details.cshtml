@@ -8,13 +8,18 @@
 
 <br />
 <h2>@Html.DisplayFor(model => model.Nome)</h2>
-
 <div>
-    <h4></h4>
-    <hr />
+    <div style="background-color:#fff;padding:10px;border-radius:5px;border:1px solid #ddd">
+        <div id="map" class="" style="height:300px;width:100%"></div>
+        <div class="row" style="margin-top:5px;">
+            <p class="col-sm-3" style="color:#00F">Edifício de Arquitectura Doméstica</p>
+            <p class="col-sm-2" style="color:#F00">Edifícios Públicos</p>
+        </div>
+    </div>
+    <br />
     <div class="container">
         <div class="row">
-            <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
+            <div class="col-md" style="background-color:#fff;padding:20px;">
                 <div class="row">
                     <div class="col">
                         <h3>Pontos de Interesse:</h3>
@@ -34,7 +39,6 @@
                                             if (@item.Ponto.Imagens.Count() > 0)
                                             {
                                                 <img src="@item.Ponto.Imagens.First().ConteudoImagem" alt="Alternate Text" />
-
                                             }
                                         }
                                     </td>
@@ -68,3 +72,78 @@
 
 
 </div>
+
+@section scripts
+    {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaNOF8NDOvIgeHEO5Glt6yz9AellnNS2E&callback=initMap" async defer></script>
+
+    <script>
+        var map;
+        function initMap() {
+            var myCenter = new google.maps.LatLng(parseFloat("39.603803"), parseFloat("-8.406601"));
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                scrollwheel: true,
+                draggable: true,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: true,
+                rotateControl: false,
+                fullscreenControl: true
+            };
+            map = new google.maps.Map(document.getElementById('map'),
+                mapProp
+            );
+             @foreach (var item in Model.PontosInteresse)
+             {
+                  if (item.Ponto.TipoEdificio== "Edifício Publico")
+                 {
+                    <text>
+                      var icone = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+                      var cor ="#FF0000";
+                    </text>
+                 }
+                 else{
+                    <text>
+                        var icone = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                        var cor = "#0000FF";
+                    </text>
+                    }
+
+             <text>
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(parseFloat("@item.Ponto.CoordenadaIcon.Latitude"), parseFloat("@item.Ponto.CoordenadaIcon.Longitude")),
+                        title: "@Html.Raw(item.Ponto.TipoEdificio) - @Html.Raw(item.Ponto.Nome)",
+                        icon: {
+                            url: icone
+                        }
+                    });
+                    marker.addListener('click', function () {
+                        window.location.href = "PontosInteresse/Details/@item.Id"
+                    });
+                     var coords = [];
+                    @foreach (var coordenada in item.Ponto.CoordenadasPoligono)
+                    {
+                        @:coords.push({ lat: parseFloat("@coordenada.Latitude.Replace(",",".")"), lng: parseFloat("@coordenada.Longitude.Replace(",",".")") });
+                    }
+                    var poligono = new google.maps.Polygon({
+                        paths: coords,
+                        strokeColor: cor,
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: cor,
+                        fillOpacity: 0.35
+                    });
+                    poligono.addListener('click', function () {
+                        window.location.href = "PontosInteresse/Details/@item.Id"
+                    });
+                    poligono.setMap(map);
+                    marker.setMap(map);
+             </text>
+             }
+        }
+    </script>
+}
