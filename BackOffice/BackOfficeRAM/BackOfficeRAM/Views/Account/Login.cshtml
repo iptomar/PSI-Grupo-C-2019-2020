@@ -30,7 +30,6 @@
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            @*<h4>Use a local account to log in.</h4>*@
 
 
 
@@ -47,6 +46,7 @@
                                     <div class="brand-logo">
                                         <h1 style="text-align:center">RAM Tomar</h1>
                                     </div>
+
 
                                     <form class="pt-3">
                                         <div class="form-group">
@@ -83,15 +83,25 @@
 
                                         </div>
                                         <div class="my-3">
-
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                             <input type="submit" value="Log in" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" />
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            Ainda não tem conta? <a href="@Url.Action("Register", "Account")" class="text-primary">Registe-se</a>
                                         </div>
 
                                     </form>
                                 </div>
                             </div>
-                            <div class="col-lg-6 login-half-bg d-flex flex-row">
+
+                            @{
+                                var random = new Random();
+                                var lista = new List<string> { "back-foto-1", "back-foto-2", "back-foto-3", "back-foto-4", "back-foto-5", "back-foto-6" };
+                                int index = random.Next(lista.Count);
+                                var classe = lista[index];
+                            }
+
+                            <div class="col-lg-6 @classe d-flex flex-row">
                             </div>
                         </div>
                     </div>

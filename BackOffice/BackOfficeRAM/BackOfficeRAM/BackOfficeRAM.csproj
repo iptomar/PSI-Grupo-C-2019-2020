@@ -53,12 +53,18 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -250,6 +256,22 @@
     <Compile Include="Migrations\202004202059379_fix-relacao-roteiro-ponto.Designer.cs">
       <DependentUpon>202004202059379_fix-relacao-roteiro-ponto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004242002319_add-attr-visivel-pontos.cs" />
+    <Compile Include="Migrations\202004242002319_add-attr-visivel-pontos.Designer.cs">
+      <DependentUpon>202004242002319_add-attr-visivel-pontos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004242038007_add-attr-criador-ponto.cs" />
+    <Compile Include="Migrations\202004242038007_add-attr-criador-ponto.Designer.cs">
+      <DependentUpon>202004242038007_add-attr-criador-ponto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004242046086_add-attr-criador-ponto-1.cs" />
+    <Compile Include="Migrations\202004242046086_add-attr-criador-ponto-1.Designer.cs">
+      <DependentUpon>202004242046086_add-attr-criador-ponto-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004242115118_add-attr-criador-ponto-2.cs" />
+    <Compile Include="Migrations\202004242115118_add-attr-criador-ponto-2.Designer.cs">
+      <DependentUpon>202004242115118_add-attr-criador-ponto-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
@@ -329,8 +351,12 @@
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.ttf" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff" />
     <Content Include="fonts\sourcesanspro\SourceSansPro-SemiBold.woff2" />
-    <Content Include="fotos\camara.jpg" />
-    <Content Include="fotos\convento.jpg" />
+    <Content Include="fotos\1.jpg" />
+    <Content Include="fotos\2.jpg" />
+    <Content Include="fotos\3.jpg" />
+    <Content Include="fotos\4.jpg" />
+    <Content Include="fotos\5.jpg" />
+    <Content Include="fotos\6.jpg" />
     <Content Include="fotos\templar.jpg" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\selectize.js" />
@@ -355,6 +381,7 @@
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\BackOfficeRAM - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\RAMTomar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -392,6 +419,7 @@
     <Content Include="vendors\select2\select2.min.css" />
     <Content Include="vendors\select2\select2.min.js" />
     <Content Include="vendors\typeahead.js\typeahead.bundle.min.js" />
+    <Content Include="Views\Roteiros\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -435,8 +463,12 @@
     <Content Include="Views\Roteiros\Delete.cshtml" />
     <Content Include="Views\Roteiros\Details.cshtml" />
     <Content Include="Views\Roteiros\Edit.cshtml" />
-    <Content Include="Views\Roteiros\Index.cshtml" />
     <Content Include="Views\Roteiros\_FormCreateEdit.cshtml" />
+    <Content Include="Views\PontosInteresse\ErroKey.cshtml" />
+    <Content Include="Views\Account\ExternalRegister.cshtml" />
+    <Content Include="Views\PontosInteresse\IndexAprovacao.cshtml" />
+    <Content Include="Views\PontosInteresse\InfoAprovacao.cshtml" />
+    <Content Include="Views\Imagens\ErroPonto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -492,6 +524,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004202059379_fix-relacao-roteiro-ponto.resx">
       <DependentUpon>202004202059379_fix-relacao-roteiro-ponto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004242002319_add-attr-visivel-pontos.resx">
+      <DependentUpon>202004242002319_add-attr-visivel-pontos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004242038007_add-attr-criador-ponto.resx">
+      <DependentUpon>202004242038007_add-attr-criador-ponto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004242046086_add-attr-criador-ponto-1.resx">
+      <DependentUpon>202004242046086_add-attr-criador-ponto-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004242115118_add-attr-criador-ponto-2.resx">
+      <DependentUpon>202004242115118_add-attr-criador-ponto-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

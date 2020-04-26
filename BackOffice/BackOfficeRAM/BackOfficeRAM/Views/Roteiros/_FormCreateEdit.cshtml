@@ -97,27 +97,20 @@
         self.IdPonto = ko.observable(id);
         self.NomePonto = ko.observable(nome);
     };
-
     var Model = function () {
         var self = this;
-
-
         self.ListaPontos = ko.observableArray([]);
         self.IdPonto = ko.observable(); //ponto escolhido pelo user
-
         //retorna um Ponto por nome
         self.getPontoByName = function (nomePonto) {
             return ko.utils.arrayFirst(self.ListaPontos(), function (item) {
                 return item.NomePonto() === nomePonto;
             });
         };
-
         //adiciona um Ponto ao roteiro
         self.adicionarPonto = function () {
-
             var nomePonto = $("#listaPontos").find('option:selected').text();
             var verifExiste = self.getPontoByName(nomePonto);
-
             if (verifExiste !== undefined) {
                 alert("O ponto de interesse com o nome '" + nomePonto + "' ja foi adicionado a este roteiro");
             }
@@ -129,13 +122,11 @@
                 self.IdPonto(undefined);
             }
         };
-
         //remove um Ponto do roteiro
         self.removerPonto = function (roteiroPonto) {
             self.ListaPontos.remove(roteiroPonto);
         };
     }
-
     $(function () { //document.ready
         //Aplica o modelo KO à pagina
         ko.applyBindings(new Model());

@@ -44,18 +44,21 @@
                                     <i class="fas fa-user"></i>*@
                             </a>
                         </li>
-
-                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            @Html.AntiForgeryToken()
 
-                            <li class="nav-item dropdown d-lg-flex d-none">
-                                <a class="menu-title" href="javascript:document.getElementById('logoutForm').submit()">
-                                    <span class="btn btn-inverse-primary btn-sm"><i class="fas fa-sign-out-alt"></i> Logout</span>
-                                </a>
-                            </li>
+
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <li class="nav-item dropdown d-lg-flex d-none">
+                                    <a class="menu-title" href="javascript:document.getElementById('logoutForm').submit()">
+                                        <span class="btn btn-inverse-primary btn-sm"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                                    </a>
+                                </li>
+                            }
                         }
-
                     </ul>
                     @*<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
                             <span class="fa fa-bars"></span>
@@ -76,13 +79,19 @@
                             <ul>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "PontosInteresse")">Ver lista de pontos de interesse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "PontosInteresse")">Adicionar novo ponto de interesse</a></li>
+                                @{
+                                    if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                                    {
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("IndexAprovacao", "PontosInteresse")">Pontos pendentes de aprovação</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item @(controller == "roteiros" ? "active" : "")" id="botaoRoteiros">
                         <a href="@Url.Action("Index", "Roteiros")" class="nav-link">
-                            <i class="fas fa-map-marked-alt" style="margin-bottom:10px"></i>
+                            <i class="fas fa-route" style="margin-bottom:10px"></i>
                             <span class="menu-title">Roteiros</span>
                         </a>
                         <div class="submenu">

@@ -40,12 +40,17 @@ namespace BackOfficeRAM.Migrations
                 _roleManager.Create(new IdentityRole("utilizador"));
             }
 
+            if (!_roleManager.RoleExists("registado externo"))
+            {
+                _roleManager.Create(new IdentityRole("registado externo"));
+            }
+
 
 
 
             if (_userManager.Find("admin", "asd") == null)
             {
-                var user = new Utilizador { UserName = "admin", Email = "admin@ram.pt", Nome = "Chuck Norris"};
+                var user = new Utilizador { UserName = "admin", Email = "admin@ram.pt", Nome = "Chuck Norris" };
 
                 var resultado = _userManager.Create(user, "123");
 

@@ -8,11 +8,10 @@
 <table class="table table-hover" style="background-color:#fff">
     <tr>
         <th>
-            Email
-        </th>
-
-        <th>
             Nome
+        </th>
+        <th>
+            Email
         </th>
 
         <th>
@@ -26,12 +25,12 @@
     @foreach (var user in Model.Utilizadores)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => user.Email)
-            </td>
 
             <td>
                 @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
             </td>
 
             <td>
