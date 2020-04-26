@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 
 <html>
-<body>
-<script>
-	var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var obj = JSON.parse(this.responseText);
-				document.write(obj);
-            }
-        };
-        xmlhttp.open("GET", "https://backofficeram.azurewebsites.net/api/pontosapi", true);
-        xmlhttp.send();
-</script>
-</body>
+	<head>
+		<meta charset="UTF-8"/>
+		 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+	   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	   crossorigin=""></script>
+	   <style>#RAMTMap { height: 180px; }</style>
+		<title>RAM Tomar<title/>
+	</head>
+	<body>
+		<div id="RAMTMap"></div>
+		<script>
+			const RAMTMap = L.map('mapid').setView([51.505, -0.09], 13);
+			const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+			const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+			const tiles = L.tileLayer(tileUrl,{attribution});
+			tiles.addTo(mymap);
+			const api_url = 'https://backofficeram.azurewebsites.net/api/pontosapi';
+			
+			async function getAPI(){
+				const response = await	fetch(api_url);
+				const data = await response .json();
+				console.log(data);
+			}
+			getAPI();
+			
+			//var xmlhttp = new XMLHttpRequest();
+				//xmlhttp.onreadystatechange = function() {
+					//if (this.readyState == 4 && this.status == 200) {
+						//var obj = JSON.parse(this.responseText);
+						//document.write(obj);
+					//}
+				//};
+				//xmlhttp.open("GET", "https://backofficeram.azurewebsites.net/api/pontosapi", true);
+				//xmlhttp.send();
+		</script>
+	</body>
 </html>
