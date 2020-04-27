@@ -14,5 +14,6 @@ namespace BackOfficeRAM.Models
         public String Nome { get; set; }
         public String Autor { get; set; }
         public virtual PontoInteresse PontoInteresse { get; set; }
+        public virtual ApplicationUser InseridaPor { get; set; }
     }
 }

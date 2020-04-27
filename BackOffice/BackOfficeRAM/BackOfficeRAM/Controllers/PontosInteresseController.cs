@@ -211,15 +211,23 @@ namespace BackOfficeRAM.Controllers
             PontoInteresse pontoInteresse = db.PontosInteresse.Find(id);
             if (pontoInteresse.CoordenadasPoligono != null)
             {
-                foreach (var item in pontoInteresse.CoordenadasPoligono.ToList())
+                foreach (var coordenada in pontoInteresse.CoordenadasPoligono.ToList())
                 {
-                    db.Coordenadas.Remove(item);
+                    db.Coordenadas.Remove(coordenada);
                 }
             }
             if (pontoInteresse.CoordenadaIcon != null)
             {
                 db.Coordenadas.Remove(pontoInteresse.CoordenadaIcon);
             }
+            if (pontoInteresse.Imagens != null)
+            {
+                foreach (var imagem in pontoInteresse.Imagens.ToList())
+                {
+                    db.Imagens.Remove(imagem);
+                }
+            }
+
             db.PontosInteresse.Remove(pontoInteresse);
             try
             {

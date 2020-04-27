@@ -45,7 +45,12 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr style="cursor:pointer" onclick="javascript:window.location='@Url.Action("Details","PontosInteresse", new{id = item.Id})'">
+        var estilo = "";
+        if (User.IsInRole("registado externo") && item.CriadorPonto != null && item.CriadorPonto.UserName.Equals(User.Identity.Name))
+        {
+            estilo = "background-color: #efefef;";
+        }
+        <tr style="cursor:pointer;@estilo" onclick="javascript:window.location='@Url.Action("Details","PontosInteresse", new{id = item.Id})'">
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
@@ -53,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Localizacao)
             </td>
             <td>
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) 
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
 
                 @if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
                 {

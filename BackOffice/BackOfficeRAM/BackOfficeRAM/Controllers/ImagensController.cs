@@ -28,6 +28,12 @@ namespace BackOfficeRAM.Controllers
                 lista = lista.Where(s => s.Nome.Contains(searchStringImg) || s.Autor.Contains(searchStringImg) || s.PontoInteresse.Nome.Contains(searchStringImg));
             }
 
+            if (User.IsInRole("registado externo"))
+            {
+                lista = lista.Where(i => i.InseridaPor.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault()));
+            }
+
+
             return View(lista.ToList());
         }
 
@@ -54,6 +60,10 @@ namespace BackOfficeRAM.Controllers
         {
             CreateEditImagemViewModel model = new CreateEditImagemViewModel();
             LoadPontos(ref model);
+            if (model.PontosInteresse.Count() == 0)
+            {
+                return View("ErroPonto");
+            }
             return View(model);
         }
 
@@ -74,7 +84,8 @@ namespace BackOfficeRAM.Controllers
                 var imagem = new Imagem
                 {
                     Autor = model.Autor,
-                    Nome = model.Nome
+                    Nome = model.Nome,
+                    InseridaPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault()
                 };
 
                 pontodb.Imagens.Add(imagem);
@@ -202,11 +213,6 @@ namespace BackOfficeRAM.Controllers
                 //remover o que tem criador a null
                 pontos = pontos.Where(s => s.CriadorPonto != null);
                 pontos = pontos.Where(s => s.CriadorPonto.UserName.Equals(User.Identity.Name));
-
-                if (pontos.Count() == 0)
-                {
-                    //apresentar erro
-                }
 
                 model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
 
