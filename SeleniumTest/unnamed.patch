@@ -1,8 +1,0 @@
-Index: venv/Test1/geckodriver.log
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
---- venv/Test1/geckodriver.log	(date 1585063565812)
-+++ venv/Test1/geckodriver.log	(date 1585063565812)
-@@ -0,0 +1,0 @@
