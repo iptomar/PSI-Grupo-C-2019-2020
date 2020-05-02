@@ -54,7 +54,7 @@
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id })
 
                 }
-                @if (item.PontoInteresse.Visivel.Equals(false))
+                @if (item.PontoInteresse.Visivel.Equals(false) || (User.IsInRole("administrador")|| User.IsInRole("utilizador")))
                 {
                     @:|
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })

@@ -117,6 +117,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Imagems/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -163,6 +164,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Imagems/Delete/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -179,6 +181,7 @@ namespace BackOfficeRAM.Controllers
 
         // POST: Imagems/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "administrador,utilizador")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

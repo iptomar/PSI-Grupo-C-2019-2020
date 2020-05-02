@@ -16,22 +16,33 @@
 
 @using (Html.BeginForm("Create", "Imagens", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <br />
     @Html.AntiForgeryToken()
-
-    <h3>Após o Ponto de Interesse ser aprovado, não poderá inserir novas imagens.</h3>
+    if (User.IsInRole("registado externo"))
+    {
+        <h3 class="alert alert-info">Após o Ponto de Interesse ser aprovado, não poderá inserir novas imagens.</h3>
+    }
     <div class="form-horizontal">
-        <br />
+
         <h4> Nova Imagem</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.Label("Associar imagem ao seguinte ponto de interesse")
+                @Html.DropDownListFor(m => m.PontoEscolhido, Model.PontosInteresse, new { @class = "form-control text-box single-line", id = "select-ponto", style = "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
+            </div>
+        </div>
 
         @* Passar a carregamento de imagem e no controller adicionar método para passar a imagem para base64 *@
         <div class="form-group">
             @Html.Label("Carregar Imagem", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                <input type="file" class="form-control" name="foto" id="foto" accept=".jpg" @*multiple*@ />
+                <input type="file" class="form-control" name="foto" id="foto" accept=".jpg" multiple />
                 @*@Html.ValidationMessageFor(model => model.Conteudo, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -49,14 +60,6 @@
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-
-            <div class="col-md-10">
-                @Html.Label("Associar imagem ao seguinte ponto de interesse")
-                @Html.DropDownListFor(m => m.PontoEscolhido, Model.PontosInteresse, new { @class = "form-control text-box single-line", id = "select-ponto", style = "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />

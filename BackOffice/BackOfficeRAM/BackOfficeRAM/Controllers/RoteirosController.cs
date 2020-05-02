@@ -87,31 +87,41 @@ namespace BackOfficeRAM.Controllers
         // GET: Roteiros/Edit/5
         public ActionResult Edit(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Roteiro roteiro = db.Roteiroes.Find(id);
-            //if (roteiro == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //var model = new CreateEditRoteiroViewModel();
-            //model.PontosSeleccionados = new List<RoteiroPontoModel>();
-            //model.Roteiro = roteiro;
-            //model.Pontos = db.PontosInteresse.ToList();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Roteiro roteiro = db.Roteiroes.Find(id);
+            if (roteiro == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new CreateEditRoteiroViewModel();
+            model.PontosSeleccionados = new List<RoteiroPontoModel>();
+            model.Roteiro = roteiro;
+            model.Pontos = db.PontosInteresse.ToList();
+            model.PontosGuardados = new List<PontosGuardados>();
+            foreach (var item in db.PontoRoteiro.Where(p => p.Roteiro.Id == id))
+            {
+                var pt = new PontosGuardados()
+                {
+                    IdPonto = item.Ponto.Id,
+                    Nome = item.Ponto.Nome
+                };
+                model.PontosGuardados.Add(pt);
+            }
 
             //var rotPontosModel = new RoteiroPontoModel();
             //foreach (var item in roteiro.PontosInteresse)
             //{
             //    rotPontosModel.IdPonto = item.Ponto.Id;
             //    rotPontosModel.Posicao = item.Posicao;
-            //    var result=model.PontosSeleccionados.Append(rotPontosModel);
+            //    var result = model.PontosSeleccionados.Append(rotPontosModel);
             //}
 
-            //return View(model);
+            return View(model);
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
         // POST: Roteiros/Edit/5
@@ -125,19 +135,20 @@ namespace BackOfficeRAM.Controllers
             {
                 var oldRoteiro = db.Roteiroes.Find(model.Roteiro.Id);
 
-                //foreach (var coordenada in oldPontoInteresse.CoordenadasPoligono.ToList())
-                //{
-                //    if (model.PontoInteresse.CoordenadasPoligono == null || !model.PontoInteresse.CoordenadasPoligono.Any(c => c.Id == coordenada.Id))
-                //        oldPontoInteresse.CoordenadasPoligono.Remove(coordenada);
-                //}
+                foreach (var relacao in oldRoteiro.PontosInteresse.ToList())
+                {
+                    db.PontoRoteiro.Remove(relacao);
+                }
 
-                //if (model.PontoInteresse.CoordenadasPoligono != null)
-                //{
-                //    foreach (var novaCoordenada in model.PontoInteresse.CoordenadasPoligono.Where(x => x.Id == 0).ToList())
-                //    {
-                //        oldPontoInteresse.CoordenadasPoligono.Add(novaCoordenada);
-                //    }
-                //}
+                foreach (var ponto in model.PontosSeleccionados)
+                {
+                    oldRoteiro.PontosInteresse.Add(new PontoRoteiro
+                    {
+                        Posicao = model.PontosSeleccionados.IndexOf(ponto) + 1,
+                        Ponto = db.PontosInteresse.FirstOrDefault(i => i.Id == ponto.IdPonto)
+                    });
+
+                }
 
                 oldRoteiro.Nome = model.Roteiro.Nome;
                 oldRoteiro.Descricao = model.Roteiro.Descricao;

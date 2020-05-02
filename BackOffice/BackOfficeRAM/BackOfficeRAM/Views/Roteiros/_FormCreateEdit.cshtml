@@ -1,4 +1,5 @@
-﻿@model BackOfficeRAM.ViewModels.CreateEditRoteiroViewModel
+﻿@using System.Web.Script.Serialization
+@model BackOfficeRAM.ViewModels.CreateEditRoteiroViewModel
 
 <script>
     $(document).ready(function () {
@@ -126,6 +127,22 @@
         self.removerPonto = function (roteiroPonto) {
             self.ListaPontos.remove(roteiroPonto);
         };
+
+        self.loadPontos = function () {
+                var json = @Html.Raw(new JavaScriptSerializer().Serialize(Model.PontosGuardados));
+
+                if (json == null || json.length === 0)
+                    return;
+
+                var arr = [];
+                $.each(json, function (index, ponto) {
+                   arr.push(new RoteiroPonto(ponto.IdPonto, ponto.Nome));
+                });
+
+                self.ListaPontos(arr);
+            };
+
+        self.loadPontos();
     }
     $(function () { //document.ready
         //Aplica o modelo KO à pagina
