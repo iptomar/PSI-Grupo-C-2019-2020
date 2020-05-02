@@ -1,0 +1,7 @@
+keytool -genkey -v -keystore RAMTomar.keystore -alias RAMTomar -keyalg RSA -keysize 2048 -validity 10000
+
+cordova build --release android
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore RAMTomar.keystore app-release-unsigned.apk RAMTomar
+
+zipalign -v 4 app-release-unsigned.apk RAMTomar.apk

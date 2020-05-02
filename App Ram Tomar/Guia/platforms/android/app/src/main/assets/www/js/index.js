@@ -461,9 +461,9 @@ var app = {
             if (error.code == 3) { // no gps
                 str = "Sem sinal de GPS.";
                 onSuccess();
-            }
+            } 
             alert(str);
-           
+            
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 10000, enableHighAccuracy: true });
