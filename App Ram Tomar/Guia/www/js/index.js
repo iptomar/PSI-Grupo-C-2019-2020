@@ -13,9 +13,14 @@ var app = {
     // 'pause', 'resume', etc.
 
     onDeviceReady: function () {
+        this.receivedEvent('deviceready');
+
+
+        var onSuccess = function (position) {
             var topo = document.getElementById('topo');
             var body = document.body;
             body.classList.add('overflow');
+
 
             //buscar o div criado no html
             var mapa = document.getElementById('mapid');
@@ -24,64 +29,280 @@ var app = {
             //.locate({setView: true, maxZoom: 16});
             var estado = 0;
 
-            //Como o consumo da API não pode funcionar em Offline, deixamos apenas o modo online
             document.addEventListener("online", onOnline, false);
 
             function onOnline() {
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    //maxZoom: 19,
+                    //minZoom: 15,
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
             }
                 onOnline();
-                
-                //Custom icon for current position
-                const markerCurrent = L.icon({
-                    iconUrl: 'img/green.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [25, 16]
-                });
 
-                var marker;
-                //posição inicial
-                navigator.geolocation.getCurrentPosition(function (location) {
-                   var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                   //marcador na posição inicial
-                   marker = L.marker(latlng, { icon: markerCurrent}).addTo(mymap);
-
-                   marker.bindPopup("<b>Sua posição atual</b>").openPopup();     
-               });
-
-
-                var jsonData;
-                var control;
-                //buscas do elementos criados no html
-                var btPos = document.getElementById('btPosicao');
-                var icon = document.getElementById('idIcon');
-                var divInfo = document.getElementById('infoAdicional');
-                var divFullImg = document.getElementById('fullImg');
-
-            //Funcão para fazer fetch das cordenadas dos edificios
-            let geojson;
-            $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi', function(data) {
-              geojson = data;
-              const dataPoint = geojson.datapoint;
-            
-              // store all the coordinates in this array o be able to iterate over the markers array
-              let coordinates = [];
-            
-              // populate coordinates array with all the markers
-              for (let i = 0; i < dataPoint.length; i++) {
-                coordinates.push([Number(dataPoint[i].lat1), Number(dataPoint[i].long1)], [Number(dataPoint[i].lat2), Number(dataPoint[i].long2)]);
-              };
-            
-              // visualize the markers on the map
-              for (let i = 0; i < coordinates.length; i++) {
-                L.marker(coordinates[i]).addTo(map)
-                  .bindPopup("<b>Latitude:</b> " + coordinates[i][0] + " <b>Longitude:</b> " + coordinates[i][1]);
-              };
+            //vai buscar a posição inicial quando inicia a app
+            navigator.geolocation.getCurrentPosition(function (location) {
+                var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+             
+                //var marker = L.marker(latlng).addTo(mymap);
             });
 
+            mymap.on('locationfound', onLocationFound);
+
+            var jsonData;
+            var control;
+            //buscas do elementos criados no html
+            var btPos = document.getElementById('btPosicao');
+            var icon = document.getElementById('idIcon');
+            var divInfo = document.getElementById('infoAdicional');
+            var divFullImg = document.getElementById('fullImg');
+
             var br = document.createElement('br');
+
+
+            //metodo de jQuery para ir buscar e ler o ficheiro info.json
+            $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi', function(json) {
+                jsonData = json;
+                //let cada posição do ficheiro json e inserir numa variavel
+                for (var i = 0; i < jsonData.length; i++) {
+                    let jsons = jsonData[i];
+                    //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
+                    var coordenadas=[];
+                    for(var j=0; j<jsonData[i].CoodenadasPoligono.length; j++) {
+                      var c=[];
+                      c.push(parseFloat(jsonData[i].CoodenadasPoligono[j].Latitude));
+                      c.push(parseFloat(jsonData[i].CoodenadasPoligono[j].Longitude));
+                      coordenadas.push(c);
+                    }
+                    var polygon = L.polygon([coordenadas], {
+                        color: 'red',
+                        weight: '0.5',
+                        fillOpacity: '0.2',
+                    }).addTo(mymap);
+
+                    //criação de elementos para mostrar no popup quando se clica num icon ou poligno de um edificio
+                    var divPopup = document.createElement('div');
+                    divPopup.setAttribute('id', 'iDdivPopup');
+                    var popUpTipo = document.createElement('p');
+                    popUpTipo.setAttribute('id', 'idPopUpTipo');
+                    popUpTipo.classList.add('item1');
+                    var popUpNome = document.createElement('p');
+                    popUpNome.setAttribute('id', 'idPopUpNome');
+                    popUpNome.classList.add('item2');
+
+                    var btWaypoint = document.createElement('button');
+                    btWaypoint.setAttribute('id', 'idBtWaypoint');
+                    btWaypoint.classList.add('btn', 'btn-warning', 'item4');
+                    btWaypoint.textContent = "Traçar caminho  ";
+                    var iShoes = document.createElement('i');
+                    iShoes.classList.add('fas', 'fa-shoe-prints');
+                    btWaypoint.appendChild(iShoes);
+
+
+                    var greenIcon = new L.Icon({
+                        iconUrl: './img/green.png',
+                        shadowUrl: './img/shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    });
+
+                    //onclick do traçar trajeto e criação da rota com metodos do leaflet routing map
+                    //em que vai buscar as coordenadas do user e faz rota ate as coordernadas do icon clicado
+                    btWaypoint.onclick = waypoint => {
+
+                        removeRoutingControl();
+
+                        console.log(current_position._latlng.lat);
+
+                        control = L.Routing.control({
+                            waypoints: [
+                                L.latLng(current_position._latlng),
+                                L.latLng(jsons.IconCoordenadas)
+                            ],
+                            createMarker: function (i, wp, nWps) {
+                                if (i === nWps - 1) {
+                                    // here change the starting and ending icons
+                                    return L.marker(wp.latLng, {
+                                        icon: greenIcon // here pass the custom marker icon instance
+                                    });
+                                }
+                            },
+                            lineOptions: {
+                                styles: [{ color: 'red', opacity: 1, weight: 5 }],
+                            },
+                            draggableWaypoints: false,
+
+                        }).addTo(mymap);
+
+
+                    }
+
+                    popUpTipo.textContent = jsons.TipoEdificio;
+                    popUpNome.textContent = jsons.Nome;
+                    divPopup.appendChild(popUpTipo);
+                    divPopup.appendChild(popUpNome);
+
+
+                    //criação do icon dos edificios
+                    var myIcon = L.icon({
+                        iconUrl: 'icon.png',
+                        iconSize: [30, 48],
+                        iconAnchor: [15, 48],
+                        popupAnchor: [-7, -45]
+
+                    });
+
+                    var coord = [];
+                    coord.push(parseFloat(jsons.LatitudeIcone));
+                    coord.push(parseFloat(jsons.LongitudeIcone));
+
+                    L.marker(coord, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
+
+                    //atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
+                    var link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
+                        // class="speciallink badge badge-info" margin-left: 0.7em; margin-right: -10em;
+
+                        body.classList.remove('overflow');
+                        btPos.classList.add('hidden');
+                        divInfo.classList.remove("hidden");
+                        mapa.classList.add('hidden');
+                        mymap.closePopup();
+
+                        //criação de elementos e adicionados ao html
+                        var hr = document.createElement('hr');
+                        hr.setAttribute('id', 'idHr');
+
+                        var spanLinha = document.createElement('span');
+                        spanLinha.setAttribute('id', 'idSpanLinha');
+                        spanLinha.textContent = "";
+
+                        var autoresTab = document.createElement('div');
+                        autoresTab.setAttribute('id', 'idAutoresTab');
+                        autoresTab.textContent = "Autores do projeto: ";
+
+
+                        var pNomeEdificio = document.createElement('h2');
+                        pNomeEdificio.setAttribute('id', 'idNomeEdificio');
+                        var pLocalizacao = document.createElement('p');
+                        pLocalizacao.setAttribute('id', 'idLocalizacao');
+                        var pAutores = document.createElement('p');
+                        pAutores.setAttribute('id', 'idAutores');
+                        var pDescricao = document.createElement('p');
+                        pDescricao.setAttribute('id', 'idDescricao');
+                        var pTipoEdificio = document.createElement('h3');
+                        pTipoEdificio.setAttribute('id', 'idTipoEdificio');
+                        var pData = document.createElement('p');
+                        pData.setAttribute('id', 'idData');
+
+                        //atribuição dos valores existentes no json
+                        pNomeEdificio.textContent = jsons.Nome;
+                        pLocalizacao.textContent = jsons.Localizacao;
+                        pAutores.textContent = jsons.Autores;
+                        pDescricao.textContent = jsons.Descricao;
+                        spanLinha.textContent = jsons.TipoEdificio;
+                        pTipoEdificio.appendChild(spanLinha);
+                        pData.textContent = jsons.Data;
+
+                        divInfo.appendChild(pTipoEdificio);
+                        divInfo.appendChild(pNomeEdificio);
+                        divInfo.appendChild(pData);
+                        divInfo.appendChild(pLocalizacao);
+                        divInfo.appendChild(autoresTab);
+
+                        //dividir a string dos autores por virgulas e let autor a autor
+                        var rString = pAutores.textContent;
+                        var rArray = rString.split(",");
+
+                        for (var k = 0; k < rArray.length; k++) {
+                            var sAutores = rArray[k];
+
+                            var singleAutor = document.createElement('p');
+                            singleAutor.setAttribute('id', 'idSingleAutors');
+                            singleAutor.textContent = sAutores;
+
+                            divInfo.appendChild(singleAutor);
+
+                        }
+
+                        divInfo.appendChild(hr);
+                        divInfo.appendChild(pDescricao);
+
+                        var divRow = document.createElement('div');
+                        divRow.setAttribute('id', 'idDivRow');
+                        divRow.setAttribute('class', 'row');
+
+                        //ler arrays de imagens existente no json e criar os elementos para cada imagens com a legendas e o autores da imagem
+                        for (var j = 0; j < jsons.Imagens.length; j++) {
+                            var imgEdificio = jsons.Imagens[j];
+
+
+                            var divColMd = document.createElement('div');
+                            divColMd.setAttribute('id', 'idDivColMd');
+                            divColMd.setAttribute('class', 'col-md-4');
+                            divColMd.setAttribute('class', 'content');
+                            var divThumb = document.createElement('div');
+                            divThumb.setAttribute('class', 'thumbnail');
+                            divThumb.setAttribute('id', 'idDivThumb');
+                            var divCaption = document.createElement('div')
+                            divCaption.setAttribute('id', 'idDivCaption');
+                            divCaption.setAttribute('class', 'caption');
+                            divCaption.setAttribute('class', 'rounded-bottom');
+
+                            var img = document.createElement('img');
+                            var imgLegenda = document.createElement('p');
+                            var imgAutor = document.createElement('p');
+
+                            //lida a path da imagem para a pasta das imagens
+                            img.src = imgEdificio.Path;
+                            img.setAttribute('id', 'idImagens');
+                            img.setAttribute('class', 'rounded');
+
+                            //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                            img.setAttribute('data-Path', imgEdificio.Path);
+                            img.onclick = fullImg => {
+                                var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
+                                //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                                ecraImagem(pathId);
+                            }
+
+                            //atribuição dos valores existentes no json
+                            imgLegenda.textContent = imgEdificio.Legenda;
+                            imgAutor.textContent = imgEdificio.AutorFonte;
+
+                            divCaption.appendChild(imgLegenda);
+                            divCaption.appendChild(imgAutor);
+
+                            divThumb.appendChild(img);
+                            divThumb.appendChild(divCaption);
+
+
+                            divColMd.appendChild(divThumb);
+
+                            divRow.appendChild(divColMd);
+
+                            divInfo.appendChild(divRow);
+
+                        }
+
+                    })[0];
+                    divPopup.appendChild(link);
+                    divPopup.appendChild(br);
+                    divPopup.appendChild(btWaypoint);
+
+                    polygon.bindPopup(divPopup);
+                }
+
+            });
+
+            //funcap +ara remover painel de direções gerado automaticamente para o trajeto
+            function removeRoutingControl() {
+                if (control != null) {
+                    mymap.removeControl(control);
+                    control = null;
+                }
+            };
 
             //função para abrir a imagem no ecra inteiro com opção de zoom
             function ecraImagem(imgP) {
@@ -98,7 +319,6 @@ var app = {
                 });
                 document.body.style.background = "#000000";
             }
-
 
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
@@ -136,7 +356,6 @@ var app = {
                     /******************************************************* */
                     /* *********** sair do Sobre para o mapa  *************  */
                 } else if (divAcerca.classList.contains('hidden') === false) {
-                    // imgFull.innerHTML = "";
 
                     divInfo.innerHTML = "";
                     e.preventDefault();
@@ -165,7 +384,82 @@ var app = {
                     /******************************************************* */
                 }
             }
+
+            setInterval(5000);
+            mymap.locate({ setView: true, maxZoom: 16 });
+
+            /* =========  Função para o butão de ir para a posição do marker ===========*/
+            $('.refreshButton').on('click', function () {
+                mymap.locate({ setView: true, maxZoom: 17 });
+            });
+            mymap.on('locationfound', onLocationFound);
+            function onLocationFound(e) {
+                console.log(e);
+                // e.heading will contain the user's heading (in degrees) if it's available,
+                // and if not it will be NaN. This would allow you to point a marker in the same direction the user is pointed. 
+                L.marker(e.latlng).addTo(mymap);
+            }
+            /* ======================================================================== */
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // placeholders for the L.marker and L.circle representing user's current position and accuracy    
+            var current_position;
+
+            //funcoes que vao ler a posição do utilizador e marcar no mapa e remover a posição anterior
+            function onLocationFound(e) {
+                // if position defined, then remove the existing position marker and accuracy circle from the map
+                if (current_position) {
+                    mymap.removeLayer(current_position);
+
+                }
+                current_position = L.marker(e.latlng).addTo(mymap);
+            
+            }
+
+            function onLocationError(e) {
+                alert(e.message);
+            }
+
+            //mymap.on('locationfound', onLocationFound);
+
+            // wrap map.locate in a function    
+            function locate() {
+                mymap.locate({ setView: false, maxZoom: 16 });
+                //var marker = L.marker(latlng).addTo(mymap);
+            }
+
+
+            // call locate every 3 seconds... forever
+            setInterval(locate, 3000);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
         }
+
+        var onError = function (error) {
+            str = 'code: ' + error.code + '\n' +
+            'message: ' + error.message + '\n';
+            if (error.code == 3) { // no gps
+                str = "Sem sinal de GPS.";
+                onSuccess();
+            } 
+            alert(str);
+            
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 10000, enableHighAccuracy: true });
+
+
+
+    },
+
+    // Update DOM on a Received Event
+    receivedEvent: function (id) {
+        var parentElement = document.getElementById(id);
+    }
 };
+
 
 app.initialize();
