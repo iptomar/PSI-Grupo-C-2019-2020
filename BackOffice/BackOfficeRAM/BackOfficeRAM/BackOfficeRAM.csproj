@@ -364,6 +364,7 @@
     <Content Include="fotos\6.jpg" />
     <Content Include="fotos\templar.jpg" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Content\style-override.css" />

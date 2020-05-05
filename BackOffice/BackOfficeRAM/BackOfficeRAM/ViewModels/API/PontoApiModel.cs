@@ -14,7 +14,7 @@ namespace BackOfficeRAM.ViewModels.API
             Id = ponto.Id;
             Nome = ponto.Nome;
             TipoEdificio = ponto.TipoEdificio;
-            CoodenadasPoligono = ponto.CoordenadasPoligono.Select(i => new CoordenadasPoligonoApiModel(i));
+            CoordenadasPoligono = ponto.CoordenadasPoligono.Select(i => new CoordenadasPoligonoApiModel(i));
             LatitudeIcone = ponto.CoordenadaIcon.Latitude;
             LongitudeIcone = ponto.CoordenadaIcon.Longitude;
         }
@@ -25,7 +25,7 @@ namespace BackOfficeRAM.ViewModels.API
         public String LatitudeIcone { get; set; }
         public String LongitudeIcone { get; set; }
 
-        public IEnumerable<CoordenadasPoligonoApiModel> CoodenadasPoligono { get; set; }
+        public IEnumerable<CoordenadasPoligonoApiModel> CoordenadasPoligono { get; set; }
 
         public class CoordenadasPoligonoApiModel
         {
