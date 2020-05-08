@@ -46,7 +46,7 @@
     @foreach (var item in Model)
     {
         var estilo = "";
-        if (User.IsInRole("registado externo") && item.CriadorPonto != null && item.CriadorPonto.UserName.Equals(User.Identity.Name))
+        if (User.IsInRole("registado externo") && item.CriadorPonto != null && item.CriadorPonto.Equals(User.Identity.Name))
         {
             estilo = "background-color: #efefef;";
         }

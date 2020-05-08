@@ -51,8 +51,8 @@
                             <div class="h3 mt-4">
                                 Ponto aprovado por:
                             </div>
-                            <div  style="font-style:italic">
-                                @Html.DisplayFor(model => model.AprovadoPor.UserName)
+                            <div style="font-style:italic">
+                                @Html.DisplayFor(model => model.AprovadoPor)
                             </div>
                         }
                     </div>
@@ -66,7 +66,7 @@
                         <div class="h3 mt-4">
                             Ano(s) de construção:
                         </div>
-                        <div >
+                        <div>
                             @Html.DisplayFor(model => model.Ano)
                         </div>
                         @if (Model.CriadorPonto != null)
@@ -75,7 +75,7 @@
                                 Criador do Ponto:
                             </div>
                             <div style="font-style:italic">
-                                @Html.DisplayFor(model => model.CriadorPonto.UserName)
+                                @Html.DisplayFor(model => model.CriadorPonto)
                             </div>
                         }
                     </div>
@@ -89,7 +89,7 @@
 
                                 @foreach (var item in Model.CoordenadasPoligono)
                                 {
-                                    <div  style="font-style:italic">
+                                    <div style="font-style:italic">
                                         @item.Latitude
                                         @String.Format(" , ")
                                         @item.Longitude
@@ -112,7 +112,7 @@
             {
                 <div class="col-lg-4 well" style="text-align:center">
                     <a href="@Url.Action("Details", "Imagens", new { id = item.Id })">
-                        <img class="img-thumbnail img-responsive" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) "  />
+                        <img class="img-thumbnail img-responsive" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " />
                     </a>
                     <div>
                         @Html.DisplayFor(modelItem => item.Nome)
@@ -124,132 +124,132 @@
 
         @*<div class="row">
 
-            <div id="map" class="col-md-3 img-thumbnail" style="height:300px;width:100%;margin-bottom:10px"></div>
+                <div id="map" class="col-md-3 img-thumbnail" style="height:300px;width:100%;margin-bottom:10px"></div>
 
-            <br />
-            <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="h3 col-sm">
-                            Autor(es):
-                        </div>
-                        <div class="col-sm">
-                            @Html.DisplayFor(model => model.Autor)
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="h3 col-sm">
-                            Localização:
-                        </div>
-                        <div class="col-sm">
-                            @Html.DisplayFor(model => model.Localizacao)
-                        </div>
-                    </div>
-
-                </div>
                 <br />
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="h3 col-sm">
-                            Tipo de Edifício:
-                        </div>
+                <div class="col-md" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
+                    <div class="row">
                         <div class="col-sm">
-                            @Html.DisplayFor(model => model.TipoEdificio)
-                        </div>
-                    </div>
-
-                    <div class="col-sm">
-                        <div class="h3 col-sm">
-                            Ano(s) de construção:
-                        </div>
-                        <div class="col-sm">
-                            @Html.DisplayFor(model => model.Ano)
-                        </div>
-                    </div>
-
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md">
-                        <div class="h3 col-sm">
-                            Coordenadas do Ícone:
-                        </div>
-                        <div class="col-sm" style="font-style:italic">
-                            @Html.DisplayFor(model => model.CoordenadaIcon.Latitude)
-                            ,
-                            @Html.DisplayFor(model => model.CoordenadaIcon.Longitude)
-                        </div>
-                    </div>
-                    @if (Model.CriadorPonto != null)
-                    {
-                        <div class="col-md">
                             <div class="h3 col-sm">
-                                Criador do Ponto:
+                                Autor(es):
                             </div>
-                            <div class="col-sm" style="font-style:italic">
-                                @Html.DisplayFor(model => model.CriadorPonto.UserName)
+                            <div class="col-sm">
+                                @Html.DisplayFor(model => model.Autor)
                             </div>
                         </div>
-                    }
-                </div>
-                <br />
-                @if (Model.AprovadoPor != null)
-                {
+                        <div class="col-sm">
+                            <div class="h3 col-sm">
+                                Localização:
+                            </div>
+                            <div class="col-sm">
+                                @Html.DisplayFor(model => model.Localizacao)
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="h3 col-sm">
+                                Tipo de Edifício:
+                            </div>
+                            <div class="col-sm">
+                                @Html.DisplayFor(model => model.TipoEdificio)
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="h3 col-sm">
+                                Ano(s) de construção:
+                            </div>
+                            <div class="col-sm">
+                                @Html.DisplayFor(model => model.Ano)
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
                     <div class="row">
                         <div class="col-md">
                             <div class="h3 col-sm">
-                                Ponto aprovado por:
+                                Coordenadas do Ícone:
                             </div>
                             <div class="col-sm" style="font-style:italic">
-                                @Html.DisplayFor(model => model.AprovadoPor.UserName)
+                                @Html.DisplayFor(model => model.CoordenadaIcon.Latitude)
+                                ,
+                                @Html.DisplayFor(model => model.CoordenadaIcon.Longitude)
                             </div>
                         </div>
+                        @if (Model.CriadorPonto != null)
+                        {
+                            <div class="col-md">
+                                <div class="h3 col-sm">
+                                    Criador do Ponto:
+                                </div>
+                                <div class="col-sm" style="font-style:italic">
+                                    @Html.DisplayFor(model => model.CriadorPonto.UserName)
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
-                <br /><br />
-
-            </div>
-            @if (Model.CoordenadasPoligono.Count() > 0)
-            {
-                <div class="col-sm-3" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
-                    <div class="h3 col-sm">
-                        Coordenadas do Polígono:
-                    </div>
-
-                    @foreach (var item in Model.CoordenadasPoligono)
-                    {<div class="col-sm" style="font-style:italic">
-                            @item.Latitude
-                            @String.Format(" , ")
-                            @item.Longitude
+                    <br />
+                    @if (Model.AprovadoPor != null)
+                    {
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="h3 col-sm">
+                                    Ponto aprovado por:
+                                </div>
+                                <div class="col-sm" style="font-style:italic">
+                                    @Html.DisplayFor(model => model.AprovadoPor.UserName)
+                                </div>
+                            </div>
                         </div>
                     }
+                    <br /><br />
 
                 </div>
-            }
-            <div class="row" style="text-align: justify;background-color:#fff; padding:20px;margin:0">
-                @Html.DisplayFor(model => model.Descricao)
-            </div>
-            <br />
-            <br />
-
-
-
-
-            <div class="row">
-                @foreach (var item in Model.Imagens)
+                @if (Model.CoordenadasPoligono.Count() > 0)
                 {
-                    <div class="col-sm" style="text-align: center;">
-                        <div>
-                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style=" margin:10px;margin-left:0px;cursor:pointer" onclick="javascript:window.location='@Url.Action("Details", "Imagens", new { id = item.Id })'" />
+                    <div class="col-sm-3" style="background-color:#fff;padding:20px;margin:0 0 10px 10px">
+                        <div class="h3 col-sm">
+                            Coordenadas do Polígono:
                         </div>
-                        <div>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </div>
+
+                        @foreach (var item in Model.CoordenadasPoligono)
+                        {<div class="col-sm" style="font-style:italic">
+                                @item.Latitude
+                                @String.Format(" , ")
+                                @item.Longitude
+                            </div>
+                        }
+
                     </div>
                 }
-            </div>
+                <div class="row" style="text-align: justify;background-color:#fff; padding:20px;margin:0">
+                    @Html.DisplayFor(model => model.Descricao)
+                </div>
+                <br />
+                <br />
 
-        </div>*@
+
+
+
+                <div class="row">
+                    @foreach (var item in Model.Imagens)
+                    {
+                        <div class="col-sm" style="text-align: center;">
+                            <div>
+                                <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.ConteudoImagem)" alt="Autor: @Html.DisplayFor(modelItem => item.Autor) " style=" margin:10px;margin-left:0px;cursor:pointer" onclick="javascript:window.location='@Url.Action("Details", "Imagens", new { id = item.Id })'" />
+                            </div>
+                            <div>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>*@
     </div>
 </div>
 <br />

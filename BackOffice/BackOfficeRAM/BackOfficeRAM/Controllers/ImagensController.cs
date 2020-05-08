@@ -85,7 +85,7 @@ namespace BackOfficeRAM.Controllers
                 {
                     Autor = model.Autor,
                     Nome = model.Nome,
-                    InseridaPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault()
+                    InseridaPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName
                 };
 
                 pontodb.Imagens.Add(imagem);
@@ -215,7 +215,7 @@ namespace BackOfficeRAM.Controllers
 
                 //remover o que tem criador a null
                 pontos = pontos.Where(s => s.CriadorPonto != null);
-                pontos = pontos.Where(s => s.CriadorPonto.UserName.Equals(User.Identity.Name));
+                pontos = pontos.Where(s => s.CriadorPonto.Equals(User.Identity.Name));
 
                 model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
 

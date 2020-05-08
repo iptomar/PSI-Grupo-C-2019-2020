@@ -61,6 +61,13 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Create(CreateEditRoteiroViewModel model)
         {
             ModelState.Remove("model.Roteiro.Id");
+
+            if (model.PontosSeleccionados == null)
+            {
+                ModelState.AddModelError("", "Tem que seleccionar pelo menos um ponto de interesse.");
+                model.Pontos = db.PontosInteresse.ToList().Where(p => p.Visivel.Equals(true));
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
                 var roteiro = model.Roteiro;

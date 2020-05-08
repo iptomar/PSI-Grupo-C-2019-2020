@@ -276,6 +276,14 @@
     <Compile Include="Migrations\202004251739459_add-attr-inseridopor-img.Designer.cs">
       <DependentUpon>202004251739459_add-attr-inseridopor-img.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005082203310_alteracao-associacao-user-ponto.cs" />
+    <Compile Include="Migrations\202005082203310_alteracao-associacao-user-ponto.Designer.cs">
+      <DependentUpon>202005082203310_alteracao-associacao-user-ponto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005082213476_alteracao-associacao-user-imagem.cs" />
+    <Compile Include="Migrations\202005082213476_alteracao-associacao-user-imagem.Designer.cs">
+      <DependentUpon>202005082213476_alteracao-associacao-user-imagem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
@@ -545,6 +553,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004251739459_add-attr-inseridopor-img.resx">
       <DependentUpon>202004251739459_add-attr-inseridopor-img.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082203310_alteracao-associacao-user-ponto.resx">
+      <DependentUpon>202005082203310_alteracao-associacao-user-ponto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082213476_alteracao-associacao-user-imagem.resx">
+      <DependentUpon>202005082213476_alteracao-associacao-user-imagem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,14 +14,14 @@
 
         <div class="col-md-6">
             @Html.Label("Nome")
-            @Html.EditorFor(model => model.Roteiro.Nome, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.EditorFor(model => model.Roteiro.Nome, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
             @Html.ValidationMessageFor(model => model.Roteiro.Nome, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-12">
-            @Html.TextAreaFor(model => model.Roteiro.Descricao, 5, 1, new { @class = "form-control" })
+            @Html.TextAreaFor(model => model.Roteiro.Descricao, 5, 1, new { @class = "form-control", @required = "required" })
             @Html.ValidationMessageFor(model => model.Roteiro.Descricao, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -33,9 +33,13 @@
                 <div class="form-row">
                     <div class="col-md-5">
                         <select class="form-control" id="listaPontos" data-bind="value: IdPonto">
-                            @foreach (var item in Model.Pontos)
+                            @if (Model.Pontos != null)
                             {
-                                <option value="@item.Id">@item.Nome</option>
+                                foreach (var item in Model.Pontos)
+                                {
+                                    <option value="@item.Id">@item.Nome</option>
+                                }
+
                             }
                         </select>
                     </div>
@@ -85,6 +89,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Guardar" class="btn btn-primary" />
+            <a class="btn btn-outline-primary" href="@Url.Action("Index")">Voltar</a>
         </div>
     </div>
 </div>

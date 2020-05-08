@@ -20,8 +20,8 @@ namespace BackOfficeRAM.Models
         public String Descricao { get; set; }
         public bool Visivel { get; set; }
 
-        public virtual ApplicationUser AprovadoPor { get; set; }
-        public virtual ApplicationUser CriadorPonto { get; set; }
+        public virtual string AprovadoPor { get; set; }
+        public virtual string CriadorPonto { get; set; }
         public virtual Coordenada CoordenadaIcon { get; set; }
         public virtual List<Coordenada> CoordenadasPoligono { get; set; }
         public virtual List<Imagem> Imagens { get; set; }

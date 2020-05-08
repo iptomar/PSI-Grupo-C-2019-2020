@@ -28,7 +28,7 @@ namespace BackOfficeRAM.Controllers
         {
             var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
             ponto.Visivel = true;
-            ponto.AprovadoPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            ponto.AprovadoPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName;
             db.SaveChanges();
             return RedirectToAction("IndexAprovacao");
         }
@@ -106,7 +106,7 @@ namespace BackOfficeRAM.Controllers
                 {
                     model.PontoInteresse.Visivel = false;
                 }
-                model.PontoInteresse.CriadorPonto = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+                model.PontoInteresse.CriadorPonto = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName;
                 db.PontosInteresse.Add(model.PontoInteresse);
                 db.SaveChanges();
                 if (User.IsInRole("registado externo"))

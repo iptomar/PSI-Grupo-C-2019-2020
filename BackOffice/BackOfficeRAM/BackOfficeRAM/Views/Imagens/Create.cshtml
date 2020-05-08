@@ -42,35 +42,32 @@
             @Html.Label("Carregar Imagem", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                <input type="file" class="form-control" name="foto" id="foto" accept=".jpg" multiple />
+                <input type="file" class="form-control" name="foto" id="foto" accept=".jpg" required />
                 @*@Html.ValidationMessageFor(model => model.Conteudo, "", new { @class = "text-danger" })*@
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a class="btn btn-outline-primary" href="@Url.Action("Index")">Voltar</a>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 
 
