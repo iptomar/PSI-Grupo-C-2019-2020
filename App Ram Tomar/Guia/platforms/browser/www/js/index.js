@@ -29,20 +29,6 @@ var app = {
             //.locate({setView: true, maxZoom: 16});
             var estado = 0;
 
-            //criação dos eventos e suas funcoes para distinguir o estado online e offline
-            document.addEventListener("offline", onOffline, false);
-
-
-            function onOffline() {
-                L.tileLayer('maps/{z}/{x}/{y}.png', {
-                    maxZoom: 17,
-                    minZoom: 15,
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(mymap);
-                alert('Entrou no modo Offline, vai encontrar algumas funcionabilidades limitadas.',  "Alert Title");
-
-            }
-
             document.addEventListener("online", onOnline, false);
 
             function onOnline() {
@@ -52,16 +38,7 @@ var app = {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
             }
-
-            //verificação inicial para saber se o dispositivo encontra-se com conexão ou nao 
-            if (navigator.onLine) {
-                console.log("online");
                 onOnline();
-            } else {
-                console.log("offline");
-                onOffline();
-            }
-
 
             //vai buscar a posição inicial quando inicia a app
             navigator.geolocation.getCurrentPosition(function (location) {
@@ -72,7 +49,7 @@ var app = {
 
             mymap.on('locationfound', onLocationFound);
 
-            var jsonData;
+            var jsonInfo;
             var control;
             //buscas do elementos criados no html
             var btPos = document.getElementById('btPosicao');
@@ -80,23 +57,21 @@ var app = {
             var divInfo = document.getElementById('infoAdicional');
             var divFullImg = document.getElementById('fullImg');
 
-
-
             var br = document.createElement('br');
 
 
             //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi', function(json) {
-                jsonData = json;
+            $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/', function(json) {
+                jsonInfo = json;
                 //let cada posição do ficheiro json e inserir numa variavel
-                for (var i = 0; i < jsonData.length; i++) {
-                    let jsons = jsonData[i];
+                for (var i = 0; i < jsonInfo.length; i++) {
+                    let jsons = jsonInfo[i];
                     //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
                     var coordenadas=[];
-                    for(var j=0; j<jsonData[i].CoodenadasPoligono.length; j++) {
+                    for(var j=0; j<jsonInfo[i].CoordenadasPoligono.length; j++) {
                       var c=[];
-                      c.push(parseFloat(jsonData[i].CoodenadasPoligono[j].Latitude));
-                      c.push(parseFloat(jsonData[i].CoodenadasPoligono[j].Longitude));
+                      c.push(parseFloat(jsonInfo[i].CoordenadasPoligono[j].Latitude));
+                      c.push(parseFloat(jsonInfo[i].CoordenadasPoligono[j].Longitude));
                       coordenadas.push(c);
                     }
                     var polygon = L.polygon([coordenadas], {
@@ -164,12 +139,13 @@ var app = {
 
                     }
 
-
+                    //////////////////POPUPS////////////////////////
+                    
+                    //Cria a primeira info no popup
                     popUpTipo.textContent = jsons.TipoEdificio;
                     popUpNome.textContent = jsons.Nome;
                     divPopup.appendChild(popUpTipo);
                     divPopup.appendChild(popUpNome);
-
 
                     //criação do icon dos edificios
                     var myIcon = L.icon({
@@ -180,6 +156,7 @@ var app = {
 
                     });
 
+                    //Cria um popup para cada marker
                     var coord = [];
                     coord.push(parseFloat(jsons.LatitudeIcone));
                     coord.push(parseFloat(jsons.LongitudeIcone));
@@ -187,8 +164,9 @@ var app = {
                     L.marker(coord, { icon: myIcon }).addTo(mymap).bindPopup(divPopup);
 
                     //atraves de jquery clicar nos detalhes de um edificio e ler as suas informações
-                    var link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>').click(function () {
-                        // class="speciallink badge badge-info" margin-left: 0.7em; margin-right: -10em;
+                    //Cria o botão "Detalhes" nos popups
+                    var link = $('<a href="#"  class="item3" style="background-color: #17283B; color: white; text-align: center; margin-bottom: .5em; margin-left: .5em; padding: .75em; text-decoration: none; border-radius: .25rem; ">Detalhes  <i class="fas fa-info"></i></a>')
+                    .click(function () {
 
                         body.classList.remove('overflow');
                         btPos.classList.add('hidden');
@@ -199,16 +177,18 @@ var app = {
                         //criação de elementos e adicionados ao html
                         var hr = document.createElement('hr');
                         hr.setAttribute('id', 'idHr');
-
+                        
+                        //Cria a Linha
                         var spanLinha = document.createElement('span');
                         spanLinha.setAttribute('id', 'idSpanLinha');
                         spanLinha.textContent = "";
-
+                        
+                        //Cria o titulo antes da lista de autores
                         var autoresTab = document.createElement('div');
                         autoresTab.setAttribute('id', 'idAutoresTab');
                         autoresTab.textContent = "Autores do projeto: ";
 
-
+                        
                         var pNomeEdificio = document.createElement('h2');
                         pNomeEdificio.setAttribute('id', 'idNomeEdificio');
                         var pLocalizacao = document.createElement('p');
@@ -222,13 +202,23 @@ var app = {
                         var pData = document.createElement('p');
                         pData.setAttribute('id', 'idData');
 
+                        //atribuição dos valores existentes no json     
+                        $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/' + jsons.Id, function(json) {
+                            var info = [];
+                            $.each( json, function( Id, val ) {
+                                info.push(parseFloat(info[i].Autor));
+                        });      
 
-
-                        //atribuição dos valores existentes no json
-                        pNomeEdificio.textContent = jsons.NomeEdificio;
-                        pLocalizacao.textContent = jsons.Localizacao;
+                        var polygon = L.polygon([coordenadas], {
+                            color: 'red',
+                            weight: '0.5',
+                            fillOpacity: '0.2',
+                        });
+                        pNomeEdificio.textContent = jsons.Nome;
+                        pLocalizacao.textContent = jsons.location
                         pAutores.textContent = jsons.Autores;
                         pDescricao.textContent = jsons.Descricao;
+                        //Coloca o texto do Tipo de Edificio no meio da linha
                         spanLinha.textContent = jsons.TipoEdificio;
                         pTipoEdificio.appendChild(spanLinha);
                         pData.textContent = jsons.Data;
@@ -238,6 +228,7 @@ var app = {
                         divInfo.appendChild(pData);
                         divInfo.appendChild(pLocalizacao);
                         divInfo.appendChild(autoresTab);
+
 
                         //dividir a string dos autores por virgulas e let autor a autor
                         var rString = pAutores.textContent;
@@ -253,7 +244,6 @@ var app = {
                             divInfo.appendChild(singleAutor);
 
                         }
-
 
                         divInfo.appendChild(hr);
                         divInfo.appendChild(pDescricao);
@@ -349,8 +339,6 @@ var app = {
                 document.body.style.background = "#000000";
             }
 
-
-
             /* Busca o div do Acerca e o Buttão do sobre e faz o onclick*/
             var divAcerca = document.getElementById('idAcerca');
             var btSobre = document.getElementById('idSobreBt');
@@ -387,7 +375,6 @@ var app = {
                     /******************************************************* */
                     /* *********** sair do Sobre para o mapa  *************  */
                 } else if (divAcerca.classList.contains('hidden') === false) {
-                    // imgFull.innerHTML = "";
 
                     divInfo.innerHTML = "";
                     e.preventDefault();
