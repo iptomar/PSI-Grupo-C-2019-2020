@@ -401,7 +401,6 @@ var app = {
             }
             /* ======================================================================== */
 
-
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // placeholders for the L.marker and L.circle representing user's current position and accuracy    
             var current_position;
@@ -421,21 +420,14 @@ var app = {
                 alert(e.message);
             }
 
-            //mymap.on('locationfound', onLocationFound);
-
             // wrap map.locate in a function    
             function locate() {
-                mymap.locate({ setView: false, maxZoom: 16 });
-                //var marker = L.marker(latlng).addTo(mymap);
+                mymap.locate({ setView: false, maxZoom: 16 });  
             }
-
 
             // call locate every 3 seconds... forever
             setInterval(locate, 3000);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
         }
 
         var onError = function (error) {
@@ -446,13 +438,9 @@ var app = {
                 onSuccess();
             } 
             alert(str);
-            
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 10000, enableHighAccuracy: true });
-
-
-
     },
 
     // Update DOM on a Received Event
