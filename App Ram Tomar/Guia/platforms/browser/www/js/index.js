@@ -49,7 +49,7 @@ var app = {
 
             mymap.on('locationfound', onLocationFound);
 
-            var jsonInfo;
+            var jsonData;
             var control;
             //buscas do elementos criados no html
             var btPos = document.getElementById('btPosicao');
@@ -62,16 +62,16 @@ var app = {
 
             //metodo de jQuery para ir buscar e ler o ficheiro info.json
             $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/', function(json) {
-                jsonInfo = json;
+                jsonData = json;
                 //let cada posição do ficheiro json e inserir numa variavel
-                for (var i = 0; i < jsonInfo.length; i++) {
-                    let jsons = jsonInfo[i];
+                for (var i = 0; i < jsonData.length; i++) {
+                    let jsons = jsonData[i];
                     //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
                     var coordenadas=[];
-                    for(var j=0; j<jsonInfo[i].CoordenadasPoligono.length; j++) {
+                    for(var j=0; j<jsonData[i].CoordenadasPoligono.length; j++) {
                       var c=[];
-                      c.push(parseFloat(jsonInfo[i].CoordenadasPoligono[j].Latitude));
-                      c.push(parseFloat(jsonInfo[i].CoordenadasPoligono[j].Longitude));
+                      c.push(parseFloat(jsonData[i].CoordenadasPoligono[j].Latitude));
+                      c.push(parseFloat(jsonData[i].CoordenadasPoligono[j].Longitude));
                       coordenadas.push(c);
                     }
                     var polygon = L.polygon([coordenadas], {
@@ -184,126 +184,104 @@ var app = {
                         spanLinha.textContent = "";
                         
                         //Cria o titulo antes da lista de autores
-                        var autoresTab = document.createElement('div');
-                        autoresTab.setAttribute('id', 'idAutoresTab');
-                        autoresTab.textContent = "Autores do projeto: ";
-
                         
+                        //Nome do Edificio
                         var pNomeEdificio = document.createElement('h2');
                         pNomeEdificio.setAttribute('id', 'idNomeEdificio');
-                        var pLocalizacao = document.createElement('p');
-                        pLocalizacao.setAttribute('id', 'idLocalizacao');
-                        var pAutores = document.createElement('p');
-                        pAutores.setAttribute('id', 'idAutores');
-                        var pDescricao = document.createElement('p');
-                        pDescricao.setAttribute('id', 'idDescricao');
+                        pNomeEdificio.textContent = jsons.Nome;
+                        divInfo.appendChild(pNomeEdificio);
+                        
+                        //Tipo de Edificio
                         var pTipoEdificio = document.createElement('h3');
                         pTipoEdificio.setAttribute('id', 'idTipoEdificio');
-                        var pData = document.createElement('p');
-                        pData.setAttribute('id', 'idData');
-
-                        //atribuição dos valores existentes no json     
-                        $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/' + jsons.Id, function(json) {
-                            var info = [];
-                            $.each( json, function( Id, val ) {
-                                info.push(parseFloat(info[i].Autor));
-                        });      
-
-                        var polygon = L.polygon([coordenadas], {
-                            color: 'red',
-                            weight: '0.5',
-                            fillOpacity: '0.2',
-                        });
-                        pNomeEdificio.textContent = jsons.Nome;
-                        pLocalizacao.textContent = jsons.location
-                        pAutores.textContent = jsons.Autores;
-                        pDescricao.textContent = jsons.Descricao;
                         //Coloca o texto do Tipo de Edificio no meio da linha
                         spanLinha.textContent = jsons.TipoEdificio;
                         pTipoEdificio.appendChild(spanLinha);
-                        pData.textContent = jsons.Data;
-
                         divInfo.appendChild(pTipoEdificio);
-                        divInfo.appendChild(pNomeEdificio);
-                        divInfo.appendChild(pData);
-                        divInfo.appendChild(pLocalizacao);
-                        divInfo.appendChild(autoresTab);
 
+                        //atribuição dos valores existentes no json no popup da Descrição de cada Edificio    
+                        $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/' + jsons.Id, function(json) {
+                            
+                            //Autores
+                            var autoresTab = document.createElement('div');
+                            autoresTab.setAttribute('id', 'idAutoresTab');
+                            autoresTab.textContent = "Autores do projeto: " + json.Autor;
+                            divInfo.appendChild(autoresTab);
+     
+                            //Localização
+                            var pLocalizacao = document.createElement('p');
+                            pLocalizacao.setAttribute('id', 'idLocalizacao');
+                            pLocalizacao.textContent = "Localização: " + json.Localizacao;
+                            divInfo.appendChild(pLocalizacao);
+                           
+                            //Ano
+                            var pData = document.createElement('p');
+                            pData.setAttribute('id', 'idData');
+                            pData.textContent = "Ano: " + json.Ano;
+                            divInfo.appendChild(pData);
+                            
+                            //Descrição
+                            var pImagem = document.createElement('p');
+                            pImagem.setAttribute('id', 'idDescricao');
+                            divInfo.appendChild(pImagem);
+                            pImagem.textContent = "Descrição: " + json.Descricao;
 
-                        //dividir a string dos autores por virgulas e let autor a autor
-                        var rString = pAutores.textContent;
-                        var rArray = rString.split(",");
-
-                        for (var k = 0; k < rArray.length; k++) {
-                            var sAutores = rArray[k];
-
-                            var singleAutor = document.createElement('p');
-                            singleAutor.setAttribute('id', 'idSingleAutors');
-                            singleAutor.textContent = sAutores;
-
-                            divInfo.appendChild(singleAutor);
-
-                        }
-
-                        divInfo.appendChild(hr);
-                        divInfo.appendChild(pDescricao);
-
-                        var divRow = document.createElement('div');
-                        divRow.setAttribute('id', 'idDivRow');
-                        divRow.setAttribute('class', 'row');
-
-                        //ler arrays de imagens existente no json e criar os elementos para cada imagens com a legendas e o autores da imagem
-                        for (var j = 0; j < jsons.Imagens.length; j++) {
-                            var imgEdificio = jsons.Imagens[j];
-
-
-                            var divColMd = document.createElement('div');
-                            divColMd.setAttribute('id', 'idDivColMd');
-                            divColMd.setAttribute('class', 'col-md-4');
-                            divColMd.setAttribute('class', 'content');
-                            var divThumb = document.createElement('div');
-                            divThumb.setAttribute('class', 'thumbnail');
-                            divThumb.setAttribute('id', 'idDivThumb');
-                            var divCaption = document.createElement('div')
-                            divCaption.setAttribute('id', 'idDivCaption');
-                            divCaption.setAttribute('class', 'caption');
-                            divCaption.setAttribute('class', 'rounded-bottom');
-
-                            var img = document.createElement('img');
-                            var imgLegenda = document.createElement('p');
-                            var imgAutor = document.createElement('p');
-
-                            //lida a path da imagem para a pasta das imagens
-                            img.src = imgEdificio.Path;
-                            img.setAttribute('id', 'idImagens');
-                            img.setAttribute('class', 'rounded');
-
-                            //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-                            img.setAttribute('data-Path', imgEdificio.Path);
-                            img.onclick = fullImg => {
-                                var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
-                                //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-                                ecraImagem(pathId);
+                            //Imagens
+                            for (var j = 0; j < jsons.Imagens.length; j++) {
+                                var imgEdificio = jsons.Imagens[j];
+                            
+                            
+                                var divColMd = document.createElement('div');
+                                divColMd.setAttribute('id', 'idDivColMd');
+                                divColMd.setAttribute('class', 'col-md-4');
+                                divColMd.setAttribute('class', 'content');
+                                var divThumb = document.createElement('div');
+                                divThumb.setAttribute('class', 'thumbnail');
+                                divThumb.setAttribute('id', 'idDivThumb');
+                                var divCaption = document.createElement('div')
+                                divCaption.setAttribute('id', 'idDivCaption');
+                                divCaption.setAttribute('class', 'caption');
+                                divCaption.setAttribute('class', 'rounded-bottom');
+                            
+                                var img = document.createElement('img');
+                                var imgLegenda = document.createElement('p');
+                                var imgAutor = document.createElement('p');
+                            
+                                //lida a path da imagem para a pasta das imagens
+                                img.src = imgEdificio.Path;
+                                img.setAttribute('id', 'idImagens');
+                                img.setAttribute('class', 'rounded');
+                            
+                                //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                                img.setAttribute('data-Path', imgEdificio.Path);
+                                img.onclick = fullImg => {
+                                    var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
+                                    //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                                    ecraImagem(pathId);
+                                }
+                            
+                                //atribuição dos valores existentes no json
+                                imgLegenda.textContent = imgEdificio.Legenda;
+                                imgAutor.textContent = imgEdificio.AutorFonte;
+                            
+                                divCaption.appendChild(imgLegenda);
+                                divCaption.appendChild(imgAutor);
+                            
+                                divThumb.appendChild(img);
+                                divThumb.appendChild(divCaption);
+                            
+                            
+                                divColMd.appendChild(divThumb);
+                            
+                                divRow.appendChild(divColMd);
+                            
+                                divInfo.appendChild(divRow);
+                            
                             }
 
-                            //atribuição dos valores existentes no json
-                            imgLegenda.textContent = imgEdificio.Legenda;
-                            imgAutor.textContent = imgEdificio.AutorFonte;
+                        });
 
-                            divCaption.appendChild(imgLegenda);
-                            divCaption.appendChild(imgAutor);
-
-                            divThumb.appendChild(img);
-                            divThumb.appendChild(divCaption);
-
-
-                            divColMd.appendChild(divThumb);
-
-                            divRow.appendChild(divColMd);
-
-                            divInfo.appendChild(divRow);
-
-                        }
+                        divInfo.appendChild(hr); 
 
                     })[0];
                     divPopup.appendChild(link);
