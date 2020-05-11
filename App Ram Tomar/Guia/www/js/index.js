@@ -221,64 +221,69 @@ var app = {
                             divInfo.appendChild(pData);
                             
                             //Descrição
-                            var pImagem = document.createElement('p');
-                            pImagem.setAttribute('id', 'idDescricao');
-                            divInfo.appendChild(pImagem);
-                            pImagem.textContent = "Descrição: " + json.Descricao;
-
+                            var pDescricao = document.createElement('p');
+                            pDescricao.setAttribute('id', 'idDescricao');
+                            divInfo.appendChild(pDescricao);
+                            pDescricao.textContent = "Descrição: " + json.Descricao;
+                            
                             //Imagens
-                            for (var j = 0; j < jsons.Imagens.length; j++) {
-                                var imgEdificio = jsons.Imagens[j];
+                            divInfo.appendChild(hr);
+
+                            var divRow = document.createElement('div');
+                            divRow.setAttribute('id', 'idDivRow');
+                            divRow.setAttribute('class', 'row');
+                            
+                            for (var j = 0; j < json.Imagens.length; j++) {
+                                var imgEdificio = json.Imagens[j];
                             
                             
                                 var divColMd = document.createElement('div');
-                                divColMd.setAttribute('id', 'idDivColMd');
-                                divColMd.setAttribute('class', 'col-md-4');
-                                divColMd.setAttribute('class', 'content');
-                                var divThumb = document.createElement('div');
-                                divThumb.setAttribute('class', 'thumbnail');
-                                divThumb.setAttribute('id', 'idDivThumb');
-                                var divCaption = document.createElement('div')
-                                divCaption.setAttribute('id', 'idDivCaption');
-                                divCaption.setAttribute('class', 'caption');
-                                divCaption.setAttribute('class', 'rounded-bottom');
-                            
-                                var img = document.createElement('img');
-                                var imgLegenda = document.createElement('p');
-                                var imgAutor = document.createElement('p');
-                            
-                                //lida a path da imagem para a pasta das imagens
-                                img.src = imgEdificio.Path;
-                                img.setAttribute('id', 'idImagens');
-                                img.setAttribute('class', 'rounded');
-                            
-                                //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-                                img.setAttribute('data-Path', imgEdificio.Path);
-                                img.onclick = fullImg => {
-                                    var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Path);
-                                    //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-                                    ecraImagem(pathId);
-                                }
-                            
-                                //atribuição dos valores existentes no json
-                                imgLegenda.textContent = imgEdificio.Legenda;
-                                imgAutor.textContent = imgEdificio.AutorFonte;
-                            
-                                divCaption.appendChild(imgLegenda);
-                                divCaption.appendChild(imgAutor);
-                            
-                                divThumb.appendChild(img);
-                                divThumb.appendChild(divCaption);
-                            
-                            
-                                divColMd.appendChild(divThumb);
-                            
-                                divRow.appendChild(divColMd);
-                            
-                                divInfo.appendChild(divRow);
-                            
+                            divColMd.setAttribute('id', 'idDivColMd');
+                            divColMd.setAttribute('class', 'col-md-4');
+                            divColMd.setAttribute('class', 'content');
+                            var divThumb = document.createElement('div');
+                            divThumb.setAttribute('class', 'thumbnail');
+                            divThumb.setAttribute('id', 'idDivThumb');
+                            var divCaption = document.createElement('div')
+                            divCaption.setAttribute('id', 'idDivCaption');
+                            divCaption.setAttribute('class', 'caption');
+                            divCaption.setAttribute('class', 'rounded-bottom');
+
+                            var img = document.createElement('img');
+                            var imgLegenda = document.createElement('p');
+                            var imgAutor = document.createElement('p');
+
+                            //lida a path da imagem para a pasta das imagens
+                            img.src = imgEdificio.Conteudo;
+                            img.setAttribute('id', 'idImagens');
+                            img.setAttribute('class', 'rounded');
+
+                            //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                            img.setAttribute('data-Path', imgEdificio.Conteudo);
+                            img.onclick = fullImg => {
+                                var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Conteudo);
+                                //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                                ecraImagem(pathId);
                             }
 
+                            //atribuição dos valores existentes no json
+                            imgLegenda.textContent = imgEdificio.Legenda;
+                            imgAutor.textContent = imgEdificio.Autor;
+
+                            divCaption.appendChild(imgLegenda);
+                            divCaption.appendChild(imgAutor);
+
+                            divThumb.appendChild(img);
+                            divThumb.appendChild(divCaption);
+
+
+                            divColMd.appendChild(divThumb);
+
+                            divRow.appendChild(divColMd);
+
+                            divInfo.appendChild(divRow);
+
+                        }
                         });
 
                         divInfo.appendChild(hr); 
@@ -293,7 +298,7 @@ var app = {
 
             });
 
-            //funcap +ara remover painel de direções gerado automaticamente para o trajeto
+            //funcão para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
                 if (control != null) {
                     mymap.removeControl(control);
@@ -367,8 +372,6 @@ var app = {
                     /******************************************************* */
                 } else {
                     /* ***** sair da informação do edificio para o mapa **** */
-                    //imgFull.innerHTML = "";
-
                     divInfo.innerHTML = "";
                     e.preventDefault();
                     window.scrollTo(0, 0);
