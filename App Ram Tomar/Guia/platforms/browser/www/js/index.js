@@ -26,8 +26,6 @@ var app = {
             var mapa = document.getElementById('mapid');
             //criar o mapa atraves da biblioteca da leaflet com a posiçao definida e zoom
             var mymap = L.map('mapid').setView([39.60360511, -8.40795278], 16);
-            //.locate({setView: true, maxZoom: 16});
-            var estado = 0;
 
             document.addEventListener("online", onOnline, false);
 
@@ -43,8 +41,6 @@ var app = {
             //vai buscar a posição inicial quando inicia a app
             navigator.geolocation.getCurrentPosition(function (location) {
                 var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-             
-                //var marker = L.marker(latlng).addTo(mymap);
             });
 
             mymap.on('locationfound', onLocationFound);
@@ -116,10 +112,15 @@ var app = {
 
                         console.log(current_position._latlng.lat);
 
+                        
+                    var coord = [];
+                    coord.push(parseFloat(jsons.LatitudeIcone));
+                    coord.push(parseFloat(jsons.LongitudeIcone));
+
                         control = L.Routing.control({
                             waypoints: [
                                 L.latLng(current_position._latlng),
-                                L.latLng(jsons.IconCoordenadas)
+                                L.latLng(coord)
                             ],
                             createMarker: function (i, wp, nWps) {
                                 if (i === nWps - 1) {
@@ -298,7 +299,7 @@ var app = {
 
             });
 
-            //funcap +ara remover painel de direções gerado automaticamente para o trajeto
+            //funcão para remover painel de direções gerado automaticamente para o trajeto
             function removeRoutingControl() {
                 if (control != null) {
                     mymap.removeControl(control);
@@ -372,8 +373,6 @@ var app = {
                     /******************************************************* */
                 } else {
                     /* ***** sair da informação do edificio para o mapa **** */
-                    //imgFull.innerHTML = "";
-
                     divInfo.innerHTML = "";
                     e.preventDefault();
                     window.scrollTo(0, 0);
@@ -395,49 +394,40 @@ var app = {
                 mymap.locate({ setView: true, maxZoom: 17 });
             });
             mymap.on('locationfound', onLocationFound);
-            function onLocationFound(e) {
-                console.log(e);
-                // e.heading will contain the user's heading (in degrees) if it's available,
-                // and if not it will be NaN. This would allow you to point a marker in the same direction the user is pointed. 
-                L.marker(e.latlng).addTo(mymap);
-            }
-            /* ======================================================================== */
-
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // placeholders for the L.marker and L.circle representing user's current position and accuracy    
             var current_position;
-
-            //funcoes que vao ler a posição do utilizador e marcar no mapa e remover a posição anterior
-            function onLocationFound(e) {
+            
+             //funcoes que vao ler a posição do utilizador e marcar no mapa e remover a posição anterior
+             function onLocationFound(e) {
+                    
                 // if position defined, then remove the existing position marker and accuracy circle from the map
                 if (current_position) {
                     mymap.removeLayer(current_position);
-
                 }
-                current_position = L.marker(e.latlng).addTo(mymap);
-            
+                if(e.latitude<39.620443 && e.latitude>39.59430 && e.longitude<-8.426837 && e.longitude>-8.374149)
+                    current_position = L.marker(e.latlng).addTo(mymap);
+                else {
+                    e.latlng.lat= 39.60360511;
+                    e.latlng.lng= -8.40795278;
+                    current_position = L.marker(e.latlng).addTo(mymap);
+                    
+                    
+                }
+                
+                mymap.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 16);
             }
 
             function onLocationError(e) {
                 alert(e.message);
             }
 
-            //mymap.on('locationfound', onLocationFound);
-
             // wrap map.locate in a function    
             function locate() {
-                mymap.locate({ setView: false, maxZoom: 16 });
-                //var marker = L.marker(latlng).addTo(mymap);
+                mymap.locate({ setView: false, maxZoom: 16 });  
             }
-
 
             // call locate every 3 seconds... forever
             setInterval(locate, 3000);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
         }
 
         var onError = function (error) {
@@ -448,13 +438,9 @@ var app = {
                 onSuccess();
             } 
             alert(str);
-            
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 10000, enableHighAccuracy: true });
-
-
-
     },
 
     // Update DOM on a Received Event
