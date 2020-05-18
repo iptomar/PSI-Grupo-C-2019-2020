@@ -117,7 +117,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Imagems/Edit/5
-
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -144,6 +144,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(CreateEditImagemViewModel model)
         {
             if (ModelState.IsValid)
