@@ -92,6 +92,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Roteiros/Edit/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -136,6 +137,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(CreateEditRoteiroViewModel model)
         {
             if (ModelState.IsValid)
@@ -168,6 +170,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Roteiros/Delete/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -185,6 +188,7 @@ namespace BackOfficeRAM.Controllers
         // POST: Roteiros/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Roteiro roteiro = db.Roteiroes.Find(id);
