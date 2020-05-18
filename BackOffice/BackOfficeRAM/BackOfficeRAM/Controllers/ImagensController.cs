@@ -30,7 +30,7 @@ namespace BackOfficeRAM.Controllers
 
             if (User.IsInRole("registado externo"))
             {
-                lista = lista.Where(i => i.InseridaPor.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault()));
+                lista = lista.Where(i => i.InseridaPor.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName));
             }
 
 
