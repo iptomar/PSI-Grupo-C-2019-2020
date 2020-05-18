@@ -43,9 +43,15 @@
                 @item.Descricao
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
+
+                @if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                {
+                    @:|
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    @:|
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                }
             </td>
         </tr>
     }
