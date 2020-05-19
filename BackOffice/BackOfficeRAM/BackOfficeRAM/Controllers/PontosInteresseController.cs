@@ -37,6 +37,26 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Rejeitar(int id)
         {
             var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
+
+            if (ponto.CoordenadasPoligono != null)
+            {
+                foreach (var coordenada in ponto.CoordenadasPoligono.ToList())
+                {
+                    db.Coordenadas.Remove(coordenada);
+                }
+            }
+            if (ponto.CoordenadaIcon != null)
+            {
+                db.Coordenadas.Remove(ponto.CoordenadaIcon);
+            }
+            if (ponto.Imagens != null)
+            {
+                foreach (var imagem in ponto.Imagens.ToList())
+                {
+                    db.Imagens.Remove(imagem);
+                }
+            }
+
             db.PontosInteresse.Remove(ponto);
             db.SaveChanges();
             return RedirectToAction("IndexAprovacao");
