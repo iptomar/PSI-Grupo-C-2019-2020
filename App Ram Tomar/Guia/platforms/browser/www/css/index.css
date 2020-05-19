@@ -40,6 +40,14 @@ html, body {
     left: 1.2em;
     box-shadow: 1px 1px 10px 1px #888888;
 }
+
+.roteiroButton{
+    z-index: 2;
+    position: absolute;
+    top: 14em; 
+    left: 1.2em;
+    box-shadow: 1px 1px 10px 1px #888888;
+}
 /* 
 .leaflet-control-container{
     display: none !important;

@@ -49,16 +49,19 @@ var app = {
             var control;
             //buscas do elementos criados no html
             var btPos = document.getElementById('btPosicao');
+            var btRot = document.getElementById('btRoteiro');
             var icon = document.getElementById('idIcon');
             var divInfo = document.getElementById('infoAdicional');
+            var divRot = document.getElementById('infoRoteiro');
             var divFullImg = document.getElementById('fullImg');
 
             var br = document.createElement('br');
-
+            
+            
 
             //metodo de jQuery para ir buscar e ler o ficheiro info.json
-            $.getJSON('https://ramtomar.azurewebsites.net/api/pontosapi/', function(json) {
-                jsonData = json;
+            $.getJSON('https://ramtomar.azurewebsites.net/api/RamAPI/GetRoteiro/24', function(json) {
+                jsonData = json.Pontos;
                 //let cada posição do ficheiro json e inserir numa variavel
                 for (var i = 0; i < jsonData.length; i++) {
                     let jsons = jsonData[i];
@@ -171,7 +174,9 @@ var app = {
 
                         body.classList.remove('overflow');
                         btPos.classList.add('hidden');
+                        btRot.classList.add('hidden');
                         divInfo.classList.remove("hidden");
+                        divRot.classList.add("hidden");
                         mapa.classList.add('hidden');
                         mymap.closePopup();
 
@@ -313,7 +318,7 @@ var app = {
                 var topo = document.getElementById('topo');
                 topo.classList.add('hidden');
                 divInfo.classList.add("hidden");
-
+                divRot.classList.add("hidden");
                 divFullImg.classList.remove('hidden');
                 //é criado um canvas com a ajuda do ficheiro img-touch-canvas.js usar touch gestures no dispositivo
                 var gesturableImg = new ImgTouchCanvas({
@@ -330,7 +335,9 @@ var app = {
                 divAcerca.classList.remove('hidden');
                 mapa.classList.add('hidden');
                 divInfo.classList.add('hidden');
+                divRot.classList.add("hidden");
                 btPos.classList.add('hidden');
+                btRot.classList.add('hidden');
                 body.classList.remove('overflow');
             }
             /****************************************************************/
@@ -354,6 +361,7 @@ var app = {
                     document.body.style.background = "#F2F2F2";
                     topo.classList.remove('hidden');
                     divInfo.classList.remove('hidden');
+                    divRot.classList.add("hidden");
                     divFullImg.classList.add('hidden');
 
                     /******************************************************* */
@@ -361,25 +369,48 @@ var app = {
                 } else if (divAcerca.classList.contains('hidden') === false) {
 
                     divInfo.innerHTML = "";
+                    divRot.innerHTML = "";
                     e.preventDefault();
                     window.scrollTo(0, 0);
                     btPos.classList.remove('hidden');
+                    btRot.classList.remove('hidden');
                     icon.classList.remove('hidden');
                     mapa.classList.remove('hidden');
                     divInfo.classList.add('hidden');
+                    divRot.classList.add("hidden");
                     divAcerca.classList.add('hidden');
                     body.classList.add('overflow');
                     mymap.closePopup();
                     /******************************************************* */
-                } else {
-                    /* ***** sair da informação do edificio para o mapa **** */
+                    // sair do roteiro para o map
+                } else if (divRot.classList.contains('hidden') === false) {
+
                     divInfo.innerHTML = "";
+                    divRot.innerHTML = "";
                     e.preventDefault();
                     window.scrollTo(0, 0);
                     btPos.classList.remove('hidden');
+                    btRot.classList.remove('hidden');
                     icon.classList.remove('hidden');
                     mapa.classList.remove('hidden');
                     divInfo.classList.add('hidden');
+                    divRot.classList.add("hidden");
+                    divAcerca.classList.add('hidden');
+                    body.classList.add('overflow');
+                    mymap.closePopup();
+                    /******************************************************* */
+                }else {
+                    /* ***** sair da informação do edificio para o mapa **** */
+                    divInfo.innerHTML = "";
+                    divRot.innerHTML = "";
+                    e.preventDefault();
+                    window.scrollTo(0, 0);
+                    btPos.classList.remove('hidden');
+                    btRot.classList.remove('hidden');
+                    icon.classList.remove('hidden');
+                    mapa.classList.remove('hidden');
+                    divInfo.classList.add('hidden');
+                    divRot.classList.add("hidden");
                     body.classList.add('overflow');
                     mymap.closePopup();
                     /******************************************************* */
@@ -392,6 +423,31 @@ var app = {
             /* =========  Função para o butão de ir para a posição do marker ===========*/
             $('.refreshButton').on('click', function () {
                 mymap.locate({ setView: true, maxZoom: 17 });
+            });
+            /* =========  Função para o butão de ir para a posição do marker ===========*/
+            $('.roteiroButton').on('click', function () {
+                //alert("ola");
+                body.classList.remove('overflow');
+                btPos.classList.add('hidden');
+                btRot.classList.add('hidden');
+                divInfo.classList.add("hidden");
+                divRot.classList.remove("hidden");
+                mapa.classList.add('hidden');
+                //mymap.closePopup();
+
+                //criação de elementos e adicionados ao html
+                $.getJSON('https://ramtomar.azurewebsites.net/api/RamAPI/GetRoteiros', function(json) {
+                    jsonData = json;
+                    //let cada posição do ficheiro json e inserir numa variavel
+                    for (var i = 0; i < jsonData.length; i++) {
+                        
+                        var pRoteiro = document.createElement('p');
+                        pRoteiro.setAttribute('id', 'idRoteiro');
+                        pRoteiro.textContent = jsonData[i].NomeRoteiro;
+                        divRot.appendChild(pRoteiro);
+                    }
+                });
+                
             });
             mymap.on('locationfound', onLocationFound);
             var current_position;
