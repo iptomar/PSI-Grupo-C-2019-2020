@@ -13,15 +13,28 @@ using BackOfficeRAM.ViewModels.API;
 
 namespace BackOfficeRAM.API
 {
-    public class PontosAPIController : ApiController
+    public class RamAPIController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/PontosAPI
-        // retorna todos os pontos com os campos id e nome
-        public IEnumerable<PontoApiModel> GetPontosInteresse()
+        // GET: api/RoteirosAPI
+        // retorna todos os roteiros
+        public IEnumerable<RoteiroApiModel> GetRoteiros()
         {
-            return db.PontosInteresse.ToList().Select(p => new PontoApiModel(p));
+            return db.Roteiroes.ToList().Select(p => new RoteiroApiModel(p));
+        }
+
+        // GET: api/RoteirosAPI/5
+        [ResponseType(typeof(Roteiro))]
+        public RoteiroApiModel GetRoteiro(int id)
+        {
+            Roteiro roteiro = db.Roteiroes.Find(id);
+            if (roteiro == null)
+            {
+                return null;
+            }
+
+            return new RoteiroApiModel(roteiro);
         }
 
         // GET: api/PontosAPI/5
@@ -37,7 +50,7 @@ namespace BackOfficeRAM.API
             return new PontoApiDetalheModel(pontoInteresse);
         }
 
-     
+
 
         protected override void Dispose(bool disposing)
         {
