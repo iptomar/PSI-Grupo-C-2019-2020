@@ -1,13 +1,7 @@
-﻿@model BackOfficeRAM.ViewModels.CreateEditRoteiroViewModel
+﻿@using System.Web.Script.Serialization
+@model BackOfficeRAM.ViewModels.CreateEditRoteiroViewModel
 
-<script>
-    $(document).ready(function () {
-        $('#listaPontos').selectize({
-            create: false,
-            sortField: 'text'
-        });
-    });
-</script>
+
 
 <div class="form-horizontal">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,29 +14,32 @@
 
         <div class="col-md-6">
             @Html.Label("Nome")
-            @Html.EditorFor(model => model.Roteiro.Nome, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.EditorFor(model => model.Roteiro.Nome, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
             @Html.ValidationMessageFor(model => model.Roteiro.Nome, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-12">
-            @Html.TextAreaFor(model => model.Roteiro.Descricao, 5, 1, new { @class = "form-control" })
+            @Html.TextAreaFor(model => model.Roteiro.Descricao, 5, 1, new { @class = "form-control", @required = "required" })
             @Html.ValidationMessageFor(model => model.Roteiro.Descricao, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-12">
-
             <div class="form-group">
                 @Html.Label("Pontos do Roteiro", htmlAttributes: new { @class = "control-label col-md-12" })
                 <div class="form-row">
                     <div class="col-md-5">
                         <select class="form-control" id="listaPontos" data-bind="value: IdPonto">
-                            @foreach (var item in Model.Pontos)
+                            @if (Model.Pontos != null)
                             {
-                                <option value="@item.Id">@item.Nome</option>
+                                foreach (var item in Model.Pontos)
+                                {
+                                    <option value="@item.Id">@item.Nome</option>
+                                }
+
                             }
                         </select>
                     </div>
@@ -58,14 +55,19 @@
                 <table class="table" data-bind="visible: ListaPontos().length > 0">
                     <thead style="color:white;">
                         <tr style="border-top: 0">
+                            <th style="width:10px">
+                            </th>
                             <th><b>Ponto</b></th>
                             <th style="width:100px"></th>
                         </tr>
                     </thead>
                     <!-- percorre a lista de pontos. desenha um TR por cara ponto -->
-                    <tbody data-bind="foreach: ListaPontos" style="color:white">
-                        <tr>
-                            <td data-bind="text: NomePonto"></td>
+                    <tbody id="sortable" data-bind="foreach: ListaPontos" style="color:white;cursor:ns-resize">
+                        <tr class="ui-state-default">
+                            <td>
+                                <i class="fas fa-arrows-alt-v">
+                            </td>
+                            <td data-bind="text: NomePonto"><i class="fas fa-arrows-alt-v"></i></td>
                             <td>
                                 <!-- cria hiddens para guardar os pontos escolhidos e mandar no post para o controller -->
                                 <!-- $index() -> dá a iteração atual do ciclo: "0","1","2"... -->
@@ -77,6 +79,7 @@
                         </tr>
                     </tbody>
                 </table>
+
             </div>
 
 
@@ -86,11 +89,16 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Guardar" class="btn btn-primary" />
+            <a class="btn btn-outline-primary" href="@Url.Action("Index")">Voltar</a>
         </div>
     </div>
 </div>
 
+
+
 <script>
+
+
     //Modelo que representa a relação entre um roteiro e um ponto.
     var RoteiroPonto = function (id, nome) {
         var self = this;
@@ -126,9 +134,27 @@
         self.removerPonto = function (roteiroPonto) {
             self.ListaPontos.remove(roteiroPonto);
         };
-    }
-    $(function () { //document.ready
-        //Aplica o modelo KO à pagina
-        ko.applyBindings(new Model());
-    });
+
+
+        //carrega os pontos que o roteiro ja tem
+        self.loadPontos = function () {
+                var json = @Html.Raw(new JavaScriptSerializer().Serialize(Model.PontosGuardados));
+
+                if (json == null || json.length === 0)
+                return;
+
+                var arr = [];
+                $.each(json, function (index, ponto) {
+                arr.push(new RoteiroPonto(ponto.IdPonto, ponto.Nome));
+                });
+
+                self.ListaPontos(arr);
+                };
+
+                self.loadPontos();
+                }
+                $(function () { //document.ready
+                //Aplica o modelo KO à pagina
+                ko.applyBindings(new Model());
+                });
 </script>

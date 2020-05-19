@@ -76,7 +76,8 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+
+            return View(new LoginViewModel(TempData));
         }
 
         //
@@ -132,6 +133,8 @@ namespace BackOfficeRAM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var crudResult = new CRUDResultModel();
+
             if (ModelState.IsValid)
             {
                 var user = new Utilizador { UserName = model.Username, Email = model.Email };
@@ -159,11 +162,18 @@ namespace BackOfficeRAM.Controllers
 
                     if (resultadoAddRole.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        crudResult.Sucesso = true;
+                        crudResult.Mensagens.Add("Conta criada com sucesso");
+
+                        TempData["CRUD"] = crudResult;
+
+                        return RedirectToAction("Login", "Account");
                     }
                     else
                     {
-                        //AddErrors(new  { $"Ocorreu um erro a associar a role {model.SelectedRole} ao funcionario." });
+                        model.CRUDResult.Mensagens.Add("Ocorreu um erro a associar a role {model.SelectedRole} ao utilizador.");
+                        model.CRUDResult = crudResult;
+                        //AddErrors(new  {  });
 
                         return View(model);
                     }
@@ -171,6 +181,8 @@ namespace BackOfficeRAM.Controllers
                 }
                 AddErrors(result);
             }
+
+            model.CRUDResult = crudResult;
 
             // If we got this far, something failed, redisplay form
             return View(model);

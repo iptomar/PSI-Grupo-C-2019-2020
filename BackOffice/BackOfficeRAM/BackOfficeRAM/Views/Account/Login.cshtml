@@ -27,6 +27,8 @@
 
 <body>
     <section id="loginForm">
+
+
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -49,6 +51,15 @@
 
 
                                     <form class="pt-3">
+                                        @if (Model.CRUDResult != null)
+                                        {
+                                            <div class="alert alert-@(Model.CRUDResult.Sucesso ? "success" : "danger")">
+                                                @foreach (var item in Model.CRUDResult.Mensagens)
+                                                {
+                                                    <p>@item</p>
+                                                }
+                                            </div>
+                                        }
                                         <div class="form-group">
 
 

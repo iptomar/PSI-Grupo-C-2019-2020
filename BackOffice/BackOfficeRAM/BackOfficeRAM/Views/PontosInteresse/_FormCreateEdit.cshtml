@@ -11,7 +11,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PontoInteresse.Nome, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-6">
-            @Html.EditorFor(model => model.PontoInteresse.Nome, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.EditorFor(model => model.PontoInteresse.Nome, new { htmlAttributes = new { @class = "form-control ", required = "required" } })
             @Html.ValidationMessageFor(model => model.PontoInteresse.Nome, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="form-group">
         @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-12">
-            @Html.TextAreaFor(model => model.PontoInteresse.Descricao, 5, 1, new { @class = "form-control" })
+            @Html.TextAreaFor(model => model.PontoInteresse.Descricao, 5, 1, new { @class = "form-control", required = "required" })
             @Html.ValidationMessageFor(model => model.PontoInteresse.Descricao, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -28,14 +28,14 @@
 
         <div class="col-md-6">
             @Html.Label("Localização", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-            @Html.EditorFor(model => model.PontoInteresse.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.PontoInteresse.Localizacao, new { htmlAttributes = new { @class = "form-control", required = "required" } })
             @Html.ValidationMessageFor(model => model.PontoInteresse.Localizacao, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="col-md-6">
             @Html.LabelFor(model => model.PontoInteresse.Autor, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0;" })
-            @Html.EditorFor(model => model.PontoInteresse.Autor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.PontoInteresse.Autor, new { htmlAttributes = new { @class = "form-control", required = "required" } })
             @Html.ValidationMessageFor(model => model.PontoInteresse.Autor, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -45,30 +45,37 @@
 
         <div class="col-md-6">
             @Html.Label("Ano de Construção", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-            @Html.EditorFor(model => model.PontoInteresse.Ano, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.PontoInteresse.Ano, new { htmlAttributes = new { @class = "form-control", required = "required", type = "number", min = "0", max = "9999" } })
             @Html.ValidationMessageFor(model => model.PontoInteresse.Ano, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="col-md-6">
             @Html.Label("Tipo de Edifício", htmlAttributes: new { @class = "control-label col-md-5", @style = "padding-left:0;" })
-            @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control text-box single-line", style= "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
+            @Html.DropDownListFor(model => model.PontoInteresse.TipoEdificio, Model.TiposEdificios, new { @class = "form-control text-box single-line", style = "padding-right: 22px;padding-left: 22px;padding-top: 13px;padding-bottom:13px;border:1px solid #02b1f7;" })
             @Html.ValidationMessageFor(model => model.PontoInteresse.TipoEdificio, "", new { @class = "text-danger" })
         </div>
     </div>
 
-
     <div class="form-group row" style="margin-left:0; margin-right:0">
+
+
         <div class="col-md-6">
             @Html.Label("Coordenadas do Ícone", htmlAttributes: new { @class = "control-label", @style = "padding-left:0;" })
             <div class="row">
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Latitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude" } })
+                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Latitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude", required = "required", type = "number", step = "0.01" } })
                     @Html.ValidationMessageFor(model => model.PontoInteresse.CoordenadaIcon.Latitude, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude" } })
+                    @Html.EditorFor(model => model.PontoInteresse.CoordenadaIcon.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Latitude", required = "required", type = "number", step = "0.01" } })
                     @Html.ValidationMessageFor(model => model.PontoInteresse.CoordenadaIcon.Longitude, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @if (User.IsInRole("registado externo"))
+                    {
+                        @:<a class="text-info" href="https://www.latlong.net" target="_blank">Recomendamos este site para encontrar as coordenadas.</a>
+                    }
                 </div>
 
 
@@ -89,10 +96,10 @@
             @Html.Label("Coordenadas do Polígono", htmlAttributes: new { @class = "control-label", @style = "padding-left:0;" })
             <div class="row">
                 <div class="col">
-                    <input type="text" placeholder="Latitude" data-bind="value: Latitude" class="form-control col-md" />
+                    <input type="number" step="0.01" placeholder="Latitude" data-bind="value: Latitude" class="form-control col-md" />
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="Longitude" data-bind="value: Longitude" class="form-control col-md" />
+                    <input type="number" step="0.01" placeholder="Longitude" data-bind="value: Longitude" class="form-control col-md" />
                 </div>
                 <div class="col">
                     <button class="btn btn-success" data-bind="click: adicionarCoordenada" type="button">
@@ -147,6 +154,7 @@
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" value="Guardar" class="btn btn-primary" />
+        <a class="btn btn-outline-primary" href="@Url.Action("Index")">Voltar</a>
     </div>
 </div>
 

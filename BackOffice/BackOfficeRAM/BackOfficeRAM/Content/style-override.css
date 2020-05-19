@@ -122,3 +122,21 @@ select.form-control, select.typeahead, select.tt-query, select.tt-hint {
     left: 0;
     bottom: 0;
 }
+
+.well {
+    background-color: white !important;
+    padding: 10px !important;
+    border-radius: 0px !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using BackOfficeRAM.ViewModels;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace BackOfficeRAM.Models
 {
@@ -48,6 +50,15 @@ namespace BackOfficeRAM.Models
 
     public class LoginViewModel
     {
+        public LoginViewModel() { }
+        public LoginViewModel(TempDataDictionary tempData)
+        {
+            if (tempData.ContainsKey("CRUD"))
+                CRUDResult = (CRUDResultModel)tempData["CRUD"];
+        }
+
+        public CRUDResultModel CRUDResult { get; set; }
+
         [Required]
         [Display(Name = "Nome de utilizador")]
         public string Username { get; set; }
@@ -63,6 +74,8 @@ namespace BackOfficeRAM.Models
 
     public class RegisterViewModel
     {
+        public CRUDResultModel CRUDResult { get; set; }
+
         [Required]
         [Display(Name = "Nome de utilizador")]
         public string Username { get; set; }
@@ -83,7 +96,7 @@ namespace BackOfficeRAM.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar password")]
-        [Compare("Password", ErrorMessage = "As passwords inseridas nao coincidem.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "As passwords inseridas nao coincidem.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -102,7 +115,7 @@ namespace BackOfficeRAM.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

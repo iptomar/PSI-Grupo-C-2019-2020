@@ -63,6 +63,7 @@
     <br />
     <br />
     <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }) |
         @Html.ActionLink("Voltar", "Index")
     </p>
@@ -122,7 +123,7 @@
                         }
                     });
                     marker.addListener('click', function () {
-                        window.location.href = "PontosInteresse/Details/@item.Id"
+                        window.location = "@Url.Action("Details", "PontosInteresse", new { id= item.Ponto.Id })"
                     });
                      var coords = [];
                     @foreach (var coordenada in item.Ponto.CoordenadasPoligono)
@@ -137,9 +138,7 @@
                         fillColor: cor,
                         fillOpacity: 0.35
                     });
-                    poligono.addListener('click', function () {
-                        window.location.href = "PontosInteresse/Details/@item.Id"
-                    });
+
                     poligono.setMap(map);
                     marker.setMap(map);
              </text>

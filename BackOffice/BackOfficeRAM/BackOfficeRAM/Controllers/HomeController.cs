@@ -17,7 +17,7 @@ namespace BackOfficeRAM.Controllers
 
         public ActionResult Index()
         {
-            HomeIndexViewModel model = new HomeIndexViewModel();
+            HomeIndexViewModel model = new HomeIndexViewModel(TempData);
             model.NumPontos = db.PontosInteresse.Where(p => p.Visivel.Equals(true)).Count();
             model.NumImagens = db.Imagens.Count();
             model.NumRoteiros = db.Roteiroes.Count();

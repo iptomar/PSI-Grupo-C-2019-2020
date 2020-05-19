@@ -28,6 +28,12 @@ namespace BackOfficeRAM.Controllers
                 lista = lista.Where(s => s.Nome.Contains(searchStringImg) || s.Autor.Contains(searchStringImg) || s.PontoInteresse.Nome.Contains(searchStringImg));
             }
 
+            if (User.IsInRole("registado externo"))
+            {
+                lista = lista.Where(i => i.InseridaPor.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName));
+            }
+
+
             return View(lista.ToList());
         }
 
@@ -54,6 +60,10 @@ namespace BackOfficeRAM.Controllers
         {
             CreateEditImagemViewModel model = new CreateEditImagemViewModel();
             LoadPontos(ref model);
+            if (model.PontosInteresse.Count() == 0)
+            {
+                return View("ErroPonto");
+            }
             return View(model);
         }
 
@@ -74,7 +84,8 @@ namespace BackOfficeRAM.Controllers
                 var imagem = new Imagem
                 {
                     Autor = model.Autor,
-                    Nome = model.Nome
+                    Nome = model.Nome,
+                    InseridaPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName
                 };
 
                 pontodb.Imagens.Add(imagem);
@@ -106,6 +117,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Imagems/Edit/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -132,6 +144,7 @@ namespace BackOfficeRAM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Edit(CreateEditImagemViewModel model)
         {
             if (ModelState.IsValid)
@@ -152,6 +165,7 @@ namespace BackOfficeRAM.Controllers
         }
 
         // GET: Imagems/Delete/5
+        [Authorize(Roles = "administrador,utilizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -168,6 +182,7 @@ namespace BackOfficeRAM.Controllers
 
         // POST: Imagems/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "administrador,utilizador")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -201,12 +216,7 @@ namespace BackOfficeRAM.Controllers
 
                 //remover o que tem criador a null
                 pontos = pontos.Where(s => s.CriadorPonto != null);
-                pontos = pontos.Where(s => s.CriadorPonto.UserName.Equals(User.Identity.Name));
-
-                if (pontos.Count() == 0)
-                {
-                    //apresentar erro
-                }
+                pontos = pontos.Where(s => s.CriadorPonto.Equals(User.Identity.Name));
 
                 model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
 

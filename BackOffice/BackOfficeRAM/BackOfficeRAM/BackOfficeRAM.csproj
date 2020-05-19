@@ -184,7 +184,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\PontosAPIController.cs" />
+    <Compile Include="API\RoteiroApiModel.cs" />
+    <Compile Include="API\RamAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -272,6 +273,18 @@
     <Compile Include="Migrations\202004242115118_add-attr-criador-ponto-2.Designer.cs">
       <DependentUpon>202004242115118_add-attr-criador-ponto-2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004251739459_add-attr-inseridopor-img.cs" />
+    <Compile Include="Migrations\202004251739459_add-attr-inseridopor-img.Designer.cs">
+      <DependentUpon>202004251739459_add-attr-inseridopor-img.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005082203310_alteracao-associacao-user-ponto.cs" />
+    <Compile Include="Migrations\202005082203310_alteracao-associacao-user-ponto.Designer.cs">
+      <DependentUpon>202005082203310_alteracao-associacao-user-ponto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005082213476_alteracao-associacao-user-imagem.cs" />
+    <Compile Include="Migrations\202005082213476_alteracao-associacao-user-imagem.Designer.cs">
+      <DependentUpon>202005082213476_alteracao-associacao-user-imagem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\Coordenada.cs" />
     <Compile Include="Models\Database\Imagem.cs" />
@@ -284,11 +297,12 @@
     <Compile Include="Models\Users\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\API\PontoApiDetalheModel.cs" />
-    <Compile Include="ViewModels\API\PontoApiModel.cs" />
+    <Compile Include="API\PontoApiDetalheModel.cs" />
+    <Compile Include="API\PontoApiModel.cs" />
     <Compile Include="ViewModels\CreateEditImagemViewModel.cs" />
     <Compile Include="ViewModels\CreateEditPontoInteresseViewModel.cs" />
     <Compile Include="ViewModels\CreateEditRoteiroViewModel.cs" />
+    <Compile Include="ViewModels\CRUDResultModel.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ImageDetailsViewModel.cs" />
     <Compile Include="ViewModels\IndexAccountViewModel.cs" />
@@ -359,6 +373,7 @@
     <Content Include="fotos\6.jpg" />
     <Content Include="fotos\templar.jpg" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Content\style-override.css" />
@@ -472,6 +487,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\API\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
@@ -536,6 +552,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004242115118_add-attr-criador-ponto-2.resx">
       <DependentUpon>202004242115118_add-attr-criador-ponto-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004251739459_add-attr-inseridopor-img.resx">
+      <DependentUpon>202004251739459_add-attr-inseridopor-img.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082203310_alteracao-associacao-user-ponto.resx">
+      <DependentUpon>202005082203310_alteracao-associacao-user-ponto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082213476_alteracao-associacao-user-imagem.resx">
+      <DependentUpon>202005082213476_alteracao-associacao-user-imagem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

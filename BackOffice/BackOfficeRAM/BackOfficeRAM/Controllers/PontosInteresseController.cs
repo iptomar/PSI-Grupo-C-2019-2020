@@ -28,7 +28,7 @@ namespace BackOfficeRAM.Controllers
         {
             var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
             ponto.Visivel = true;
-            ponto.AprovadoPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            ponto.AprovadoPor = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName;
             db.SaveChanges();
             return RedirectToAction("IndexAprovacao");
         }
@@ -37,6 +37,26 @@ namespace BackOfficeRAM.Controllers
         public ActionResult Rejeitar(int id)
         {
             var ponto = db.PontosInteresse.Where(p => p.Id.Equals(id)).FirstOrDefault();
+
+            if (ponto.CoordenadasPoligono != null)
+            {
+                foreach (var coordenada in ponto.CoordenadasPoligono.ToList())
+                {
+                    db.Coordenadas.Remove(coordenada);
+                }
+            }
+            if (ponto.CoordenadaIcon != null)
+            {
+                db.Coordenadas.Remove(ponto.CoordenadaIcon);
+            }
+            if (ponto.Imagens != null)
+            {
+                foreach (var imagem in ponto.Imagens.ToList())
+                {
+                    db.Imagens.Remove(imagem);
+                }
+            }
+
             db.PontosInteresse.Remove(ponto);
             db.SaveChanges();
             return RedirectToAction("IndexAprovacao");
@@ -106,7 +126,7 @@ namespace BackOfficeRAM.Controllers
                 {
                     model.PontoInteresse.Visivel = false;
                 }
-                model.PontoInteresse.CriadorPonto = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+                model.PontoInteresse.CriadorPonto = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName;
                 db.PontosInteresse.Add(model.PontoInteresse);
                 db.SaveChanges();
                 if (User.IsInRole("registado externo"))
@@ -211,15 +231,23 @@ namespace BackOfficeRAM.Controllers
             PontoInteresse pontoInteresse = db.PontosInteresse.Find(id);
             if (pontoInteresse.CoordenadasPoligono != null)
             {
-                foreach (var item in pontoInteresse.CoordenadasPoligono.ToList())
+                foreach (var coordenada in pontoInteresse.CoordenadasPoligono.ToList())
                 {
-                    db.Coordenadas.Remove(item);
+                    db.Coordenadas.Remove(coordenada);
                 }
             }
             if (pontoInteresse.CoordenadaIcon != null)
             {
                 db.Coordenadas.Remove(pontoInteresse.CoordenadaIcon);
             }
+            if (pontoInteresse.Imagens != null)
+            {
+                foreach (var imagem in pontoInteresse.Imagens.ToList())
+                {
+                    db.Imagens.Remove(imagem);
+                }
+            }
+
             db.PontosInteresse.Remove(pontoInteresse);
             try
             {
