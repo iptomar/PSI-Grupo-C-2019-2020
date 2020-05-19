@@ -41,29 +41,46 @@
                     <br />
                 </div>
             }
-            <div>
-                <br />
-                <div class="row">
-                    <p>
+        <div>
+            <br />
+            <div class="row">
+                
+                    @if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                    {
+                        <p>
                         <div class="col">
-                            <a class="btn btn-warning" href="@Url.Action("Edit", new { id = Model.Id})">Editar</a>
+                            <a class="btn btn-warning" href="@Url.Action("Edit", new { id = Model.Id })">Editar</a>
                         </div>
                         <div class="col">
-                            <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.Id})">Eliminar</a>
+                            <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.Id })">Eliminar</a>
                         </div>
                         <div class="col">
                             <a class="btn btn-primary" href="@Url.Action("Index")">Lista de Imagens</a>
                         </div>
+                        <div class="col">
+                        <a class="btn btn-secondary" href="@Url.Action("Details", "PontosInteresse", new { id = Model.PontoInteresse.Id })">Ponto de interesse</a>
+                        </div>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                        <div class="col">
+                            <a class="btn btn-primary" href="@Url.Action("Details","PontosInteresse", new { id = Model.PontoInteresse.Id})">Detalhes do ponto de interesse</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-secondary" href="@Url.Action("Index")">A minha lista de Imagens</a>
+                        </div>
+                        </p>
+                    }
 
-
-                        @*@Html.ActionLink("Editar", "Edit", new { id = Model.Id, @class = "btn btn-warning" }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id, @class = "btn btn-danger" }) |
-                            @Html.ActionLink("Regressar à lista", "Index")*@
-                    </p>
+                    @*@Html.ActionLink("Editar", "Edit", new { id = Model.Id, @class = "btn btn-warning" }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id, @class = "btn btn-danger" }) |
+        @Html.ActionLink("Regressar à lista", "Index")*@
+               
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <br />
