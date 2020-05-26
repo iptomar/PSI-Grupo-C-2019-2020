@@ -20,7 +20,13 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#sortable").sortable();
+            $("#sortable").sortable({
+                update: function () {
+                    $.each($("#sortable tr"), function (index, tr) {
+                        $(tr).find('.posicao:first').val(index);
+                    });
+                }
+            });
             $("#sortable").disableSelection();
         });
 

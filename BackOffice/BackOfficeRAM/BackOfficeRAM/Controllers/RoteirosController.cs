@@ -149,11 +149,11 @@ namespace BackOfficeRAM.Controllers
                     db.PontoRoteiro.Remove(relacao);
                 }
 
-                foreach (var ponto in model.PontosSeleccionados)
+                foreach (var ponto in model.PontosSeleccionados.OrderBy(p => p.Posicao))
                 {
                     oldRoteiro.PontosInteresse.Add(new PontoRoteiro
                     {
-                        Posicao = model.PontosSeleccionados.IndexOf(ponto) + 1,
+                        Posicao = ponto.Posicao + 1,
                         Ponto = db.PontosInteresse.FirstOrDefault(i => i.Id == ponto.IdPonto)
                     });
 

@@ -109,7 +109,17 @@
                         </a>
                         <div class="submenu">
                             <ul>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
+                                @{
+                                    if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+                                    {
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">Ver lista de imagens</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Imagens")">As minhas imagens</a></li>
+                                    }
+                                }
+
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Imagens")">Adicionar nova imagem</a></li>
                             </ul>
                         </div>

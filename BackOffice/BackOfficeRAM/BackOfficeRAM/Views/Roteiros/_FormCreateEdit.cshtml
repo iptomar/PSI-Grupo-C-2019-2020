@@ -71,6 +71,7 @@
                             <td>
                                 <!-- cria hiddens para guardar os pontos escolhidos e mandar no post para o controller -->
                                 <!-- $index() -> dá a iteração atual do ciclo: "0","1","2"... -->
+                                <input type="hidden" class="posicao" data-bind="value: $index, attr:{name: 'PontosSeleccionados['+$index()+'].Posicao'}" />
                                 <input type="hidden" data-bind="value: IdPonto, attr:{name: 'PontosSeleccionados['+$index()+'].IdPonto'}" />
 
                                 <!-- click para remover um ponto. $root é para ir pesquisar o evento no modelo base -->
