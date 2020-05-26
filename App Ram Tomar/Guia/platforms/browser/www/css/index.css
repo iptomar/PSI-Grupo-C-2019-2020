@@ -44,18 +44,11 @@ html, body {
 .roteiroButton{
     z-index: 2;
     position: absolute;
-    top: 14em; 
+    top: 13em; 
     left: 1.2em;
     box-shadow: 1px 1px 10px 1px #888888;
 }
-/* 
-.leaflet-control-container{
-    display: none !important;
-} */
 
-/* .leaflet-routing-container{
-    display: none !important;
-} */
 
 .leaflet-right{
     display: none !important;
@@ -76,11 +69,6 @@ html, body {
 
 }
 
-/* #idSpanLinhaTopo{
-    background-color:  #F2B84B;
-    padding-right: 10px;
-    padding-left: 10px;
-} */
 
 #idTitulo{
     font-family: 'Georgia', serif;
@@ -93,13 +81,8 @@ html, body {
 
     top: 25%;
     bottom: 25%;
-
-   /*  left: 50%;
-    margin-right: -50%;
-    */
     text-align: left;
-    /* transform: translate(-50%, -50%); */
-} 
+}
 
 
 #idSobreBt{
@@ -110,9 +93,11 @@ html, body {
 
 #idAcerca{
     position: absolute;
-    /* margin: 20px; */
 }
 
+#ColorPeru {
+    color: peru;
+}
 
 /***************************************************************************************************/
 
@@ -155,8 +140,6 @@ html, body {
           'nome'
           'primeiro'
           'segundo';
-        /* grid-gap: 10px;
-        padding: 10px; */
         margin-left: -6.5px;
         margin-top: -1em;
 }
@@ -179,8 +162,6 @@ html, body {
     font-size: 1em;
     text-align: center;
     margin-left: .5em;
-    
-    /*margin-left: -1.07rem;*/
 }
 
 
@@ -271,14 +252,6 @@ html, body {
     color: #F2F2F2;
     font-style: italic;
     font-size: 3vw;
-/* 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    text-align: center; */
-    
 }
 
 #idImagens{
@@ -293,12 +266,7 @@ html, body {
     flex-wrap: wrap;
 } 
 
-
-
 /*============= imagem fullscreen =====================*/
-
-/* #fullImg{
-} */
 
 #idImgFull{
     width: 100%;
@@ -306,4 +274,50 @@ html, body {
     margin-top: 50%;
     
 }
-/*=====================================================*/
+
+/*============== Lista de Roteiros ====================*/
+
+.roteiroButton{
+    z-index: 2;
+    position: absolute;
+    top: 13em; 
+    left: 1.2em;
+    box-shadow: 1px 1px 10px 1px #888888;
+}
+
+#idCabecalhoRot{
+	font-family: 'Times New Roman';
+	margin: 15px; 
+	margin-bottom: 20px;
+	color:peru;
+}
+
+#idIntroRot {
+    font-family: 'Times New Roman';
+    text-align: justify;
+	margin: 15px; 
+	margin-bottom: 20px;
+}
+
+
+#idRoteiro {
+	font-family: 'Times New Roman';
+	margin: 15px; 
+	margin-bottom: 20px;
+	color:peru;
+}
+
+#IdDescRoteiro {
+    font-family: 'Times New Roman';
+    text-align: justify;
+	margin: 15px; 
+	margin-bottom: 20px;
+}
+
+/*==================== Informação =====================*/
+
+#IdSobreApp {
+    text-align: justify; 
+    margin: 15px; 
+    margin-bottom: 20px;
+}

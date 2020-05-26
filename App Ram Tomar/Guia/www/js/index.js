@@ -32,8 +32,6 @@ var app = {
 
             function onOnline() {
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    //maxZoom: 19,
-                    //minZoom: 15,
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
             }
@@ -189,17 +187,19 @@ var app = {
                 mapa.classList[show ? 'add' : 'remove']('hidden');
             }
 
+            //Verificação do carregamento de um roteiro e na seleção de outro roteiro, apaga os markers e poligonos do roteiro anterior no mapa
             var getRoteiroByID = (roteiroID = 25) => new Promise((resolve) => {
                 if(window.markers) window.markers.forEach(m => m.remove());
                 if(window.polygons) window.polygons.forEach(p => p.remove());
                 window.markers = [];
                 window.polygons = [];
+                //Carrega todos os pontos de interesse da API do roteiro selecionado
                 $.getJSON(`https://ramtomar.azurewebsites.net/api/RamAPI/GetRoteiro/${roteiroID}`, function(json) {
                     jsonData = json.Pontos;
-                    //let cada posição do ficheiro json e inserir numa variavel
+                    //let cada posição e inserir numa variavel
                     for (var i = 0; i < jsonData.length; i++) {
                         let jsons = jsonData[i];
-                        //desenhar o poligno dos edificios consoantes as coordenadas lidas do json
+                        //desenhar o poligno dos edificios consoantes as coordenadas lidas
                         var coordenadas=[];
                         for(var j=0; j<jsonData[i].CoordenadasPoligono.length; j++) {
                         var c=[];
@@ -343,7 +343,7 @@ var app = {
                             pTipoEdificio.appendChild(spanLinha);
                             divInfo.appendChild(pTipoEdificio);
 
-                            //atribuição dos valores existentes no json no popup da Descrição de cada Edificio    
+                            //atribuição dos valores existentes na API dos Pontos de Interesse no popup da Descrição de cada Edificio    
                             $.getJSON('https://ramtomar.azurewebsites.net/api/RamAPI/GetPontoInteresse/' + jsons.Id, function(json) {
                                 
                                 //Autores
@@ -379,35 +379,33 @@ var app = {
                                 
                                 for (var j = 0; j < json.Imagens.length; j++) {
                                     var imgEdificio = json.Imagens[j];
-                                
-                                
                                     var divColMd = document.createElement('div');
-                                divColMd.setAttribute('id', 'idDivColMd');
-                                divColMd.setAttribute('class', 'col-md-4');
-                                divColMd.setAttribute('class', 'content');
-                                var divThumb = document.createElement('div');
-                                divThumb.setAttribute('class', 'thumbnail');
-                                divThumb.setAttribute('id', 'idDivThumb');
-                                var divCaption = document.createElement('div')
-                                divCaption.setAttribute('id', 'idDivCaption');
-                                divCaption.setAttribute('class', 'caption');
-                                divCaption.setAttribute('class', 'rounded-bottom');
+                                    divColMd.setAttribute('id', 'idDivColMd');
+                                    divColMd.setAttribute('class', 'col-md-4');
+                                    divColMd.setAttribute('class', 'content');
+                                    var divThumb = document.createElement('div');
+                                    divThumb.setAttribute('class', 'thumbnail');
+                                    divThumb.setAttribute('id', 'idDivThumb');
+                                    var divCaption = document.createElement('div')
+                                    divCaption.setAttribute('id', 'idDivCaption');
+                                    divCaption.setAttribute('class', 'caption');
+                                    divCaption.setAttribute('class', 'rounded-bottom');
 
-                                var img = document.createElement('img');
-                                var imgLegenda = document.createElement('p');
-                                var imgAutor = document.createElement('p');
+                                    var img = document.createElement('img');
+                                    var imgLegenda = document.createElement('p');
+                                    var imgAutor = document.createElement('p');
 
-                                //lida a path da imagem para a pasta das imagens
-                                img.src = imgEdificio.Conteudo;
-                                img.setAttribute('id', 'idImagens');
-                                img.setAttribute('class', 'rounded');
+                                    //lida a path da imagem para a pasta das imagens
+                                    img.src = imgEdificio.Conteudo;
+                                    img.setAttribute('id', 'idImagens');
+                                    img.setAttribute('class', 'rounded');
 
-                                //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
-                                img.setAttribute('data-Path', imgEdificio.Conteudo);
-                                img.onclick = fullImg => {
-                                    var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Conteudo);
-                                    //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
-                                    ecraImagem(pathId);
+                                    //onclick na imagem para ver esta com mais zoom que é mostrada inicialmente
+                                    img.setAttribute('data-Path', imgEdificio.Conteudo);
+                                    img.onclick = fullImg => {
+                                        var pathId = fullImg.target.getAttribute('data-Path', imgEdificio.Conteudo);
+                                        //é chamada a fução de abrir a imagem, função essa que leva como parametro o path da imagem
+                                        ecraImagem(pathId);
                                 }
 
                                 //atribuição dos valores existentes no json
@@ -445,23 +443,28 @@ var app = {
 
             /* =========  Função para o butão de ir para a posição do marker ===========*/
             $('.roteiroButton').on('click', function () {
-                //alert("ola");
-
                 showRoteirosList(true);
-               
-                //mymap.closePopup();
-
-                //criação de elementos e adicionados ao html
+                var pCabecalhoRot = document.createElement('h4');
+                pCabecalhoRot.setAttribute('id', 'idCabecalhoRot');
+                pCabecalhoRot.textContent = "Lista de Roteiros:";
+                divRot.appendChild(pCabecalhoRot);
+                var pIntroRot = document.createElement('p');
+                pIntroRot.setAttribute('id', 'idIntroRot');
+                pIntroRot.textContent = "Selecione o roteiro pretendido clicando no nome";
+                divRot.appendChild(pIntroRot);
+                //Carrega a API dos Roteiros
                 $.getJSON('https://ramtomar.azurewebsites.net/api/RamAPI/GetRoteiros', function(json) {
                     jsonData = json;
-                    //let cada posição do ficheiro json e inserir numa variavel
+                    //let cada roteiro da API insere numa variavel
                     for (var i = 0; i < jsonData.length; i++) {
-                        var pRoteiro = document.createElement('p');
+                        //Nome
+                        var pRoteiro = document.createElement('h5');
                         pRoteiro.setAttribute('id', 'idRoteiro');
                         pRoteiro.textContent = jsonData[i].NomeRoteiro;
+                        //Descriçao
                         var pDescricaoRot = document.createElement('p');
-                        pDescricaoRot.setAttribute('desc', 'descRoteiro');
-                        pDescricaoRot.textContent = jsonData[i].Descricao;
+                        pDescricaoRot.setAttribute('id', 'IdDescRoteiro');
+                        pDescricaoRot.textContent = "Descrição: " + jsonData[i].Descricao;
                         pRoteiro.dataset.id = jsonData[i].IdRoteiro;
                         pRoteiro.addEventListener("click", (evt) => {
                             getRoteiroByID(evt.currentTarget.dataset.id)
@@ -471,9 +474,6 @@ var app = {
                         divRot.appendChild(pDescricaoRot);
                     }
                 });
-                
-                ////////////////////////////////////////////////////////////////////////////////////////////////////
-                //metodo de jQuery para ir buscar e ler o ficheiro info.json
                
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
             });
@@ -483,13 +483,15 @@ var app = {
              //funcoes que vao ler a posição do utilizador e marcar no mapa e remover a posição anterior
              function onLocationFound(e) {
                     
-                // if position defined, then remove the existing position marker and accuracy circle from the map
+                // If utilizador fora da zona da cidade de Tomar, remove o marcador do mapa
                 if (current_position) {
                     mymap.removeLayer(current_position);
                 }
+                // if utilizador dentro da zona de Tomar, então marcador aponta para a posição atual do mesmo
                 if(e.latitude<39.620443 && e.latitude>39.59430 && e.longitude<-8.426837 && e.longitude>-8.374149)
                     current_position = L.marker(e.latlng).addTo(mymap);
                 else {
+                    //utilizador fora da zona de Tomar, então marcador aponta para o centro da cidade
                     e.latlng.lat= 39.60360511;
                     e.latlng.lng= -8.40795278;
                     current_position = L.marker(e.latlng).addTo(mymap);
