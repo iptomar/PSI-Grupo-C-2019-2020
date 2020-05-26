@@ -28,11 +28,12 @@ namespace BackOfficeRAM.Controllers
                 lista = lista.Where(s => s.Nome.Contains(searchStringImg) || s.Autor.Contains(searchStringImg) || s.PontoInteresse.Nome.Contains(searchStringImg));
             }
 
+            lista = lista.Where(s => s.PontoInteresse.Visivel.Equals(true));
+
             if (User.IsInRole("registado externo"))
             {
                 lista = lista.Where(i => i.InseridaPor.Equals(db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault().UserName));
             }
-
 
             return View(lista.ToList());
         }
@@ -217,6 +218,7 @@ namespace BackOfficeRAM.Controllers
                 //remover o que tem criador a null
                 pontos = pontos.Where(s => s.CriadorPonto != null);
                 pontos = pontos.Where(s => s.CriadorPonto.Equals(User.Identity.Name));
+                pontos = pontos.Where(s => !s.Visivel);
 
                 model.PontosInteresse = pontos.Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Nome.ToString() });
 
