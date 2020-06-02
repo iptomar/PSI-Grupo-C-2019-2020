@@ -445,23 +445,18 @@ var app = {
 
             /* =========  Função para o butão de ir para a posição do marker ===========*/
             $('.roteiroButton').on('click', function () {
-                //alert("ola");
-
                 showRoteirosList(true);
-               
-                //mymap.closePopup();
-
                 //criação de elementos e adicionados ao html
                 $.getJSON('https://ramtomar.azurewebsites.net/api/RamAPI/GetRoteiros', function(json) {
                     jsonData = json;
                     //let cada posição do ficheiro json e inserir numa variavel
                     for (var i = 0; i < jsonData.length; i++) {
-                        var pRoteiro = document.createElement('p');
+                        var pRoteiro = document.createElement('h1');
                         pRoteiro.setAttribute('id', 'idRoteiro');
                         pRoteiro.textContent = jsonData[i].NomeRoteiro;
                         var pDescricaoRot = document.createElement('p');
-                        pDescricaoRot.setAttribute('desc', 'descRoteiro');
-                        pDescricaoRot.textContent = jsonData[i].Descricao;
+                        pDescricaoRot.setAttribute('id', 'iddesc');
+                        pDescricaoRot.textContent = "Descrição: " + jsonData[i].Descricao;
                         pRoteiro.dataset.id = jsonData[i].IdRoteiro;
                         pRoteiro.addEventListener("click", (evt) => {
                             getRoteiroByID(evt.currentTarget.dataset.id)
@@ -471,11 +466,16 @@ var app = {
                         divRot.appendChild(pDescricaoRot);
                     }
                 });
-                
-                ////////////////////////////////////////////////////////////////////////////////////////////////////
-                //metodo de jQuery para ir buscar e ler o ficheiro info.json
-               
-                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                //Titulo da lista de Roteiros
+                var pTituloRots = document.createElement('h2');
+                pTituloRots.setAttribute('id', 'idttlRot')
+                pTituloRots.textContent = "Lista de Roteiros";
+                divRot.appendChild(pTituloRots);
+                //Pequena informação de como escolher o roteiro
+                var pInfoRot = document.createElement('p');
+                pInfoRot.setAttribute('id', 'idInfo');
+                pInfoRot.textContent = "Info: Selecione o roteiro pretendido clicando no seu nome. ";
+                divRot.appendChild(pInfoRot);
             });
             mymap.on('locationfound', onLocationFound);
             var current_position;
