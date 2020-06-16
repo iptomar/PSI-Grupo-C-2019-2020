@@ -16,4 +16,25 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#sortable").sortable({
+                update: function () {
+                    $.each($("#sortable tr"), function (index, tr) {
+                        $(tr).find('.posicao:first').val(index);
+                    });
+                }
+            });
+            $("#sortable").disableSelection();
+        });
+
+        $(document).ready(function () {
+            $('#listaPontos').selectize({
+                create: false,
+                sortField: 'text'
+            });
+        });
+
+
+    </script>
 }
