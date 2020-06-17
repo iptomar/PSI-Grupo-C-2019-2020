@@ -63,8 +63,13 @@
     <br />
     <br />
     <p>
-        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }) |
+        @if (User.IsInRole("administrador") || User.IsInRole("utilizador"))
+        {
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id })
+            <text>|</text>
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id })
+            <text>|</text>
+        }
         @Html.ActionLink("Voltar", "Index")
     </p>
 
